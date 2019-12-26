@@ -1,0 +1,15 @@
+class Solution:
+    def lengthOfLongestSubstring(self, s: str) -> int:
+        substring = ""
+        
+        maximum = 0
+        
+        for i in s:
+            if i not in substring:
+                substring += i
+                maximum = max(maximum, len(substring))
+            else:
+                find_index = substring.index(i)
+                substring = substring[find_index + 1 :] + i
+                
+        return maximum
