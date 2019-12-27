@@ -1,0 +1,38 @@
+class Solution:
+    def reverse(self, x: int) -> int:
+        
+        maximum = 2**31
+        minimum = -2**31
+        
+        if x > 0:
+            string_int = str(x)
+            
+            int_arr = []
+            for i in range(len(string_int)-1,-1,-1):
+                int_arr.append(string_int[i])
+                #reversed array - output is in array
+                
+            output = "".join(str(x) for x in int_arr)
+            answer = int(output)
+        
+        else:
+            
+            int_string = str(x)
+            
+            a = int_string[0] # extracting negative sign
+            string_int = int_string[1:] #number - integer
+            
+            int_arr = []
+            for i in range(len(string_int)-1,-1,-1):
+                int_arr.append(string_int[i])
+                #reversed array - output is in array
+                
+            output = "".join(str(x) for x in int_arr)
+            
+            answer = int(a + output)
+        
+        
+        if answer < maximum and answer > minimum:
+            return answer
+        else:
+            return 0
