@@ -1,0 +1,38 @@
+class Solution:
+    def romanToInt(self, s: str) -> int:
+        
+        number = 0
+        for i in s: #basic addition related to roman numerals
+            if i is "I":
+                number += 1
+            elif i is "V":
+                number += 5
+            elif i is "X":
+                number += 10
+            elif i is "L":
+                number += 50
+            elif i is "C":
+                number += 100
+            elif i is "D":
+                number += 500
+            elif i is "M":
+                number += 1000
+ 
+
+        substring = "" #adding the constraints and subtracting correspondingly
+        for k in s:
+            if len(substring)>0: #checking with the conditions of 4,9,40,90,400,900
+                a = len(substring) - 1
+                if substring[a] == "I":
+                    if (k == "V"  or k == "X"):
+                        number -= 2
+                elif (substring[a] == "X"):
+                    if (k == "L" or k == "C"):
+                        number -= 20
+                elif (substring[a] == "C"):
+                    if (k == "D" or k == "M"):
+                        number -= 200
+    
+            substring += k
+
+        return number
