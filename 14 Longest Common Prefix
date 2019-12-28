@@ -1,0 +1,16 @@
+#Read this code from solutions - most effective and short
+        if not strs: #base conditions
+            return ""
+        if len(strs) ==1:
+            return strs[0]
+        
+        strs.sort() #sorting to compare shortest/smallest with the largest string in the list
+        output = ""
+        #using zip function
+        for i,j in zip(strs[0], strs[-1]):
+            if i == j:
+                output += i
+            else:
+                break
+                
+        return output
