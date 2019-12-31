@@ -1,0 +1,18 @@
+class Solution:
+    def removeElement(self, nums: List[int], val: int) -> int:
+        
+        o_len = len(nums) #original length
+        number_track = 0 #trackign no. of times val occur in the list
+        i=0
+        
+        #popping and appending at the very end
+        while i < o_len-number_track:
+            if nums[i] == val:
+                nums.pop(i)
+                nums.append(val)
+                number_track += 1
+            else:
+                i+=1
+
+        del_from_last = o_len - number_track
+        return (del_from_last)
