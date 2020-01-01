@@ -1,0 +1,25 @@
+        #nums - sorted array
+        #target value
+        #return the index - if target is found
+        #else return index where it would be if inserted
+        #assume - no duplicates
+        
+        for i in nums:
+            if i == target:
+                return nums.index(i) #we found it - end of the program
+            
+        #what if there is no target? we have to check where it is to be inserted!
+        arr = [] #will track the last occuring element in nums
+        
+        for i in nums:
+            if target >= i:
+                continue
+            else:
+                if nums.index(i)== 0:
+                    return 0
+                else:
+                    index = nums.index(i)
+                    return index
+        
+        if nums[len(nums)-1]<target:
+            return len(nums)
