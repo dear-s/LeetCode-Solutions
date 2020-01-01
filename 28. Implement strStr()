@@ -1,0 +1,16 @@
+#we have 2 string
+    #first approach - go with their indexes - do some operations with that
+        
+    n_len = len(needle)
+    h_len = len(haystack)
+        
+    if n_len == 0: #needle is None
+        return 0
+    elif n_len!=0 and h_len == 0: #haystack is None only
+        return -1
+    else:        
+        for h in range(0, len(haystack)):
+            a = haystack
+            if a[h:h+n_len] == needle:
+                return h
+        return -1
