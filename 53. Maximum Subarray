@@ -1,0 +1,13 @@
+class Solution:
+    def maxSubArray(self, nums: List[int]) -> int:
+        
+        
+        compare_sum = nums[0] #first element
+        max_sum = nums[0] #first element
+        
+        
+        for i in range(1, len(nums)):
+            compare_sum = max(nums[i], compare_sum + nums[i]) #either element itself, or element+prev sum
+            max_sum = max(max_sum, compare_sum) # max of prev or new sum after comparing
+            
+        return max_sum
