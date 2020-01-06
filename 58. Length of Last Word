@@ -1,0 +1,22 @@
+class Solution:
+    def lengthOfLastWord(self, s: str) -> int:
+        
+        if len(s) is 0: #no word - empty string
+            return 0
+        else:
+            
+            #code
+            #len of last word in a maximal substring
+            a = []
+            a = s.split(' ')
+                        
+            output_string = a[len(a)-1]
+            
+            
+            while len(output_string) is 0 and len(a) > 1: 
+                a = a[:-1]
+                output_string = a[len(a)-1]
+                
+                
+            return len(output_string)
+                
