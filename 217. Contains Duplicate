@@ -1,0 +1,14 @@
+class Solution:
+    def containsDuplicate(self, nums: List[int]) -> bool:
+        
+        len_nums = len(nums) # length of nums
+        
+        a = set(nums)
+        
+        len_set = len(a) # length of set
+        
+        if len_set == len_nums: #comparing the lengths to get the idea of a duplicate integer
+            return False
+        else:
+            return True
+            
