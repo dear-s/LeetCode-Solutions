@@ -1,0 +1,21 @@
+class Solution:
+    def plusOne(self, digits: List[int]) -> List[int]:
+        
+        
+        # 1 2 3  - 1 2 4
+        #  4 3 2 1 - 4 3 2 2 
+        
+        #increase the number or  += 1 and return  the digits in the form of list
+        
+        
+        str_input = "".join(str(x) for x in digits) # "123"
+        
+        int_input = int(str_input) # 123
+        
+        int_output = int_input + 1 # 124
+        
+        str_output = str(int_output) # "124"
+        
+        list_output = list(str_output)
+        
+        return list_output
