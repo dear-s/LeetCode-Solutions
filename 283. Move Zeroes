@@ -1,0 +1,19 @@
+class Solution:
+    def moveZeroes(self, nums: List[int]) -> None:
+        """
+        Do not return anything, modify nums in-place instead.
+        """
+        count = 0 # will track the number of zeroes in the list - nums
+        
+        i = 0
+        while i < len(nums):
+            if nums[i] == 0:
+                nums.remove(nums[i])
+                count += 1
+            else:
+                i += 1
+                
+        while count > 0:
+            nums.append(0)
+            count -= 1
+           
