@@ -1,0 +1,41 @@
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+
+class Solution:
+    def deleteDuplicates(self, head: ListNode) -> ListNode:
+        
+        # given - sorted linked list
+        # delete duplicate nodes!!
+        
+        if head == None or head.val == None:
+            return None
+        elif head.next == None:
+            return head
+        else:
+            current = head # 'current' pointer - pointing towards head
+            track_arr = []
+            track_arr.append(head.val)
+            prev = current # to track the previous node - if in order to skip
+            
+            # note - we can also compare the prev and current values - since it is sorted**
+            
+            current = current.next
+            while current is not None:
+                
+                if current.val in track_arr: # if duplicate value found
+                    current = current.next
+                    prev.next = current
+                    
+                else: # if not - i.e. the value is unique
+                    track_arr.append(current.val)
+                    # prev.next = current
+                    prev = prev.next
+                    current = current.next                    
+                
+                # current = current.next # moving the pointer ahead
+            prev.next = current    
+            return head
+        
