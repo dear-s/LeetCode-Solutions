@@ -1,0 +1,19 @@
+
+# https://www.youtube.com/watch?v=CI2dZdK-tQg
+
+class Solution:
+    def isSameTree(self, p: TreeNode, q: TreeNode) -> bool:
+        
+        if p is None and q is None:
+            return True
+        if p is None:
+            return False
+        if q is None:
+            return False
+        if p.val!=q.val:
+            return False
+        
+        leftTreeCheck = self.isSameTree(p.left, q.left)
+        rightTreeCheck = self.isSameTree(p.right, q.right)
+        
+        return leftTreeCheck and rightTreeCheck
