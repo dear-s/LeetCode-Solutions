@@ -1,0 +1,29 @@
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution:
+    def levelOrderBottom(self, root: TreeNode) -> List[List[int]]:
+        
+        result = []
+        if root is None:
+            return None
+        queue = [root]
+        while len(queue):
+            # get the values out of the current queue
+            result.append([a.val for a in queue])
+            # perform a separate loop for the this layer only
+            nextlayer = []
+            for a in queue:
+                # just extend this new list for the whole layer
+                if a.left:
+                    nextlayer.append(a.left)
+                if a.right:
+                    nextlayer.append(a.right)
+            # finally put that whole layer in the queue
+            queue = nextlayer
+
+        return reversed(result)
