@@ -1,0 +1,36 @@
+class Solution:
+    def isPalindrome(self, s: str) -> bool:
+        
+        if s is "": # empty string - a valid palindrome
+            return True
+        
+        string = s.lower() # string is converted to lowercase
+        
+        # have to remove characters - consider only alphanumeric characters
+        good_string = ""
+        
+        for i in string: # explicitly checked - sorry
+            if i=='a' or i=='b' or i=='c' or i=='d' or i=='e' or i=='f' or i=='g' or i=='h' or i=='i' or i=='j' or i=='k' or i=='l' or i=='m' or i=='n' or i=='o' or i=='p' or i=='q' or i=='r' or i=='s' or i=='t' or i=='u' or i=='v' or i=='w' or i=='x' or i=='y' or i=='z' or i=='1' or i=='2' or i=='3' or i=='4' or i=='5' or i=='6' or i=='7' or i=='8' or i== '9' or i=='0':
+                good_string += i
+                
+        if good_string is "":
+            return True
+        
+        # good_string = amanaplanacanalpanama
+        
+        # for i in range(0, len(good_string)):
+        #     for j in range(len(good_string) - 1, -1, -1):
+        # check with a while loop
+        
+        i = 0 # index from first
+        j = len(good_string) - 1 # index from last
+        
+        while(i < len(good_string)) and (j > -1):
+            if i == len(good_string) - 1 and j == 0 and good_string[i] == good_string[j]:
+                return True
+            
+            if good_string[i] == good_string[j]:
+                i += 1
+                j -= 1
+            else:
+                return False
