@@ -1,0 +1,27 @@
+class Solution:
+    def generate(self, numRows: int) -> List[List[int]]:
+        
+        # Pascal's triangle
+        if numRows == 0:
+            return None
+        
+        pascal = []
+        # a = [1] # first row - explicitly append it
+        pascal.append([1])
+        
+        i = 1
+        while i<numRows:
+            len_of_sub_arr = i+1
+            
+            arr = [0] * len_of_sub_arr # new sub-array
+            arr[0] = 1 # always
+            arr[-1] = 1 # always
+            
+            # fill the array
+            for index in range(1,i):
+                arr[index] = pascal[i-1][index - 1] + pascal[i-1][index]
+                
+            pascal.append(arr)
+            i+=1
+        
+        return pascal
