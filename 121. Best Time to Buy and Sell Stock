@@ -1,0 +1,24 @@
+class Solution:
+    def maxProfit(self, prices: List[int]) -> int:
+        
+        # profit = sell - buy
+        # should be maximum
+        
+        if len(prices) == 0: # check the base condition
+            return 0
+    
+        buy_price = prices[0] # initialize the first value
+        max_profit = 0
+
+        for i in range(1, len(prices)):
+            profit_check = prices[i] - buy_price
+
+            if profit_check > max_profit:
+                max_profit = profit_check
+
+            if buy_price > prices[i]:
+                buy_price = prices[i]
+
+        return max_profit
+        
+        
