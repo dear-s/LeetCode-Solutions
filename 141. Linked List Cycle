@@ -1,0 +1,37 @@
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+
+class Solution:
+    def hasCycle(self, head: ListNode) -> bool:
+        
+        # pos - position of the tail
+        # if pos = -1 -> no cycle
+        # there is no 'pos' integer as per the question - idk why they have described it as an input value
+        
+        if head is None: return False
+        
+        cur = head
+        s_cur = head
+        count = 0
+        
+        if head.next is None:
+            return False
+        
+        while(cur):
+            count += 1
+            cur = cur.next
+            
+            if s_cur.next is None:
+                return False
+            
+            if s_cur.next.next is None:
+                return False
+            else:
+                s_cur = s_cur.next.next
+            
+            if cur==s_cur:
+                return True
+                    
