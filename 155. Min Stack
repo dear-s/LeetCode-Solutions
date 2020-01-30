@@ -1,0 +1,26 @@
+class MinStack:
+
+    def __init__(self):
+        self.arr = []
+
+    def push(self, x: int) -> None:
+        # x - appending at the very end and will remove from that end also
+        self.arr.append(x)
+
+    def pop(self) -> None:
+        self.arr.pop(len(self.arr)-1)
+
+    def top(self) -> int:
+        return self.arr[len(self.arr)-1]
+        
+    def getMin(self) -> int:
+        # return minimum element
+        return min(self.arr)
+        
+
+# Your MinStack object will be instantiated and called as such:
+# obj = MinStack()
+# obj.push(x)
+# obj.pop()
+# param_3 = obj.top()
+# param_4 = obj.getMin()
