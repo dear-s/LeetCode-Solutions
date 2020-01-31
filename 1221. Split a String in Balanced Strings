@@ -1,0 +1,25 @@
+class Solution:
+    def balancedStringSplit(self, s: str) -> int:
+        
+        i = 1
+        temp = []
+        temp.append(s[0]) # first element [R]
+        count = 0
+
+        while i < len(s):
+            if len(temp) == 0:
+                temp.append(s[i])
+                i+=1
+
+            if s[i] == temp[len(temp)-1]:
+                temp.append(s[i])
+            else:
+                temp.pop()
+                if len(temp) == 0:
+                    count += 1
+
+            i+=1
+                
+        return count
+                
+            
