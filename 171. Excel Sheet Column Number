@@ -1,0 +1,25 @@
+class Solution:
+    def titleToNumber(self, s: str) -> int:
+        
+        lengthofstring = len(s)
+        result = 0
+        alphabets = "_ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+        
+        i = 0
+        j = 0
+        
+        left_mul = 0
+        while i < lengthofstring:
+            index_value = alphabets.index(s[i])
+            if i != lengthofstring-1:
+                times = lengthofstring - i - 1
+                value = 26**times
+                left_mul = value * index_value
+                result += left_mul
+            else:
+                result += index_value
+                
+            i+= 1
+            
+        return result
+            
