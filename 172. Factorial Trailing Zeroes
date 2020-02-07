@@ -1,0 +1,39 @@
+class Solution:
+    def trailingZeroes(self, n: int) -> int:
+        
+        # solution - count the no. of fives coming in the factorial
+        
+        total_fives = 0
+        
+        while n > 0:
+            total_fives += int(n/5)
+            n = int(n/5)
+            
+        return total_fives
+        
+        
+        
+        
+        
+        """
+        #factorial - this solution has more running time
+        fact = 1
+
+        while n>0:
+            fact = fact * n
+            n-=1
+
+
+        # print(fact)
+        # trailing zeroes
+        s = str(fact)
+
+        l = len(s)
+        count = 0
+
+        for i in range(l-1, -1, -1):
+            if s[i] == "0":
+                count += 1
+            else:
+                return count
+        """
