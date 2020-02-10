@@ -1,0 +1,45 @@
+class Solution:
+    def rotate(self, nums: List[int], k: int) -> None:
+        """
+        Do not return anything, modify nums in-place instead.
+        """
+        
+        
+        
+        l = len(nums)
+        
+        a = nums[:l-k] # appending part
+        nums[:] = nums[l-k:] # real array
+        
+        for i in a:
+            nums.append(i)
+            
+            
+        # print(nums)
+        
+        
+      
+        # best solution - in place rotation
+        # while k > 0:
+        #     nums.insert(0, nums.pop())
+        #     k -= 1
+        
+        '''
+        # not an inline solution [brute force] - time limit exceeded
+        # rotate by k steps
+        length = len(nums)
+
+        while k > 0 :
+
+            # rotating by 1 to the right
+            temp = nums[0] # temp = 1 - first iteration
+            nums [0] = nums[len(nums) - 1] # nums[0] = 7
+
+            for i in range(1, len(nums)): # i = 0 to 6
+                #normal swapping with the elements to the right
+                    swap_no = nums[i] # if i = 1 then swap_no = 2
+                    nums[i] = temp # nums[1] = 1
+                    temp = swap_no
+
+            k -= 1
+        '''
