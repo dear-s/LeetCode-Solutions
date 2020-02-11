@@ -1,0 +1,8 @@
+# Write your MySQL query statement below
+
+# MySQL code
+
+select w_today.Id as Id
+from Weather w_today, Weather w_previous
+where w_previous.Temperature < w_today.Temperature and w_today.RecordDate = AddDate(w_previous.RecordDate, 1)
+;
