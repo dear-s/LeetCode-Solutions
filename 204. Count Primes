@@ -1,0 +1,59 @@
+class Solution:
+    def countPrimes(self, n: int) -> int:
+        
+        # 2 = 2*2 = not prime, 2*3 = not prime and so on
+        # following sieve of eratosthenes
+        
+        count_arr = [0] * n
+        count = 0
+        # array with n zeroes
+        
+        i = 2
+        while i < n:
+            if count_arr[i] == 0:
+                count += 1
+                
+                for squares in range(i, n, i):
+                    count_arr[squares] = 1
+                    
+            i += 1
+        
+        return count
+            
+            
+        
+        """
+        # time limit exceeded in this solution
+        count = 0
+        
+        if n == 0 or n == 1 or n == 2:
+            return 0
+        
+        for i in range(2,n):
+            count += self.isPrime(i)
+                
+        return count
+            
+    def isPrime(self, num):
+        
+        temp = num
+        isPrime_ = True
+        
+        if num == 2:
+            return 1
+        
+        a = 2
+        while a < (num/2) + 1:
+            if num % a == 0:
+                isPrime_ = False
+        
+#         for i in range(2, int(num/2)+1):
+#             if num % i == 0:
+#                 isPrime_ = False
+                
+        if isPrime_ == True:
+            return 1
+        else:
+            return 0"""
+                
+                
