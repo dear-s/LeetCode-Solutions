@@ -1,0 +1,30 @@
+class Solution:
+    def isHappy(self, n: int) -> bool:
+        
+        
+        # n = 2
+
+        total = 0
+        temp_arr = []
+        temp_arr.append(n)
+
+        while n != 1:
+            temp_total = 0
+
+            s = str(n)
+            for i in s:
+                a = int(i)
+                temp_total += a*a
+            if temp_total == 1:
+                return True
+
+            
+            if temp_total not in temp_arr:
+                temp_arr.append(temp_total)
+                n = temp_total
+            else:
+                return False
+
+        if n == 1:
+            return True
+            
