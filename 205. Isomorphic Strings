@@ -1,0 +1,29 @@
+      i = 0
+      n = len(s) # both have same length
+
+      set_s = []
+      set_t = []
+
+      dict_s = {}
+      dict_t = {}
+
+      while i < n:
+          dict_s.setdefault(s[i], []).append(i)
+          dict_t.setdefault(t[i], []).append(i)
+
+          i+=1
+
+
+      for k1,v1 in dict_s.items():
+          set_s.append(dict_s[k1])
+
+      for k2,v2 in dict_t.items():
+          set_t.append(dict_t[k2])
+
+      # print(set_s)
+      # print(set_t)
+
+      if set_s == set_t:
+          return True
+      else:
+          return False
