@@ -1,0 +1,32 @@
+class Solution:
+    def wordPattern(self, pattern: str, str: str) -> bool:
+        
+        
+        dict_1 = {} # str:pattern
+        dict_2 = {} # pattern:str
+        
+        print("pattern:", pattern)
+        print("str:", str)
+        
+        list_str = str.split(" ")
+        list_pattern = list(pattern)
+        
+        print("list_str:", list_str)
+        print("list_pattern:", list_pattern)
+        
+        
+        if len(list_str) != len(list_pattern):
+            return False
+        
+        for k1,k2 in zip(list_str, list_pattern):
+            if k1 not in dict_1:
+                dict_1[k1] = k2
+            if k2 not in dict_2:
+                dict_2[k2] = k1
+                
+            if k2 != dict_1[k1] or k1 != dict_2[k2]:
+                return False
+            
+        
+        return True
+        
