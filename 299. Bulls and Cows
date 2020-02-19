@@ -1,0 +1,51 @@
+class Solution:
+    def getHint(self, secret: str, guess: str) -> str:
+        
+        
+        i = 0
+        bulls_exact = 0
+        cows_diff = 0
+        temp = []
+
+        list_secret = list(secret)
+        list_guess = list(guess)
+
+        print(list_secret)
+        print(list_guess)
+
+        while i<len(list_secret):
+            if list_secret[i] == list_guess[i]:
+                bulls_exact += 1
+                list_secret[i] = ""
+                list_guess[i] = ""
+
+            i+=1
+
+        print(list_secret)
+        print(list_guess)
+
+        list_secret.sort()
+        list_guess.sort()
+
+        print(list_secret)
+        print(list_guess)
+
+        j = 0
+        k = 0
+        while j < len(list_secret):
+            while k < len(list_guess):
+                if list_secret[j] == list_guess[k] and list_secret[j]!="":
+                    cows_diff +=1
+                    list_secret[j] = ""
+                    list_guess[k] = ""
+
+                k+=1
+            k = 0
+            j+=1
+
+        answer = bulls_exact, "A", cows_diff, "B"
+        
+        output = "".join(str(x) for x in answer)
+        return output
+        
+
