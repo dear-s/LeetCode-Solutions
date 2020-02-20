@@ -1,0 +1,63 @@
+class Solution:
+    def reverseVowels(self, s: str) -> str:
+        
+        # two pointer method
+        vowels = ['a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U']
+        
+        list_s = list(s) # list for swap purposes
+        
+        x = 0
+        y = len(list_s) - 1
+        
+        while x<y:
+            while list_s[x] not in vowels and x<y:
+                x+=1
+            while list_s[y] not in vowels and x<y:
+                y-=1
+            
+            # swap
+            temp = list_s[x]
+            list_s[x] = list_s[y]
+            list_s[y] = temp
+            x+=1
+            y-=1
+            
+        output_string = "".join(x for x in list_s)
+        return output_string
+        
+        """
+        # time limit exceeded, using iterations
+        vowels = ['a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U']
+        has_vowels = {}
+        
+        i = 0
+        while i < len(s):
+            if s[i] in vowels: 
+                has_vowels[i] = s[i]
+                # dictionary is formed  
+            i+=1
+            
+        # print(has_vowels)
+        
+        indexes = []
+        vowel = []
+        for k,v in has_vowels.items():
+            indexes.append(k)
+            vowel.append(v)
+        
+        reversed_vowel = vowel[::-1]
+        
+        list_s = list(s)
+        # print(list_s)
+        
+        for j in range(0, len(list_s)):
+            if j in indexes:
+                a = indexes.index(j)
+                list_s[j] = reversed_vowel[a]
+                
+        # print(list_s)
+        
+        string_output = "".join(x for x in list_s)
+        
+        # print(string_output)
+        return string_output"""
