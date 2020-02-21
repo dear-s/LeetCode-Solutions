@@ -1,0 +1,29 @@
+class Solution:
+    def findTheDifference(self, s: str, t: str) -> str:
+        
+        
+        print("s", s)
+        print("t", t)
+        
+        dict_t = {}
+        
+        for i in t:
+            if i in dict_t:
+                dict_t[i] += 1
+            else:
+                dict_t[i] = 1
+              
+            
+        print("dict_t: ", dict_t)    
+        for j in s:
+            if j in dict_t:
+                dict_t[j] -= 1
+            else:
+                return False
+            
+        print("after comparing dict_t: ", dict_t)
+        
+        # check for dict_t
+        for k,v in dict_t.items():
+            if v == 1:
+                return k
