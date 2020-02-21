@@ -1,0 +1,32 @@
+class Solution:
+    def canConstruct(self, ransomNote: str, magazine: str) -> bool:
+        
+        dict_magazine = {}
+        for i in magazine:
+            if i in dict_magazine:
+                dict_magazine[i] += 1
+            else:
+                dict_magazine[i] = 1
+                
+        print("dict_magazine: ", dict_magazine)
+        
+        
+        traverse_letters = []
+        for x in ransomNote:
+            if x in dict_magazine and dict_magazine[x] > 0:
+                traverse_letters.append(x)
+                dict_magazine[x] -= 1
+
+            
+        print("traverse_letters: ", traverse_letters)
+        print("after dict_magazine: ", dict_magazine)
+        
+        string_compare = "".join(x for x in traverse_letters)
+        
+        print("string_compare: ", string_compare)
+        print("ransomNote: ", ransomNote)
+        
+        if string_compare == ransomNote:
+            return True
+        else:
+            return False
