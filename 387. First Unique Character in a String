@@ -1,0 +1,21 @@
+class Solution:
+    def firstUniqChar(self, s: str) -> int:
+        
+        dict_s = {}
+        for i in s:
+            if i in dict_s:
+                dict_s[i] += 1
+            else:
+                dict_s[i] = 1
+        
+        print("s: ", s)
+        print("dict_s: ", dict_s)
+        
+        
+        for k,v in dict_s.items():
+            if v == 1:
+                ind = s.index(k)
+                return ind
+            
+            
+        return -1
