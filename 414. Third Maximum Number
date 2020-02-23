@@ -1,0 +1,29 @@
+class Solution:
+    def thirdMax(self, nums: List[int]) -> int:
+        
+        # third max number
+        
+        nums.sort() # sorting
+        print("sorted nums: ", nums)
+        
+        nums.reverse()
+        print("reversed nums: ", nums)
+                
+        set_nums = set(nums)
+        
+        temp = []
+        
+        for i in set_nums:
+            temp.append(i)
+        
+        temp.sort()
+        temp.reverse()
+        print(temp)
+        
+        if len(temp) < 3:
+            return max(temp)
+        
+        a = temp[2]
+        
+        print(a)
+        return a
