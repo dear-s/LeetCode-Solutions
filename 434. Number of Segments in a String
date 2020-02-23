@@ -1,0 +1,16 @@
+class Solution:
+    def countSegments(self, s: str) -> int:
+        
+        if s is "": return 0
+        
+        words = s.split(" ")
+        
+        l = len(words)
+        for i in words:
+            if i == "":
+                l -= 1
+                
+                
+        print(words)
+        
+        return l
