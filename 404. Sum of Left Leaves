@@ -1,0 +1,42 @@
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution:
+    def sumOfLeftLeaves(self, root: TreeNode) -> int:
+        
+        if root is None: return 0
+        
+        # BFS approach and then saving left leaves node values
+        
+        queue = [] # nodes
+        visited = [] # values
+        left_visited = []
+        cur = root
+        
+        queue.append(cur)
+        
+        while len(queue):
+            
+            a = queue.pop(0)
+            visited.append(a.val)
+            if a.left:
+                queue.append(a.left)
+                if a.left.left is None and a.left.right is None:
+                    left_visited.append(a.left.val)
+            if a.right:
+                queue.append(a.right)
+            
+        print(visited)
+        print(left_visited)
+        
+        left_sum = 0
+        
+        for i in left_visited:
+            left_sum += i
+            
+        return left_sum
+                
