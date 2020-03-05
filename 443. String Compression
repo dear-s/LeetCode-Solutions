@@ -1,0 +1,54 @@
+class Solution:
+    def compress(self, chars: List[str]) -> int:
+        
+        # not O(1)
+        
+        dict_store = {}
+        output = []
+        i = 0
+        for i in range(0, len(chars)):
+            if chars[i] in dict_store:
+                if chars[i-1] == chars[i]:
+                    dict_store[chars[i]] += 1
+                else:
+                    chars[i] = chars[i] + str(i)
+                    dict_store[chars[i]] = 1
+            else:
+                for k,v in dict_store.items():
+                    value = str(v)
+                    if len(value) == 1:
+                        if value == "1":
+                            output.append(str(k))
+                        else:
+                            output.append(str(k))
+                            output.append(value)
+                    else:
+                        # alphabets = []
+                        output.append(str(k))
+                        for val in value:
+                            output.append(val)
+                
+                dict_store.pop(chars[i-1], None)
+                dict_store[chars[i]] = 1
+                
+        print(dict_store)
+        
+        for k,v in dict_store.items():
+            value = str(v)
+                
+            if len(value) == 1:
+                if value == "1":
+                    output.append(str(k))
+                else:
+                    output.append(str(k))
+                    output.append(value)
+            else:
+                output.append(str(k))
+                for i in value:
+                    output.append(i)
+                
+        chars[:] = output
+        print("output: ", output)
+        print("chars: ", chars)
+        
+        
