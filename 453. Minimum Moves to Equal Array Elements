@@ -1,0 +1,21 @@
+class Solution:
+    def minMoves(self, nums: List[int]) -> int:
+        
+        return (sum(nums)-(min(nums) * len(nums)))
+        
+        
+        
+        # time limit exceeded
+#         steps = 0
+#         n = len(nums)
+        
+        
+#         while len(set(nums)) != 1:
+#             # loop
+#             steps += 1
+#             nums = sorted(nums)
+#             for i in range(0, n-1):
+#                 nums[i] += 1
+            
+            
+#         return steps
