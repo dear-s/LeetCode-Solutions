@@ -1,0 +1,64 @@
+class Solution:
+    def hammingDistance(self, x: int, y: int) -> int:
+        
+        # decimal to binary
+        a = x
+        b = y
+        
+        # x into binary
+        temp = [0]*128
+        a_binary = []
+        i = 0
+        
+        while a >= 1:
+            rem = a % 2
+            a = a//2
+            if i <=128 and i >=0:
+                temp[i] = rem
+            else:
+                temp.append(rem)
+            i+=1
+            
+        a_binary = temp[::-1]
+        
+        print("x in binary: ", a_binary)      
+        
+        
+        
+        # y into binary
+        temp_ = [0]*128
+        b_binary = []
+        j = 0
+        
+        while b >= 1:
+            rem_ = b % 2
+            b = b//2
+            if j <=128 and j >=0:
+                temp_[j] = rem_
+            else:
+                temp_.append(rem_)
+            j+=1
+            
+        b_binary = temp_[::-1]
+        
+        print("y in binary: ", b_binary)
+        
+        
+        
+        
+        # check for hamming distance - total different positions
+        ind_x = 0
+        ind_y = 0
+        hamming = 0
+        while ind_x < len(a_binary) and ind_y < len(b_binary):
+            if a_binary[ind_x] == b_binary[ind_y]:
+                pass
+            else:
+                hamming += 1
+            
+            ind_x += 1
+            ind_y += 1
+        
+        print(hamming)
+        
+        return hamming
