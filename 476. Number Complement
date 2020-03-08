@@ -1,0 +1,39 @@
+class Solution:
+    def findComplement(self, num: int) -> int:
+        
+        
+        # decimal to binary
+        temp = []
+        a = num
+        a_binary = []
+        
+        while a >= 1:
+            rem = a%2
+            a = a//2
+            temp.append(rem)
+            
+        a_binary = temp[::-1]
+        
+        print("a_binary: ", a_binary)
+        
+        
+        complement = []
+        for i in a_binary:
+            if i == 1:
+                complement.append(0)
+            else:
+                complement.append(1)
+                
+        
+        
+        # convert complement (binary) to decimal
+        
+        power = len(complement) -1
+        output = 0
+        for c in complement:
+            if c == 1:
+                output += 2**power
+            power -= 1
+                
+        print(output)
+        return output
