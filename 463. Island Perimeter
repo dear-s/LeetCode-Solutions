@@ -1,0 +1,51 @@
+class Solution:
+    def islandPerimeter(self, grid: List[List[int]]) -> int:
+        
+        i = 0
+        j = 0
+        perimeter = 0
+        
+        # if 1 -> add 4 to perimeter, check afterwards i.e. after adding
+        # if left and top -> subtract 4 to perimeter
+        # if left or top -> any one -> subtract 2 to perimeter
+        
+        while i < len(grid):
+            j=0
+            while j < len(grid[i]):
+                if grid[0][0] == 1 and i==0 and j==0:
+                    perimeter += 4
+                    j+=1
+                    continue
+
+                if i == 0:
+                    if grid[0][j] == 1:
+                        perimeter += 4
+                        if grid[0][j-1] == 1:
+                            perimeter -= 2
+                        j+=1
+                        continue
+
+                if j == 0:
+                    if grid[i][0] == 1:
+                        perimeter += 4
+                        if grid[i-1][0] == 1:
+                            perimeter -= 2
+                        j+=1
+                        continue
+
+                if i != 0 and j != 0:
+                    if grid[i][j] == 1:
+                        perimeter += 4
+                        # check for "left" land
+                        if grid[i][j-1] == 1:
+                            perimeter -= 2
+                        # check for "top" land
+                        if grid[i-1][j] == 1:
+                            perimeter -= 2
+
+
+                j+=1
+
+            i+= 1
+                        
+        return perimeter
