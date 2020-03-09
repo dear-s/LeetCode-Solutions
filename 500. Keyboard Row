@@ -1,0 +1,31 @@
+class Solution:
+    def findWords(self, words: List[str]) -> List[str]:
+        
+        count = 0
+        output = []
+        
+        for ww in words:
+            temp = []
+            # w = hello
+            w = ww.upper()
+            a = list(w)
+            print(a)
+            
+            for i in a:
+                if i in ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"]:
+                    temp.append(0)
+                if i in ["A", "S", "D", "F", "G", "H", "J", "K", "L"]:
+                    temp.append(1)
+                if i in ["Z","X","C","V","B","N","M"]:
+                    temp.append(2)
+                    
+            set_temp = set(temp)
+            
+            if len(set_temp) == 1:
+                # w = hello - print or append to output
+                
+                output.append(ww)
+        
+        print(output)
+        return output
+        
