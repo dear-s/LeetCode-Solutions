@@ -1,0 +1,25 @@
+class Solution:
+    def findMaxConsecutiveOnes(self, nums: List[int]) -> int:
+        
+        
+        consecutive = [] # we have to find the max of this - will contain all such possibility
+        arr = [] # for counting purposes - keeping the track
+        
+        temp = nums
+        
+        i = 0
+        while len(temp)!=0:
+            if temp[i] == 1:
+                arr.append(1)
+                temp.pop(i)
+            else:
+                temp.pop(i)
+                len_of_arr = len(arr)
+                consecutive.append(len_of_arr)
+                arr = []
+                
+        if len(arr) > 0:
+            consecutive.append(len(arr))
+            
+        return max(consecutive)
+        
