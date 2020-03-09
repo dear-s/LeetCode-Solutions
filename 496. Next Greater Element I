@@ -1,0 +1,25 @@
+class Solution:
+    def nextGreaterElement(self, nums1: List[int], nums2: List[int]) -> List[int]:
+        
+        output = []
+        
+        for i in nums1:
+            if i in nums2:
+                temp = nums2
+                index_sliced = nums2.index(i)
+                temp = temp[index_sliced:]
+                # print(temp)
+
+                for t in temp:
+                    if t > i:
+                        output.append(t)
+                        break
+
+                    if t == temp[len(temp)-1]:
+                        output.append(-1)
+                        break
+
+
+        # print(output)
+        return output
+        
