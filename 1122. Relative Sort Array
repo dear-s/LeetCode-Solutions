@@ -1,0 +1,32 @@
+class Solution:
+    def relativeSortArray(self, arr1: List[int], arr2: List[int]) -> List[int]:
+        
+        output = []
+        print("arr1: ", arr1)
+        print("arr2: ", arr2)
+        temp = arr1
+        
+        for i in arr2: # i = 2
+            ind = 0
+            while ind < len(arr1):
+                if arr1[ind] == i:
+                    output.append(i)
+                    temp.pop(ind)
+                    ind = 0
+                    print(temp)
+                else:
+                    ind+=1
+                
+                    
+        print("before temp: ", temp)
+        temp_len = 0
+        temp.sort()
+        print("sorted temp: ", temp)
+        
+        while temp_len < len(temp):
+            output.append(temp[temp_len])
+            temp_len += 1
+            
+        print("output: ", output)
+        return output
+            
