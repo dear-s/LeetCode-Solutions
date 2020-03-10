@@ -1,0 +1,49 @@
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution:
+    def findMode(self, root: TreeNode) -> List[int]:
+        
+        if root is None: return None
+        
+        traversal = []
+        self.dfs(root, traversal)
+        
+        dict_freq = {}
+        
+        for i in traversal:
+            if i in dict_freq:
+                dict_freq[i] += 1
+            else:
+                dict_freq[i] = 1
+        
+        
+        all_frequencies = []
+        values = []
+        for k,v in dict_freq.items():
+            all_frequencies.append(v)
+            
+        max_count = max(all_frequencies)
+        
+        for k,v in dict_freq.items():
+            if v == max_count:
+                values.append(k)
+        
+        print(values)
+        return values
+            
+        
+        
+    def dfs(self, root, arr):
+        
+        if root is None: return
+        
+        self.dfs(root.left, arr)
+        arr.append(root.val)
+        self.dfs(root.right, arr)
+            
+            
