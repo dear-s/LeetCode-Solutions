@@ -1,0 +1,41 @@
+class Solution:
+    def findRelativeRanks(self, nums: List[int]) -> List[str]:
+        
+        
+        print(nums)
+        temp = []
+        output = []
+        
+        for n in nums:
+            temp.append(n)
+        
+        temp.sort()
+        temp.reverse()
+        
+        dictionary = {}
+        
+        i = 0
+        while i < len(temp) and i < 3:
+            if i == 0:
+                dictionary[temp[0]] = "Gold Medal"
+            if i == 1:
+                dictionary[temp[1]] = "Silver Medal"
+            if i == 2:
+                dictionary[temp[2]] = "Bronze Medal"
+            i+=1
+        
+        if len(temp) > 3:
+            p = 3
+            count = 3
+            while p < len(temp):
+                dictionary[temp[p]] = str(count + 1)
+                p+=1
+                count +=1
+                
+        for n in nums:
+            if n in dictionary:
+                output.append(dictionary[n])
+                
+        print(output)
+        return output
+            
