@@ -1,0 +1,27 @@
+class Solution:
+    def convertToBase7(self, num: int) -> str:
+        
+        
+        # converting to base 7
+        
+        if num == 0: return "0"
+        
+        temp_num = num
+        if num < 0:
+            temp_num = abs(num)
+
+        arr = []
+        while temp_num > 0:
+            rem = temp_num % 7
+            temp_num = temp_num // 7
+            arr.insert(0, rem)
+
+        print("number arr: ", arr)
+
+        if num<0:
+            arr.insert(0, "-")
+
+        str_output = "".join(str(x) for x in arr)
+
+        print(str_output)
+        return str_output
