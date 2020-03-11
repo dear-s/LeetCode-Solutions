@@ -1,0 +1,42 @@
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution:
+    def minDiffInBST(self, root: TreeNode) -> int:
+        
+        # bfs
+        visited = [] # store the values
+        queue = [] # store the nodes
+        
+        queue.append(root)
+        while len(queue):
+            
+            a = queue.pop(0)
+            visited.append(a.val)
+            if a.left is None and a.right is None:
+                continue
+            if a.left is None:
+                queue.append(a.right)
+            if a.right is None:
+                queue.append(a.left)
+            if a.left is not None and a.right is not None:
+                queue.append(a.left)
+                queue.append(a.right)
+                
+        print(visited)
+        min_diff = 1000000000000000000000000
+        
+        for i in range(0, len(visited)):
+            for j in range(i+1, len(visited)):
+                
+                # check difference
+                diff = abs(visited[i] - visited[j])
+                min_diff = min(diff, min_diff)
+        
+        print(min_diff)
+        return min_diff
+                
