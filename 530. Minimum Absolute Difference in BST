@@ -1,0 +1,75 @@
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution:
+    def getMinimumDifference(self, root: TreeNode) -> int:
+        
+        
+        t=[]
+        ans=float('inf')
+        
+        def inorder(root):
+            if(not root):return
+            inorder(root.left)
+            t.append(root.val)
+            inorder(root.right)
+        inorder(root)
+        
+        for i,n in enumerate(t):
+            if(i>0):
+                ans = min(ans , t[i]-t[i-1])
+        return ans
+        
+        # bfs
+#         visited = [] # store the values
+#         queue = [] # store the nodes
+        
+#         queue.append(root)
+#         while len(queue):
+            
+#             a = queue.pop(0)
+#             visited.append(a.val)
+#             if a.left is None and a.right is None:
+#                 continue
+#             if a.left is None:
+#                 queue.append(a.right)
+#             if a.right is None:
+#                 queue.append(a.left)
+#             if a.left is not None and a.right is not None:
+#                 queue.append(a.left)
+#                 queue.append(a.right)
+                
+#         print(visited)
+
+
+
+        """# dfs   
+        arr = []
+        self.dfs(root, arr)
+        print("arr: ", arr)
+        
+        min_diff = 1000000000000000000000000
+        
+        for i in range(0, len(arr)):
+            for j in range(i+1, len(arr)):
+                
+                # check difference
+                diff = abs(arr[i] - arr[j])
+                min_diff = min(diff, min_diff)
+        
+        print(min_diff)
+        return min_diff
+        
+    def dfs(self, root, arr):
+        
+        if root is None: return
+        
+        self.dfs(root.left, arr)
+        arr.append(root.val)
+        self.dfs(root.right, arr)"""
+        
+       
