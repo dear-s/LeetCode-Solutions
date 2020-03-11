@@ -1,0 +1,42 @@
+class Solution:
+    def findPairs(self, nums: List[int], k: int) -> int:
+        
+        """
+        TIME LIMIT EXCEEDED
+        arr = []
+        total_pairs = 0
+        
+        for i in range(0, len(nums)):
+            for j in range(i+1, len(nums)):
+                if abs(nums[i] - nums[j]) == k:
+                    if [nums[i],nums[j]] not in arr:
+                        if [nums[j],nums[i]] not in arr:
+                            arr.append([nums[i],nums[j]])
+                            arr.append([nums[j],nums[i]])
+                            total_pairs += 1
+                            
+                            
+        print(total_pairs)  
+        return total_pairs"""
+    
+        if k < 0: return 0
+        dt = {}
+        for i in nums:
+            if i not in dt:
+                dt[i] = 1
+            else:
+                dt[i] += 1
+                
+        ans = 0
+        for j in nums:
+            if k == 0:
+                if j in dt and dt[j] > 1:
+                    ans += 1
+                    del dt[j]
+            else:
+                if j-k in dt:
+                    ans += 1
+                    del dt[j-k]
+        return ans
+                            
+                            
