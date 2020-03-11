@@ -1,0 +1,44 @@
+class Solution:
+    def detectCapitalUse(self, word: str) -> bool:
+        
+        
+        boolCheck = []
+        print("word: ", word)
+        # first case - all capitals
+        temp = word
+        upper_word = temp.upper()
+        print("upper_word: ", upper_word)
+        if word == upper_word:
+            boolCheck.append(True)
+        else:
+            boolCheck.append(False)
+        
+        # second case - all lower
+        temp1 = word
+        lower_word = temp1.lower()
+        print("lower_word: ", lower_word)
+        if word == lower_word:
+            boolCheck.append(True)
+        else:
+            boolCheck.append(False)
+        
+        # third case - Only first letter
+        first_letter = temp[0].upper()
+        rest_lower = temp[1:].lower()
+        
+        final_string = first_letter + rest_lower
+        print("final_string: ", final_string)
+        if word == final_string:
+            boolCheck.append(True)
+        else:
+            boolCheck.append(False)
+            
+            
+        for i in boolCheck:
+            if i == True:
+                return True
+        
+        return False
+        
+        
+        
