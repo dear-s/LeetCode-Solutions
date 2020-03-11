@@ -1,0 +1,20 @@
+class Solution:
+    def checkPerfectNumber(self, num: int) -> bool:
+        
+        if num <= 0: return False
+        
+        divisors = []
+        
+        i = 1
+        sum_d = 0
+        while i*i <=num:
+            
+            if num % i == 0:
+                sum_d += i
+                if (i*i != num):
+                    sum_d += num/i
+            
+            i+=1
+            
+        return sum_d - num == num
+    
