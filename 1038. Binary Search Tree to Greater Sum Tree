@@ -1,0 +1,45 @@
+# greater tree or greater sum tree
+        traversal = []
+        neww = []
+        self.dfs(root, traversal)
+        # print(traversal)
+        
+        self.update_root(root, traversal)
+        
+        self.dfs(root, neww)
+        # print(neww)
+        return root
+    
+    def update_root(self, root, traversal):
+        if root is None: return
+        
+        # print("traversal: ", traversal)
+        count = 0
+        for t in traversal:
+            # print("root.val: ", root.val)
+            # print("t: ", t)
+            if root.val < t and root.val != t:
+                count += t
+                
+        # print("individual count: ", count)
+        root.val += count
+        # print("updated root.val: ", root.val)
+                
+        
+        if root.left:
+            self.update_root(root.left, traversal)
+        if root.right:
+            self.update_root(root.right, traversal)
+               
+    
+    def dfs(self, root, traversal):
+        
+        if root is None: return
+        
+        traversal.append(root.val)
+        self.dfs(root.left, traversal)
+        self.dfs(root.right, traversal)
+        
+        
+        
+        
