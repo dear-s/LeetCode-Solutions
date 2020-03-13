@@ -1,0 +1,41 @@
+class Solution:
+    def checkRecord(self, s: str) -> bool:
+        
+        dict_count = {}
+        check = True
+        
+        for i in s:
+            if i in dict_count:
+                dict_count[i] += 1
+            else:
+                dict_count[i] = 1
+                
+        print("dict_count: ", dict_count)
+        
+        
+        if "A" in dict_count:
+            if dict_count["A"] <= 1:
+                # continuous L's
+                ind = 0
+                while ind < len(s)-2:
+                    if s[ind+1] == s[ind] == s[ind+2] == "L":
+                        return False
+
+                    ind += 1
+
+            else:
+                check = False
+        else:
+            ind = 0
+            while ind < len(s)-2:
+                if s[ind+1] == s[ind] == s[ind+2] == "L":
+                    return False
+
+                ind += 1
+                
+            
+        if check == False:
+            return False
+        else:
+            return True
+            
