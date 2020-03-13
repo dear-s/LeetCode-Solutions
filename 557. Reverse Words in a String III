@@ -1,0 +1,36 @@
+class Solution:
+    def reverseWords(self, s: str) -> str:
+        
+        
+        temp = [] # ["lets", "take", "leetcode", "contest"]
+        temp_string = ""
+        
+        s = s + " "
+        for i in s:
+            if i != " ":
+                temp_string += i
+            else:
+                print("temp_string: ", temp_string)
+                temp.append(temp_string)
+                temp_string = ""
+                
+        print("temp: ", temp)
+        
+        reversed_list = []
+
+        for t in temp:
+            t = t[::-1]
+            print("t: ", t)
+            reversed_list.append(t)
+            reversed_list.append(" ")
+            
+            
+        reversed_list.pop()
+        print("reversed_list: ", reversed_list)
+        
+        output_list = "".join(x for x in reversed_list)
+        
+        print(output_list)
+        return output_list
+        
+        
