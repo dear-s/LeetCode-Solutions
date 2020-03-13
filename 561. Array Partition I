@@ -1,0 +1,45 @@
+class Solution:
+    def arrayPairSum(self, nums: List[int]) -> int:
+        
+        length = len(nums)
+        
+        n = length//2
+
+        print("length: ", length)
+        print("n: ", n)
+
+        nums.sort()
+        print("sorted nums: ", nums)
+
+
+        matrix = [] # matrix
+
+        i = 0
+        nums_temp = []
+        for k in nums:
+            nums_temp.append(k)
+        print("nums_temp: ", nums_temp)
+
+        while i < len(nums_temp):
+            temp = []
+            nn = 0
+            while nn < 2:
+                temp.append(nums_temp[0])
+                nums_temp.pop(0)
+                nn+=1
+
+            matrix.append(temp)
+
+
+        print("matrix: ", matrix)
+
+        small = []
+        for m in range(0, len(matrix)):
+            small.append(min(matrix[m]))
+
+        print(small)
+
+        print(sum(small))
+        return sum(small)
+        
+        
