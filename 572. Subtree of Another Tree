@@ -1,0 +1,66 @@
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution:
+    def isSubtree(self, s: TreeNode, t: TreeNode) -> bool:
+        
+        self.temp_pointer = TreeNode(None)
+        self.cur_s = s
+        self.cur_t = t
+        # self.dfs_traversal = []
+        
+        self.root_val_t = t.val
+        self.root_val_s = s.val
+        a = self.bfs_finding_node(self.cur_s)
+        # print("self.dfs_traversal: ", self.dfs_traversal)
+        
+        return a
+        
+    def dfs(self, root, array):
+        
+        if root is None: return
+        array.append(root.val)
+        self.dfs(root.left, array)
+        self.dfs(root.right, array)
+        
+    
+    def bfs_finding_node(self, root):
+        
+        if root is None: return
+        queue = [] # for queuing
+        traversal = [] # store nodes
+        queue.append(root)
+        
+        while queue:
+            a = queue.pop(0)
+            traversal.append(a)
+            if a.val == self.root_val_t:
+                self.temp_pointer = a
+                
+                
+                
+                # print("self.temp_pointer: ", self.temp_pointer)
+                # print("cur_t: ", self.cur_t)
+
+                check1 = []
+                check2 = []
+                self.dfs(self.temp_pointer, check1)
+                self.dfs(self.cur_t, check2)
+
+                if check1 == check2:
+                    return True
+                
+                
+            if a.left:
+                queue.append(a.left)
+            if a.right:
+                queue.append(a.right)
+                
+        # print("traversal: ", traversal)
+        return False
+            
+        
