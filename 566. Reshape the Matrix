@@ -1,0 +1,49 @@
+class Solution:
+    def matrixReshape(self, nums: List[List[int]], r: int, c: int) -> List[List[int]]:
+        
+        l = len(nums) # length of matrix
+
+        #total elements present, no. of rows and cols
+        count_rows = 0
+        count_cols = 0
+        total_elements = 0
+        element_array = []
+
+        for i in range(len(nums)):
+            count_rows += 1
+            for j in range(len(nums[i])):
+                if i == 0:
+                    count_cols += 1
+
+                total_elements += 1
+                element_array.append(nums[i][j])
+
+
+        print("count_rows: ", count_rows)
+        print("count_cols: ", count_cols)
+        print("total_elements: ", total_elements)
+        print("element_array: ", element_array)
+
+        # conditions to check
+        # r * c = count_rows * count_cols = total_elements
+        if r * c == count_rows * count_cols == total_elements:
+            output = []
+            #it is possible now
+            #now create a matrix
+            ele = 0
+            for rows in range(r):
+                temp = []
+                for cols in range(c):
+                    temp.append(element_array[ele])
+                    ele += 1
+
+                output.append(temp)
+
+            print(output)
+            return output
+
+        else:
+            print(nums)
+            return nums
+                
+            
