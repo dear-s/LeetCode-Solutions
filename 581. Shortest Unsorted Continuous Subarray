@@ -1,0 +1,40 @@
+class Solution:
+    def findUnsortedSubarray(self, nums: List[int]) -> int:
+        
+        # a,b = pointers for the subarray
+        sorted_nums = sorted(nums)
+
+        i = 0
+
+        temp = []
+
+        for n in nums:
+            temp.append(n)
+
+        while i < len(nums):
+
+            if nums[i] == sorted_nums[i]:
+                temp[i] = 1
+            else:
+                temp[i] = 0
+            i+=1
+
+        indices_of_zeroes = []
+
+        # track zeroes
+        for t in range(len(temp)):
+            if temp[t] == 0:
+                indices_of_zeroes.append(t)
+
+        print(indices_of_zeroes)
+
+        if len(indices_of_zeroes) == 0:
+            return 0
+
+        min_index = min(indices_of_zeroes)
+        max_index = max(indices_of_zeroes)
+
+        answer = max_index - min_index + 1
+
+        print(answer)
+        return answer
