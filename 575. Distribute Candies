@@ -1,0 +1,16 @@
+class Solution:
+    def distributeCandies(self, candies: List[int]) -> int:
+        
+        l = len(candies)
+        set_candy = set(candies)
+        
+        l_candies = len(set_candy)
+        
+        print("candies length: ", l)
+        print("set length: ", l_candies)
+        
+        if l_candies > l//2:
+            return l//2
+        else:
+            return l_candies
+        
