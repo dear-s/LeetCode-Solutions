@@ -1,0 +1,27 @@
+class Solution:
+    def findLHS(self, nums: List[int]) -> int:
+        
+        sort_nums = sorted(nums)
+
+        dict_ = {}
+
+        for n in sort_nums:
+            if n in dict_:
+                dict_[n] += 1
+            else:
+                dict_[n] = 1
+
+        print(dict_)
+
+        answer = 0
+        temp_answer = 0
+
+        for k,v in dict_.items():
+            if k+1 in dict_:
+                temp_answer += dict_[k] + dict_[k+1]
+
+                answer = max(answer , temp_answer)
+                temp_answer = 0
+
+        return answer
+        
