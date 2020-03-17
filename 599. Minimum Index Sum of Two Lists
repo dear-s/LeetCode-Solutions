@@ -1,0 +1,34 @@
+class Solution:
+    def findRestaurant(self, list1: List[str], list2: List[str]) -> List[str]:
+        
+        sum_array = {}
+        
+        i = 0
+        while i < len(list1):
+            j = 0
+            while j < len(list2):
+                if list1[i] == list2[j]:
+                    sum_array[list1[i]] = i + j
+
+                j+=1
+            i+=1
+
+        print(sum_array)
+
+        min_sum_index = len(list1) + len(list2)
+        print("length of list1: ", len(list1))
+        print("length of list2: ", len(list2))
+        answer = []
+
+        for k,v in sum_array.items():
+            min_sum_index = min(min_sum_index, v)
+        
+        print(min_sum_index)
+        
+        for d in sum_array:
+            if sum_array[d] == min_sum_index:
+                answer.append(d)
+
+        print(answer)
+        return answer
+    
