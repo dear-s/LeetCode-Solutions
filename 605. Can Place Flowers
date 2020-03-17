@@ -1,0 +1,60 @@
+class Solution:
+    def canPlaceFlowers(self, flowerbed: List[int], n: int) -> bool:
+        
+                
+        # keep index value in dictionary
+        ind_dict = {}
+        temp1 = []
+        temp0 = []
+        for i in range(len(flowerbed)):
+            if flowerbed[i] == 1:
+                temp1.append(i)
+            else:
+                temp0.append(i)
+
+        ind_dict[1] = temp1
+        ind_dict[0] = temp0
+
+        # print("ind_dict: ", ind_dict)
+
+        not_places_to_add = []
+        for noplace in temp1:
+            not_places_to_add.append(noplace)
+
+        # print("not_places_to_add: ", not_places_to_add)
+
+        # add adjacent to temp1
+        for t1 in temp1:
+            not_places_to_add.append(t1-1)
+            not_places_to_add.append(t1+1)
+
+        # print("temp1: ", temp1)
+        # print("temp0: ", temp0)
+        # print("not_places_to_add: ", not_places_to_add)
+
+        can_add = []
+        for i in temp0:
+            if i not in not_places_to_add:
+                can_add.append(i)
+
+        # print("can_add: ", can_add)
+
+        temp_n = n
+        occupy = 0
+        skip = 0
+        
+        # try adding one by one
+        c = 0
+        while c < len(can_add):
+            occupy +=1
+            c+=1
+            if c < len(can_add) and abs(can_add[c-1] - can_add[c]) == 1:
+                skip+=1
+                c+=1
+
+        if occupy >= n:
+            return True
+        else:
+            return False
+        
+        
