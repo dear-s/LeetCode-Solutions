@@ -1,0 +1,58 @@
+class Solution:
+    def maxCount(self, m: int, n: int, ops: List[List[int]]) -> int:
+        
+        minX = m
+        minY = n
+
+        for op in ops:
+            minX = min(op[0], minX)
+            minY = min(op[1], minY)
+
+        print(minX)
+        print(minY)
+        print(minX * minY)
+        return minX * minY
+
+                
+        
+        """
+        Time Limit Exceeded
+        
+        # print("m: ", m)
+        # print("n: ", n)
+        # print("ops: ", ops)
+        matrix = []
+        for first in range(m):
+            temp = []
+            for second in range(n):
+                temp.append(0)
+            
+            matrix.append(temp)
+                
+        # print("matrix: ", matrix)
+        
+        for iteration_ops in ops:
+            # print("current ops: ", iteration_ops)
+            # operation for current operation
+            for i in range(iteration_ops[0]):
+                for j in range(iteration_ops[1]):
+                    matrix[i][j] += 1
+                
+            # print("After the current operation, matrix: ", matrix)
+                
+        
+        no_of_max = 0
+        largest_no = 0
+        for num1 in matrix:
+            for num2 in num1:
+                if num2 > largest_no:
+                    largest_no = num2
+                    
+        for aa in matrix:
+            for bb in aa:
+                if largest_no == bb:
+                    no_of_max += 1
+                    
+        # print("number of maximum numbers: ", no_of_max)
+        return no_of_max
+        """
