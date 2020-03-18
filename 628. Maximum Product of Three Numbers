@@ -1,0 +1,14 @@
+class Solution:
+    def maximumProduct(self, nums: List[int]) -> int:
+        
+        
+        # USING SORTING - APPROACH 2
+        print("nums: ", nums)
+        sorted_nums = sorted(nums)
+        print("sorted_nums: ", sorted_nums)
+        
+        product = -1000000000
+        product = max(product, sorted_nums[0] * sorted_nums[1] * sorted_nums[len(sorted_nums)-1], sorted_nums[len(sorted_nums)-1] * sorted_nums[len(sorted_nums)-2] * sorted_nums[len(sorted_nums)-3])
+        
+        print(product)
+        return product
