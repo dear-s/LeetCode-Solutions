@@ -1,0 +1,44 @@
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution:
+    def averageOfLevels(self, root: TreeNode) -> List[float]:
+        
+        # level order traversal i.e. [3],[9,20],[15,7] with delimiter "-"
+        
+        queue = []
+        queue.append(root)
+        queue.append("-")
+        traversal = []
+        values = []
+        
+        while len(queue):
+            
+            a = queue.pop(0)
+            if a != "-":
+                values.append(a.val)
+                if a.left:
+                    queue.append(a.left)
+                if a.right:
+                    queue.append(a.right)
+            else:
+                traversal.append(values)
+                values = []
+                if len(queue)>0:
+                    queue.append("-")
+                
+        print("queue: ", queue)
+        print("traversal: ", traversal)
+        
+        avg_array = []
+        for arr in traversal:
+            avg = sum(arr)/len(arr)
+            avg_array.append(avg)
+        
+        
+        print("avg_array: ", avg_array)
+        return avg_array
