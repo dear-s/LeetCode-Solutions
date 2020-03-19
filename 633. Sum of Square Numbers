@@ -1,0 +1,55 @@
+import math
+
+class Solution:
+    def judgeSquareSum(self, c: int) -> bool:
+        
+        n = 0
+        dict_ = {}
+        while n*n <= c:
+            a2 = n*n
+            dict_[a2] = n
+            
+            if c-a2 in dict_:
+                return True
+            
+            n+=1
+        
+        
+        
+        # use dictionaries
+#       TIME LIMIT EXCEEDED
+        
+#         dict_ = {}
+        
+#         for a in range(c+1):
+#             b_squared = int(c - (a*a))
+#             if b_squared >= 0:
+#                 dict_[a] = b_squared
+            
+#         for k,v in dict_.items():
+#             if k in range(c+1) and math.sqrt(abs(v)) in all_numbers:
+#                 return True
+            
+#         return False
+                
+       
+        
+        
+        
+        # TIME LIMIT EXCEEDED
+#         all_numbers = []
+        
+#         for i in range(c+1):
+#             all_numbers.append(i)
+            
+#         print("all_numbers: ", all_numbers)
+        
+#         for a in range(len(all_numbers)):
+#             for b in range(len(all_numbers)):
+#                 if a*a + b*b == c:
+#                     return True
+                
+#         return False
+            
+        
+        
