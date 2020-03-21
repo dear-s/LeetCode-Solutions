@@ -1,0 +1,22 @@
+class Solution:
+    def findTarget(self, root: TreeNode, k: int) -> bool:
+        
+        self.traversal = []
+        self.depthfirst(root)
+        
+        print("traversal: ", self.traversal)
+        
+        for t in range(len(self.traversal)):
+            for t1 in range(t+1, len(self.traversal)):
+                if self.traversal[t] + self.traversal[t1] == k:
+                    return True
+        
+        return False
+        
+        
+    def depthfirst(self, root):
+        if root is None: return
+        
+        self.traversal.append(root.val)
+        self.depthfirst(root.left)
+        self.depthfirst(root.right)
