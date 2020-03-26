@@ -1,0 +1,29 @@
+class Solution:
+    def checkPossibility(self, nums: List[int]) -> bool:
+        
+        count  = 0 # should be 0 or 1 not more than 1
+        
+        if len(nums) == 1: return True
+        
+        for i in range(len(nums)):
+            for j in range(i+1, len(nums)):
+                if nums[j] < nums[i]:
+                    count += 1
+                    if i == 0: # deleting i
+                        new_array = nums[i+1:]
+                    else:
+                        new_array = nums[:i] + nums[i+1:]
+
+                    if j == len(nums)-1:
+                        new_array1 = nums[:j]
+                    else:
+                        new_array1 = nums[:j] + nums[j+1:]
+
+                    if new_array == sorted(new_array):
+                        continue
+                    elif new_array1 == sorted(new_array1):
+                        continue
+                    else:
+                        return False
+                    
+        return True
