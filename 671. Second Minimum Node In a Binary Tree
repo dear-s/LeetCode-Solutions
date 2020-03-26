@@ -1,0 +1,39 @@
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution:
+    def findSecondMinimumValue(self, root: TreeNode) -> int:
+        
+        queue = []
+        queue.append(root)
+        traversal = []
+        
+        while len(queue):
+            a = queue.pop(0)
+            traversal.append(a.val)
+            if a.left:
+                queue.append(a.left)
+            if a.right:
+                queue.append(a.right)
+                
+        print("traversal: ", traversal)
+        
+        set_traversal = set(traversal)
+        print("set_traversal: ", set_traversal)
+        
+        if len(set_traversal) > 1:
+            print("set_traversal, length greater than 1: ", set_traversal)
+            lis = []
+            for s in set_traversal:
+                lis.append(s)
+            lis.sort()
+            print("lis[1]: ", lis[1])
+            return lis[1]
+        else:
+            return -1
+        
+        
