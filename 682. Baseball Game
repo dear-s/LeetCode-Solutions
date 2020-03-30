@@ -1,0 +1,27 @@
+class Solution:
+    def calPoints(self, ops: List[str]) -> int:
+        
+        # print("ops: ", ops)
+        sum = 0
+        valid_points = []
+        
+        for point in ops:
+            if point.isdigit() or point[0]=="-":
+                sum += int(point)
+                valid_points.append(int(point))
+            elif point == "+":
+                sum = sum + valid_points[len(valid_points)-1] + valid_points[len(valid_points)-2]
+                valid_points.append(valid_points[len(valid_points)-1] + valid_points[len(valid_points)-2])
+            elif point == "D":
+                sum = sum + 2*valid_points[len(valid_points)-1]
+                valid_points.append(2*valid_points[len(valid_points)-1])
+            elif point == "C":
+                sum = sum - valid_points[len(valid_points)-1]
+                valid_points.pop()
+                
+            # print("point: ", point)
+            # print("sum: ", sum)
+            # print("valid_points: ", valid_points)
+            
+        return sum
+        
