@@ -1,0 +1,24 @@
+class Solution:
+    def repeatedStringMatch(self, A: str, B: str) -> int:
+        
+        print("initial A: ", A)
+        print("initial B: ", B)
+        
+        if B in A:
+            return 1
+        
+        add = A
+        count = 1
+        while B not in A:
+            A += add
+            # print("A: ", A)
+            # print("B: ", B)
+            count += 1
+            # print("count: ", count)
+            
+            if len(A) > 10000:
+                return -1
+            
+        if B in A:
+            # print("Final_count: ", count)
+            return count
