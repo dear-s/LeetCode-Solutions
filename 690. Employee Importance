@@ -1,0 +1,45 @@
+emp_list = []
+for li in employees:
+    temp = []
+    temp.append(li.id)
+    temp.append(li.importance)
+    temp.append(li.subordinates)
+    emp_list.append(temp)
+
+
+print("emp_list: ", emp_list)
+
+temp_arr = [] # for accessing values all at once after putting in id_importance
+total_imp_value = 0
+id_subordinates = {} # {id: []}
+id_importance = {} # {id: imp}
+
+for emp in emp_list:
+    # emp[0] -> unique id
+    # emp[1] -> importance value
+    # emp[2] -> direct subordinates
+
+    id_subordinates[emp[0]] = emp[2]    
+    id_importance[emp[0]] = emp[1]
+
+temp_arr.append(id)
+sub = id_subordinates[id]
+
+queue = []
+queue.append(id)
+# using bfs queue type
+while len(queue) > 0:
+    a = queue.pop(0)
+    subords = id_subordinates[a]
+    if len(subords) >= 1:
+        for s in subords:
+            queue.append(s)
+            temp_arr.append(s)
+
+
+for t in temp_arr:
+    total_imp_value += id_importance[t]
+
+
+print("total_imp_value: ", total_imp_value)
+return total_imp_value
