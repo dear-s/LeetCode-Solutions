@@ -1,0 +1,108 @@
+class Solution:
+    def findShortestSubArray(self, nums: List[int]) -> int:
+        
+        
+        # find smallest length array with same degree
+
+        # degree of nums
+        dict = {}
+        for n in nums:
+            if n in dict:
+                dict[n] += 1
+            else:
+                dict[n] = 1
+
+        value = 0   
+        element_responsible = {} # key -> degree
+
+        # degree = [] -> maximum frequency of an element [frequency]
+
+        for k,v in dict.items():
+            value = max(value, v)
+
+        for k1,v1 in dict.items():
+            if v1 == value:
+                element_responsible[k1] = value
+                degree = value
+                # element = k1
+
+        index_element = {}
+
+        for keys,values in dict.items():
+            index_element[keys] = []
+            for nn in range(len(nums)):
+                if nums[nn] == keys:
+                    index_element[keys].append(nn)
+
+        answer = 1000000000000000000000000000000
+        for keyss,valuess in index_element.items():        
+            if len(valuess) > degree-1:
+                answer = min(answer, valuess[degree-1] - valuess[0] + 1)
+
+        print(answer)
+        return answer
+        
+        
+        """
+        TIME LIMIT EXCEEDED
+        if len(nums) == 0 or len(nums) == 1: return len(nums)
+        
+        temp_nums = []
+        for n in nums:
+            temp_nums.append(n)
+
+        max_ele = {}
+        degree_nums = self.degree_of_nums(nums, max_ele)
+        print("degree_nums: ", degree_nums)
+
+        total_lengths = []
+        l = 0
+        min_degree = 100000000000000000000
+
+        index_for_ele = {}
+
+        for k,v in max_ele.items():
+            temp = v
+            while v > 0:
+                a = temp_nums.index(k)
+                if k in index_for_ele:
+                    index_for_ele[k].append(a)
+                else:
+                    index_for_ele[k] = [a]
+                temp_nums[a] = ""
+                v-=1
+
+
+        for key,val in index_for_ele.items():
+            if len(val)>1:
+                total_lengths.append(val[len(val)-1] - val[0] + 1 )
+
+
+        print("total_lengths: ", total_lengths)
+        print("min(total_lengths: ", min(total_lengths))
+        return min(total_lengths)
+            
+        
+    def degree_of_nums(self, array, max_ele):
+        
+        # max_ele = {} # number : frequency
+        dict_ele = {} # number : frequency
+        temp_v = 0
+
+        for i in array:
+            if i in dict_ele:
+                dict_ele[i] += 1
+            else:
+                dict_ele[i] = 1
+
+        for k,v in dict_ele.items():
+            if v > temp_v:
+                temp_v = v
+
+        for k,v in dict_ele.items():
+            if v == temp_v:
+                max_ele[k] = v
+                degree = v
+
+        print("degree: ", degree)
+        return degree"""
