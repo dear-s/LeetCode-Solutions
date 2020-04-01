@@ -1,0 +1,46 @@
+class Solution:
+    def hasAlternatingBits(self, n: int) -> bool:
+        
+        print(n)
+        temp = n
+        binary = []
+        
+        while temp>0:
+            rem = temp%2
+            temp = temp//2
+            binary.append(rem)
+            
+        print("binary: ", binary)
+        binary = binary[::-1]
+        print("correct binary: ", binary)
+        
+#         i = 1
+#         while i < len(binary)-1:
+#             if binary[i] == binary[i-1] or binary[i] == binary[i+1]:
+#                 return False
+            
+#         return True
+
+        list0 = [] # storing indexes
+        list1 = []
+        
+        for b in range(len(binary)):
+            if binary[b] == 0:
+                list0.append(b)
+            else:
+                list1.append(b)
+                
+        print("list0: ", list0)
+        print("list1: ", list1)
+        
+        if len(list0) > 1:
+            for i in range(len(list0)-1):
+                if list0[i] == list0[i+1] - 1:
+                    return False
+        
+        if len(list1) > 1:
+            for i in range(len(list1)-1):
+                if list1[i] == list1[i+1] - 1:
+                    return False
+        
+        return True
