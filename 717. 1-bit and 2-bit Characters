@@ -1,0 +1,40 @@
+class Solution:
+    def isOneBitCharacter(self, bits: List[int]) -> bool:
+        
+        char = {}
+        
+        char[0] = 0
+        char[10] = 0
+        char[11] = 0
+        
+        print("char: ", char)
+        
+        i = 0
+        temp = []
+        end = False
+        
+        while i < len(bits):
+            if bits[i] == 0:
+                if len(temp) == 0:
+                    char[0] += 1
+                    end = True
+                else:
+                    char[10] += 1
+                    temp = []
+                    end = False
+                    
+            else:
+                if len(temp) == 0:
+                    temp.append(bits[i])
+                    end = False
+                else:
+                    char[11] += 1
+                    temp = []
+                    end = False
+                    
+            i += 1
+            
+        print("char_after: ", char)
+            
+        return end
+            
