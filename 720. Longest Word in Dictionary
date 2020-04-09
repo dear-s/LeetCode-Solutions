@@ -1,0 +1,66 @@
+class Solution:
+    def longestWord(self, words: List[str]) -> str:
+        
+        # print("words: ", words)
+        words.sort()
+        # print("sorted words: ", words)
+
+        dict_ = {}
+        # temp = ""
+        answer = []
+        i = 0
+        while i < len(words):
+            if i == 0:
+                for ii in words[i]:
+                    if ii not in dict_:
+                        dict_[ii] = 1
+                    else:
+                        dict_[ii] += 1
+            else:
+                temp = words[i][:-1]
+                if temp != words[i-1]:
+                    answer.append(words[i-1])
+                    dict_ = {}
+                
+                for ii in words[i]:
+                    if ii not in dict_:
+                        dict_[ii] = 1
+                    else:
+                        dict_[ii] += 1
+
+                
+
+            if i == len(words) -1:
+                answer.append(words[i])
+
+            i+=1
+        
+                
+        full_final = []
+        for f in answer:
+            checking = True
+            s = ""
+            for i in f:
+                s += i
+                if s in words:
+                    continue
+                else:
+                    checking = False
+
+            if checking == True:
+                full_final.append(f)
+
+        result = []
+        max_len = -10
+        for ff in full_final:
+            max_len = max(max_len, len(ff))
+        for gg in full_final:
+            if len(gg) == max_len:
+                result.append(gg)
+
+        # print("dict_: ", dict_)
+        # print("temp: ", temp)
+        # print("answer", answer)
+        print(result[0])
+        return result[0]
+        
