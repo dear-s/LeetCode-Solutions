@@ -1,0 +1,30 @@
+class Solution:
+    def selfDividingNumbers(self, left: int, right: int) -> List[int]:
+        
+        output = []
+        for n in range(left, right +1):
+            
+            count = 0
+            # n is the number - we have to check
+            temp = [] # store the digits
+            str_n = str(n)
+            print("n: ", n)
+            print("str_n: ", str_n)
+            
+            for i in str_n:
+                temp.append(i)
+                count += 1
+                
+            print("temp: ", temp)
+            
+            for t in temp:
+                if int(t) == 0:
+                    break
+                if n % int(t) == 0:
+                    count -= 1
+                    
+            if count == 0:
+                output.append(n)
+                
+        print("output: ", output)
+        return output
