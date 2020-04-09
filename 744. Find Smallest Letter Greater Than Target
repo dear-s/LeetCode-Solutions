@@ -1,0 +1,10 @@
+alphabets = "abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz"
+        index = alphabets.index(target)
+        temp = alphabets[index+1:]
+            
+        print("temp: ", temp)   
+        
+        for i in temp:
+            if i in letters:
+                return i
+            
