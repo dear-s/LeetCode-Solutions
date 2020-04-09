@@ -1,0 +1,18 @@
+class Solution:
+    def dominantIndex(self, nums: List[int]) -> int:
+        
+        temp = []
+        for n in nums:
+            temp.append(n)
+        
+        temp.sort()        
+        largest_number = temp[len(temp)-1]
+                
+        for i in range(len(temp)-1):
+            if largest_number >= 2 * temp[i]:
+                continue
+            else:
+                return -1
+            
+        index = nums.index(largest_number)
+        return index
