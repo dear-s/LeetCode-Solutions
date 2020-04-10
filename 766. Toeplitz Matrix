@@ -1,0 +1,12 @@
+class Solution:
+    def isToeplitzMatrix(self, matrix: List[List[int]]) -> bool:
+        
+        # scanning with top-left element and comparing the value
+        for m in range(len(matrix)):
+            for n in range(len(matrix[m])):
+                if m > 0 and n > 0:
+                    if matrix[m-1][n-1] != matrix[m][n]:
+                        return False
+                    
+        return True
+           
