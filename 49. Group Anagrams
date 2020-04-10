@@ -1,0 +1,37 @@
+class Solution:
+    def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
+        
+        #group anagrams
+        temp = []
+        dict_ = {}
+        final_answer = []
+        
+        for s in strs:
+            list_ = list(s)
+            list_.sort()
+            ss = "".join(l for l in list_)
+            temp.append(ss)
+        
+        print("strs: ", strs)
+        print("temp: ", temp)
+        
+        for i in range(len(temp)):
+            if temp[i] not in dict_:
+                dict_[temp[i]] = [i]
+            else:
+                dict_[temp[i]].append(i)
+                
+        print("dict_: ", dict_)
+        
+        for k,v in dict_.items():
+            arr = []
+            for ind in v:
+                arr.append(strs[ind])
+                
+                
+            final_answer.append(arr)
+            
+        print(final_answer)
+        return final_answer
+                
+            
