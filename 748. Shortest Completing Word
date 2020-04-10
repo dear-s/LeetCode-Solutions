@@ -1,0 +1,42 @@
+class Solution:
+    def shortestCompletingWord(self, licensePlate: str, words: List[str]) -> str:
+
+
+        temp = []
+        for l in licensePlate:
+            if l in "ABCDEFGHIJKLMNOPQRSTUVWXYZ":
+                temp.append(l.lower())
+            elif l in "abcdefghijklmnopqrstuvwxyz":
+                temp.append(l)
+            else:
+                continue
+
+        print("licensePlate: ", licensePlate)
+        print("temp: ", temp)
+
+        answers = []
+        nope = True
+        for w in words:
+            temp_check = [] # temp
+            for t in temp:
+                temp_check.append(t)
+
+            for ww in w:
+                if len(temp_check) != 0:
+                    if ww in temp_check:
+                        ind = temp_check.index(ww)
+                        temp_check.pop(ind)
+
+            if len(temp_check) == 0:
+                answers.append(w)
+
+        min_len = float('inf')
+        for a in answers:
+            min_len = min(min_len, len(a))
+
+        for aa in answers:
+            if len(aa) == min_len:
+                return aa
+            
+                    
+                    
