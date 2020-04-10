@@ -1,0 +1,40 @@
+class Solution:
+    def countPrimeSetBits(self, L: int, R: int) -> int:
+        
+        # set bits = number of 1s
+        # 1 is not prime
+        # count - between - range [L,R]
+        
+        count_numbers = 0
+        for n in range(L, R+1):
+            binary = []
+            # binary conversion
+            set_bits = 0
+            temp_number = n
+            while temp_number>0:
+                rem = temp_number % 2
+                temp_number = temp_number // 2
+                binary.append(rem)
+                if rem == 1:
+                    set_bits += 1
+                    
+            # print(n, binary, set_bits)
+            
+            prime = True
+            # check for prime [set bits]
+            for i in range(2,set_bits):
+                if (set_bits % i) == 0:
+                    prime = False
+                
+            if set_bits == 1:
+                prime = False
+                
+            if prime == True:
+                count_numbers += 1
+        
+        print(count_numbers)
+        return count_numbers
+            
+                    
+            
+        
