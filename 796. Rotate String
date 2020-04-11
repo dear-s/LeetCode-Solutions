@@ -1,0 +1,16 @@
+class Solution:
+    def rotateString(self, A: str, B: str) -> bool:
+        
+        print(A)
+        print(B)
+        
+        if A==B: return True
+        
+        for i in range(len(A)):
+            first = A[0]
+            A = A[1:] + first
+            print("A: ", A)
+            if A == B:
+                return True
+            
+        return False
