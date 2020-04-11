@@ -1,0 +1,27 @@
+class Solution:
+    def rotatedDigits(self, N: int) -> int:
+        
+        # good number - rotate and change themselves
+        dict_ = {0:0,1:1,2:5,5:2,6:9,8:8,9:6} # mirrors - 180 degrees
+        s = str(N)
+        count = 0
+        
+        for i in range(1, N+1):
+            clone = ""
+            s = str(i)
+            not_in_dict = True
+            for digit in s:
+                a = int(digit)
+                if a in dict_:
+                    clone += str(dict_[a])
+                else:
+                    not_in_dict = False
+
+            if not_in_dict == True:
+                new_image_number = int(clone)
+                if new_image_number != i:
+                    count += 1
+                
+        print(count)
+        return count
+        
