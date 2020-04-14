@@ -1,0 +1,57 @@
+class Solution:
+    def findMaxLength(self, nums: List[int]) -> int:
+        
+        # applying hashmap solution [solution 3] - O(n) time complexity
+        
+        hashmap = {}
+        # count -> index
+
+        count  = 0
+        max_len = 0
+        hashmap[0] = -1
+
+        for i in range(len(nums)):
+
+            if nums[i] == 0:
+                count -=1
+            else:
+                count += 1
+
+            if count in hashmap:
+                max_len = max(max_len, i-hashmap[count])
+            else:
+                hashmap[count] = i
+
+
+        print(max_len)
+        return max_len
+
+    
+    
+#         TIME LIMIT EXCEEDED
+
+#         i = 0
+#         while i < len(nums):
+#             j = i+1
+#             while j < len(nums):
+#                 temp = nums[i:j+1]
+#                 dict_ = {}
+#                 dict_[0] = 0
+#                 dict_[1] = 0
+#                 for t in temp:
+#                     if t == 1:
+#                         dict_[1] += 1
+#                     else:
+#                         dict_[0] += 1
+                
+#                 # print("temp: ", temp)
+#                 # print("dict_: ", dict_)
+                
+#                 if dict_[0] == dict_[1]:
+#                     max_len = max(max_len, len(temp))
+                
+#                 j+=1
+#             i+=1
+                
+#         print("max_len: ", max_len)
+#         return max_len
