@@ -1,0 +1,25 @@
+class Solution:
+    def stringShift(self, s: str, shift: List[List[int]]) -> str:
+        
+        string = s
+        for array in shift:
+            direction = array[0]
+            how_much_to_rotate = array[1]
+
+            if direction == 0: # left shift
+                i = 0
+                while i < how_much_to_rotate:
+                    # rotate left
+                    # "abc"
+                    string = string[1:] + string[0]
+                    i+=1
+
+            if direction == 1: # right shift
+                j = 0
+                while j < how_much_to_rotate:
+                    # rotate right
+                    string = string[len(string)-1] + string[:-1]
+                    j+=1
+
+        print(string)
+        return string
