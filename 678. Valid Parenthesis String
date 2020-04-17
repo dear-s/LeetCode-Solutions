@@ -1,0 +1,43 @@
+class Solution:
+    def checkValidString(self, s: str) -> bool:
+        
+        # will store the indexes
+        # indexes method!!!
+        open = []
+        star = []
+
+        i = 0
+        while i < len(s):
+            if s[i] == '(':
+                open.append(i)
+            elif s[i] == '*':
+                star.append(i)
+            else: # ')'
+                if len(open) == 0 and len(star) == 0:
+                    return False
+                if len(open) > 0:
+                    open.pop()
+                elif len(star) > 0:
+                    star.pop()
+                
+            i+=1
+        
+        # loop through open paran indexes and checking if any * appears after that index
+        if len(open) > 0:
+            end = len(open)-1
+            while end >=0:
+                ind = open[end]
+                for x in range(len(star)):
+                    if star[x] > ind:
+                        star.pop(x)
+                        open.pop()
+                        break
+
+                end -=1
+
+        if len(open) == 0:
+            return True
+
+        return False
+        
+        
