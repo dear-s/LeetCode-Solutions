@@ -1,0 +1,38 @@
+class Solution:
+    def numberOfLines(self, widths: List[int], S: str) -> List[int]:
+        
+        alphabets = "abcdefghijklmnopqrstuvwxyz"
+        
+        dict_ = {}
+        
+        i = 0
+        while i < len(widths):
+            dict_[alphabets[i]] = widths[i]
+            i+=1
+            
+        print("dict_: ", dict_)
+        
+        
+        sum = 0
+        lines = 0
+        if len(S)>0:
+            lines +=1
+        
+        
+        s= 0
+        while s < len(S):
+            sum += dict_[S[s]]
+            if sum > 100:
+                lines +=1
+                sum = 0
+                s-=1
+
+            s+=1
+        
+        
+            
+        print("lines: ", lines)
+        print("sum: ", sum)
+        
+        
+        return [lines, sum]
