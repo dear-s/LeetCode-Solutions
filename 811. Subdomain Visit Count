@@ -1,0 +1,67 @@
+class Solution:
+    def subdomainVisits(self, cpdomains: List[str]) -> List[str]:
+        
+        
+        dict_ = {}
+        for cp in cpdomains:
+            arr = cp.split(' ')
+            number = int(arr[0])
+            domain = arr[1]
+            
+            indie_domain = domain.split('.')
+            print("indie_domain: ", indie_domain)
+            ind_domain = []
+            
+            for inn in indie_domain:
+                ind_domain.append(inn)
+                ind_domain.append('.')
+                
+            ind_domain.pop()
+            print("ind_domain: ", ind_domain)
+            cont_domains = []
+            
+            i = 0
+            while i < len(ind_domain):
+                temp = ind_domain[i:]
+                t = "".join(x for x in temp)
+                cont_domains.append(temp)
+                i+=2
+                
+            print("cont_domains: ", cont_domains)
+            
+            domain_joins = []
+            for cd in cont_domains:
+                c = "".join(x for x in cd)
+                print("c: ", c)
+                
+                if c in dict_:
+                    dict_[c] += number
+                else:
+                    dict_[c] = number
+                
+        
+        
+        print("dict_: ", dict_)
+        
+        # dictionary has been formed
+        
+        output = [] # result
+        
+        
+        for k,v in dict_.items():
+            arr = []
+            arr.append(str(v))
+            arr.append(" ")
+            arr.append(k)
+            
+            print("arr: ", arr)
+            
+            a = "".join(x for x in arr)
+            print(a)
+            output.append(a)
+            
+        print("output: ", output)
+        return output
+        
+                
+                
