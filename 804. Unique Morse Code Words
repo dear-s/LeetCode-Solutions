@@ -1,0 +1,32 @@
+class Solution:
+    def uniqueMorseRepresentations(self, words: List[str]) -> int:
+        
+        morse_code = [".-","-...","-.-.","-..",".","..-.","--.","....","..",".---","-.-",".-..","--","-.","---",".--.","--.-",".-.","...","-","..-","...-",".--","-..-","-.--","--.."]
+
+        
+        alphabets = "abcdefghijklmnopqrstuvwxyz"
+        
+        dict_ = {}
+        
+        i = 0
+        while i < len(morse_code):
+            dict_[alphabets[i]] = morse_code[i]
+            i+=1
+            
+        print("dict_: ", dict_)
+        
+        
+        morse_coded = []
+        for word in words:
+            temp = ""
+            for w in word:
+                temp += dict_[w]
+                
+            if temp not in morse_coded:
+                morse_coded.append(temp)
+            
+        print("morse_coded: ", morse_coded)
+        
+        
+        return len(morse_coded)
+            
