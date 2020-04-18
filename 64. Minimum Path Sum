@@ -1,0 +1,73 @@
+class Solution:
+    def minPathSum(self, grid: List[List[int]]) -> int:
+        
+        dp = []    
+
+        for i in range(len(grid)):
+            t = []
+            for j in range(len(grid[i])):
+                t.append(grid[i][j])
+            dp.append(t)
+
+        # fill first row
+        for j in range(len(grid[0])):
+            if j == 0:
+                dp[0][0] = grid[0][0]
+            else:
+                dp[0][j] = grid[0][j] + dp[0][j-1]
+
+        # fill first column
+        for i in range(len(grid)):
+            if i == 0:
+                dp[0][0] = grid[0][0]
+            else:
+                dp[i][0] = grid[i][0] + dp[i-1][0]
+
+
+        # changing other column values
+        for i in range(1, len(grid)):
+            for j in range(1, len(grid[i])):
+
+                # up and left - values - minimum sum
+                dp[i][j] = grid[i][j] + min(dp[i-1][j], dp[i][j-1])
+
+
+
+        print(dp[len(grid)-1][len(grid[0])-1])
+        return dp[len(grid)-1][len(grid[0])-1]
+        
+        
+        """
+        TIME LIMIT EXCEEDED
+        poss = []
+        q = []
+        s = 0
+        
+        self.bfs(grid, 0, 0, q, poss)
+
+        print(poss)
+        min_sum = float('inf')
+
+        for p in poss:
+            if sum(p) < min_sum:
+                min_sum = sum(p)
+
+        print("min_sum: ", min_sum)
+        return min_sum
+        
+        
+    def bfs(self, grid, i, j, queue, poss):
+        if i<0 or i>=len(grid) or j<0 or j >=len(grid[i]): return
+
+        if i == len(grid)-1 and j == len(grid[i])-1:
+            queue.append(grid[i][j])
+            poss.append(queue)
+            return
+        queue.append(grid[i][j])
+        left = list(queue)
+        right = list(queue)
+
+        self.bfs(grid, i+1, j, left, poss) # down
+        self.bfs(grid, i, j+1, right, poss) # right
+        """
+        
