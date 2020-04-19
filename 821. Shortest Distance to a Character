@@ -1,0 +1,26 @@
+class Solution:
+    def shortestToChar(self, S: str, C: str) -> List[int]:
+        
+        index_C = []
+        s = 0
+        while s < len(S):
+            if S[s] == C:
+                index_C.append(s)
+
+            s+=1
+
+        print("index_C: ", index_C)
+
+        # s is now the total length
+
+        out = []
+        for i in range(len(S)):
+            mini = float('inf')
+            for j in range(len(index_C)):
+                mini = min(mini, abs(index_C[j] - i))
+
+            out.append(mini)
+
+        print(out)
+        return out
+        
