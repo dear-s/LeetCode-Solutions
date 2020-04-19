@@ -1,0 +1,43 @@
+class Solution:
+    def mostCommonWord(self, paragraph: str, banned: List[str]) -> str:
+        
+        alphabets = "abcdefghijklmnopqrstuvwxyz"
+
+        temp = ""
+        array = []
+        p = 0
+        while p < len(paragraph):
+
+            while p < len(paragraph) and paragraph[p].lower() in alphabets:
+                temp += paragraph[p].lower()
+                p+=1
+
+            array.append(temp)
+            temp = ""
+
+            while p < len(paragraph) and paragraph[p].lower() not in alphabets:
+                p+=1
+
+        dict_ = {}
+        for a in array:
+            if a in dict_:
+                dict_[a] += 1
+            else:
+                dict_[a] = 1
+
+        max_num = float('-inf')
+
+        for k,v in dict_.items():
+            max_num = max(max_num, v)
+
+
+        temp_array = []
+        while max_num > 0:
+            for key,value in dict_.items():
+                if max_num == value:
+                    temp_array.append(key)
+            max_num -= 1
+
+        for t in temp_array:
+            if t not in banned:
+                return t
