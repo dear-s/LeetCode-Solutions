@@ -1,0 +1,42 @@
+# """
+# This is BinaryMatrix's API interface.
+# You should not implement it, or speculate about its implementation
+# """
+#class BinaryMatrix(object):
+#    def get(self, x: int, y: int) -> int:
+#    def dimensions(self) -> list[]:
+
+class Solution:
+    def leftMostColumnWithOne(self, binaryMatrix: 'BinaryMatrix') -> int:
+        
+        dimension_array = binaryMatrix.dimensions()
+        print("dimension_array: ", dimension_array)
+        
+        rows = dimension_array[0]
+        cols = dimension_array[1]
+        
+        print("rows: ", rows)
+        print("cols: ", cols)
+        
+        # if 1 -> left
+        # if 0 -> down
+        # where? - > where + 1
+        
+        r = 0
+        c = cols -1
+        
+        # start from top right corner
+        while r<rows and c >= 0:
+            value = binaryMatrix.get(r,c)
+            if value == 1: # left
+                c -= 1
+            else: # down
+                r += 1
+                
+        if c != cols -1:
+            print("place: ", c + 1)
+            return c+1
+        else:
+            print("not found")
+            return -1
+        
