@@ -1,0 +1,88 @@
+class Solution:
+    def rangeBitwiseAnd(self, m: int, n: int) -> int:
+        
+                
+        # shift approach
+        # right shift then left shift
+        shift = 0
+        while m != n:
+            # right right 
+            m >>= 1
+            n >>= 1
+            shift += 1
+            
+        # left shift the same - any of them - 'shift' times
+        return m << shift
+        
+        
+        
+        """
+        TIME LIMIT EXCEEDED
+        
+        # convert all numbers to binary
+        # AND them all
+
+        binary_num_array = [] # will store all the numbers - in binary form
+            
+        for i in range(m,n+1):
+
+            # convert into binary
+            temp = i
+            binary = ""
+            while temp > 0:
+                binary += str(temp %2)
+                temp = temp // 2
+
+            binary = binary[::-1] # reversed
+
+            binary_num_array.append(binary)
+
+        max_length = float('-inf')
+        for bb in binary_num_array:
+            max_length = max(max_length, len(bb))
+
+
+        indexx = -1
+        for bb1 in binary_num_array:
+            indexx+=1
+            if len(bb1) <  max_length:
+                difference = max_length
+
+                while difference > 0:
+                    bb1 = '0' + bb1
+
+                    binary_num_array[indexx] = bb1
+                    difference -= 1
+
+        answer_array = []
+        index = 0
+        while index < max_length:
+            temp_digits = []
+            for number in binary_num_array:
+                temp_digits.append(number[index])
+
+            if '0' in temp_digits:
+                answer_array.append(0)
+            else:
+                answer_array.append(1)
+            index +=1
+
+
+        binaryNum_toConvert = "".join(str(x) for x in answer_array)
+
+
+        # convert binary to decimal number
+        decimalNumber = 0
+        end_index = len(binaryNum_toConvert)-1
+        power = 0
+        while end_index >= 0:
+            if binaryNum_toConvert[end_index] == '1':
+                decimalNumber += 2**power
+
+            power += 1
+            end_index -= 1
+
+        return decimalNumber
+        
+        
+        """
