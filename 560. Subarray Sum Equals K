@@ -1,0 +1,39 @@
+class Solution:
+    def subarraySum(self, nums: List[int], k: int) -> int:
+        
+        # approach 4 [hashmap method]
+        count = 0
+        s=0
+        sum_index = {}
+        sum_index[0] = 1
+        
+        for i in range(len(nums)):
+            s += nums[i]
+            
+            if s-k in sum_index:
+                count += sum_index[s-k]
+            
+            if s not in sum_index:
+                sum_index[s] = 1
+            else:
+                sum_index[s] += 1
+            
+        print(count)
+        return count
+          
+        
+        """
+        # Time limit exceeded - brute force approach - approach 3
+        subarray = 0
+        for i in range(len(nums)):
+            sum = 0
+            for j in range(i, len(nums)):
+                sum += nums[j]
+                if sum == k:
+                    subarray += 1
+                    
+                    
+        print("subarray: ", subarray)
+        return subarray
+        
+        """
