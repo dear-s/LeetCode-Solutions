@@ -1,0 +1,65 @@
+class LRUCache:
+
+    def __init__(self, capacity: int):
+        self.capacity = capacity
+        self.dict = {}
+        self.queue = [] # can store arrays [[key, value],[key, value],[key, value]] ------
+        # print("capacity: ", capacity)
+        
+        
+    def get(self, key: int) -> int:
+        # remove - just to check the usage
+        for i in range(len(self.queue)):
+            if self.queue[i][0] == key:
+                index = i
+                self.queue.pop(index)
+                self.queue.append([key, self.dict[key]])
+                break
+            
+            
+        # check if key is still there
+        if key in self.dict:
+            # print("self.dict[key] from get(): ", self.dict[key])
+            return self.dict[key]
+        else:
+            print(-1)
+            return -1
+
+    def put(self, key: int, value: int) -> None:
+        # simple insert
+        # if capacity is max - remove least recently used - make a queue
+        
+        if key in self.dict:
+            self.dict[key] = value
+            # remove old array from queue
+            for q in range(len(self.queue)):
+                if self.queue[q][0] == key:
+                    self.queue.pop(q)
+                    self.queue.append([key, value])
+                    break                           
+        
+        else:
+            if len(self.queue) == self.capacity:
+                # if capacity is full - remove first element from queue [index 0]
+                zero_index_key_value = self.queue[0][0]
+                
+                self.queue.pop(0)
+                self.queue.append([key, value])
+                self.dict.pop(zero_index_key_value)
+                self.dict[key] = value
+            else:
+                self.queue.append([key, value])
+                self.dict[key] = value
+                
+        
+#         print("put() function: ", [key, value])
+#         print("queue now: ", self.queue)
+#         print("dict now: ", self.dict)
+           
+        
+
+
+# Your LRUCache object will be instantiated and called as such:
+# obj = LRUCache(capacity)
+# param_1 = obj.get(key)
+# obj.put(key,value)
