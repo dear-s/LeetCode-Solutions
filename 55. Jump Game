@@ -1,0 +1,20 @@
+class Solution:
+    def canJump(self, nums: List[int]) -> bool:
+    
+        # linear approach - traverse from the back - approach 4 greedy approach!!!
+        
+        validIndexFromBack = len(nums) - 1 # last index
+        
+        for i in range(len(nums)-1, -1, -1):
+            # loops from the end of the array
+            if i + nums[i] >= validIndexFromBack:
+                validIndexFromBack = i
+                
+        
+        if validIndexFromBack == 0:
+            return True
+        
+        return False
+            
+        
+        
