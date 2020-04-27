@@ -1,0 +1,10 @@
+class Solution:
+    def peakIndexInMountainArray(self, A: List[int]) -> int:
+        
+        i = 0
+        while i < len(A):
+            if A[i+1] < A[i]:
+                return i
+            
+            i+=1
+            
