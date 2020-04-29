@@ -1,0 +1,83 @@
+class Solution:
+    def numMagicSquaresInside(self, grid: List[List[int]]) -> int:
+      
+    
+        output = 0 # final counter - answer
+        print("grid length: ", len(grid))
+        
+        
+        for i in range(len(grid)-2):
+            for j in range(len(grid[i])-2):
+
+                count_len = 0 # first condition - all distinct - len should be 9
+                row_sum = 1 # should be 3
+                col_sum = 1 # should be 3
+                diag_sum = 1 # should be 2
+                temp = [[0 for x in range(3)] for x in range(3)]
+                checking_repeats = []
+                cool = True
+                print("checking length: ", len(grid[i]))
+
+
+                temp[0][0] = grid[i][j]
+                checking_repeats.append(grid[i][j])
+                temp[0][1] = grid[i][j+1]
+                checking_repeats.append(grid[i][j+1])
+                temp[0][2] = grid[i][j+2]
+                checking_repeats.append(grid[i][j+2])
+
+                temp[1][0] = grid[i+1][j]
+                checking_repeats.append(grid[i+1][j])
+                temp[1][1] = grid[i+1][j+1]
+                checking_repeats.append(grid[i+1][j+1])
+                temp[1][2] = grid[i+1][j+2]
+                checking_repeats.append(grid[i+1][j+2])
+
+                temp[2][0] = grid[i+2][j]
+                checking_repeats.append(grid[i+2][j])
+                temp[2][1] = grid[i+2][j+1]
+                checking_repeats.append(grid[i+2][j+1])
+                temp[2][2] = grid[i+2][j+2]
+                checking_repeats.append(grid[i+2][j+2])
+
+                print('temp: ', temp)
+
+                row_sum_first = sum(temp[0])
+                #checking row_sum
+                if sum(temp[1]) == row_sum_first:
+                    row_sum += 1
+                if sum(temp[2]) == row_sum_first:
+                    row_sum += 1
+
+
+                col_sum_first = temp[0][0] + temp[1][0] + temp[2][0]
+                #checking col_sum
+                if temp[0][1] + temp[1][1] + temp[2][1] == col_sum_first:
+                    col_sum += 1
+                if temp[0][2] + temp[1][2] + temp[2][2] == col_sum_first:
+                    col_sum += 1
+
+
+                #checking unique elements
+                small_grid = set(checking_repeats)
+
+
+                # checking diagonals
+                first_d = temp[0][0] + temp[1][1] + temp[2][2]
+                second_d = temp[0][2] + temp[1][1] + temp[2][0]
+
+                if first_d == second_d:
+                    diag_sum += 1
+                    
+                # from 1 to 9
+                for rowss in temp:
+                    for colls in rowss:
+                        if colls not in [1,2,3,4,5,6,7,8,9]:
+                            cool = False
+
+                if len(small_grid) == 9 and row_sum == 3 and col_sum == 3 and diag_sum == 2 and cool == True:
+                    output += 1
+
+
+        print("Final output: ", output)
+        return output
