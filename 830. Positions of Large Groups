@@ -1,0 +1,47 @@
+class Solution:
+    def largeGroupPositions(self, S: str) -> List[List[int]]:
+        
+        a = []
+        temp = []
+        temp.append(S[0])
+
+        i = 1
+
+
+        while i < len(S):
+            if S[i] in temp:
+                temp.append(S[i]) 
+                i+=1
+            else:        
+                a.append(temp)
+                temp = []
+
+                if i < len(S):
+                    temp.append(S[i])
+                i+=1
+
+
+        a.append(temp)
+        print("a: ", a)
+
+        real_output= []
+
+        out = []
+        count = 0
+        for arr in a:
+            if len(arr) >= 3:
+                out = []
+                initial = count
+                final = count + len(arr) - 1
+                out.append(initial)
+                out.append(final)
+                real_output.append(out)
+                count += len(arr) 
+                continue
+
+            for b in arr:
+                count += 1
+
+
+        print("real_output: ", real_output)
+        return real_output
