@@ -1,0 +1,36 @@
+class Solution:
+    def toGoatLatin(self, S: str) -> str:
+        
+        vowels = "aeiouAEIOU"
+        
+        arr = S.split(' ')
+        print("arr: ", arr)
+        i = 1
+        
+        out = []
+        for a in arr:
+            j = i
+            temp = ""
+            if a[0] not in vowels:
+                temp = a[1:] + a[0]
+            else:
+                temp += a
+                
+            temp += "ma"
+            while j > 0:
+                temp+= "a"
+                j-=1
+            i+=1
+            out.append(temp)
+            
+        print("out: ", out)
+        output = ""
+        
+        for o in out:
+            output += o
+            output += " "
+            
+        print("output: ", output)
+        return output[:-1]
+        
+        
