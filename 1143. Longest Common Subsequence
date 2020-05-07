@@ -1,0 +1,25 @@
+class Solution:
+    def longestCommonSubsequence(self, text1: str, text2: str) -> int:
+        
+        # dynamic programming question 
+        
+        array = [[0] * (len(text2)+1) for x in range(len(text1)+1)]
+        
+        print("array: ", array)
+        
+        for i in range(len(text1)):
+            for j in range(len(text2)):
+                
+                if text1[i] == text2[j]:
+                    # take diagonal element and add 1
+                    # array[i][j] = array[i-1][j-1] + 1
+                    array[i+1][j+1] = array[i][j] + 1
+                
+                else:
+                    # choose the maximum from top or left side
+                    # array[i][j] = max(array[i-1][j], array[i][j-1])
+                    array[i+1][j+1] = max(array[i][j+1], array[i+1][j])
+                    
+        print("array after: ", array)
+        return array[-1][-1]
+        
