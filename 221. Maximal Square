@@ -1,0 +1,28 @@
+class Solution:
+    def maximalSquare(self, matrix: List[List[str]]) -> int:
+        
+        # dynamic approach
+        # if 0 -> 0
+        # if 1 -> left, top, diagonal left top -> minimum of these + 1
+        
+        array = [[0] * (len(matrix[0])+1) for z in range(len(matrix))]
+        print("array: ", array)
+        max_number = 0
+        
+        for i in range(len(matrix)):
+            for j in range(len(matrix[i])):
+                
+                if matrix[i][j] == '0':
+                    array[i][j] = 0
+                else:
+                    # if matrix[i][j] == '1'
+                    array[i][j] = min(array[i-1][j], array[i][j-1], array[i-1][j-1]) + 1
+                max_number = max(max_number, array[i][j])
+        
+        print("array after: ", array)
+        print("max_number: ", max_number)
+        area = max_number * max_number
+        print("area: ", area)
+        return area
+        
+        
