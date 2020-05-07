@@ -1,0 +1,73 @@
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def isCousins(self, root: TreeNode, x: int, y: int) -> bool:
+        
+        # check two conditions
+        # 1. same depth level
+        # 2. different parents
+        depth_x = 0
+        depth_y = 0
+        # parent_x
+        # parent_y
+        a = self.level_order(root, x, y)
+        print("a: ", a)
+        d = 0
+        while d < len(a):
+            if x in a[d]:
+                depth_x = d
+            if y in a[d]:
+                depth_y = d
+            d+=1
+            
+        print("depth_x: ", depth_x)
+        print("depth_y: ", depth_y)
+        
+        if depth_x == depth_y and self.cousins == True:
+            return True
+        return False
+        
+    def level_order(self, root, x, y):
+        # level order traversal
+        if root is None:
+            return
+        
+        traversal = []
+        queue = []
+        queue.append(root)
+        temp = []
+        queue.append("-") # delimiter
+        lev_order = []
+        self.cousins = True
+        
+        while queue:
+            a = queue.pop(0)
+            
+            if a == "-":
+                print("each temp: ", temp)
+                lev_order.append(temp)
+                temp = []
+                if len(queue) != 0:
+                    queue.append("-")
+            else:
+                temp.append(a.val)
+                if a.left:
+                    queue.append(a.left)
+                if a.right:
+                    queue.append(a.right)
+                    
+                if a.left is not None and a.right is not None:
+                    if a.left.val == x and a.right.val == y:
+                        self.cousins = False
+                    if a.left.val == y and a.right.val == x:
+                        self.cousins = False
+
+            
+        print("lev_order inside the function: ", lev_order)
+        return lev_order
+        
+        
