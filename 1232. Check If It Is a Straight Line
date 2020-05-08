@@ -1,0 +1,23 @@
+class Solution:
+    def checkStraightLine(self, coordinates: List[List[int]]) -> bool:
+        
+        first_point = coordinates[0] # [1,2]
+        slopes = []
+        
+        i = 1
+        while i < len(coordinates):
+            numerator = first_point[1] - coordinates[i][1]
+            denominator = first_point[0] - coordinates[i][0]
+            if denominator != 0:
+                slope_val = numerator/denominator
+            else:
+                return False
+            slopes.append(slope_val)
+            i+=1
+            
+            
+        if len(set(slopes)) == 1:
+            return True
+        
+        return False
+        
