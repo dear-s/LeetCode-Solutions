@@ -1,0 +1,40 @@
+class Solution:
+    def findJudge(self, N: int, trust: List[List[int]]) -> int:
+        
+        all_members = []
+        for i in range(1, N+1):
+            all_members.append(i)
+        # print("all_members: ", all_members)
+        
+        
+        not_judge = []
+        for t in trust:
+            not_judge.append(t[0])
+        # print("not_judge: ", not_judge)
+            
+        
+        may_be_judge = []
+        for member in all_members:
+            if member not in not_judge:
+                may_be_judge.append(member)
+        # print("may_be_judge: ", may_be_judge)
+        
+        
+        for j in may_be_judge:
+            all_in = True
+            check = []
+            for x in range(1, N+1):
+                if x != j:
+                    check.append(x)
+                
+            for n in check:
+                temp = [n,j]
+                if temp not in trust:
+                    all_in = False
+                    
+            if all_in == True:
+                return j
+            
+        return -1
+        
+        
