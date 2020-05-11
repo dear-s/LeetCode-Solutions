@@ -1,0 +1,35 @@
+ class Solution:
+def binaryGap(self, N: int) -> int:
+
+    # decimal to binary
+    bin_arr = []
+    temp = N
+    while temp > 0:
+        a = temp%2
+        bin_arr.append(a)
+        temp = temp//2
+
+    # print("bin_arr to reverse: ", bin_arr)
+    binary_number = bin_arr.reverse()
+    # print("bin_arr: ", bin_arr)
+
+    one_index = []
+    for b in range(len(bin_arr)):
+        if bin_arr[b] == 1:
+            one_index.append(b)
+
+    # print("one_index: ", one_index)
+
+    if len(one_index)>1:
+        max_distance = float('-inf')
+        for a in range(len(one_index)-1):
+            t_arr = one_index[a:a+2]
+            # print("t_arr: ", t_arr)
+            diff = t_arr[1] - t_arr[0]
+            max_distance = max(max_distance, diff)
+
+        # print("max_distance: ", max_distance)
+        return max_distance
+
+    else:
+        return 0
