@@ -1,0 +1,29 @@
+class Solution:
+    def isMonotonic(self, A: List[int]) -> bool:
+        
+        temp = []
+        temp.append(A[0])
+        
+        inc = False
+        dec = False
+        
+        for i in range(1, len(A)):
+            if A[i] > temp[len(temp)-1]:
+                inc = True
+            elif A[i] < temp[len(temp)-1]:
+                dec = True
+            else:
+                pass
+            
+            temp.append(A[i])
+            
+        if inc == True and dec == False:
+            return True
+        if inc == False and dec == True:
+            return True
+        if inc == True and dec == True:
+            return False
+        if inc == False and dec == False:
+            return True
+        
+        
