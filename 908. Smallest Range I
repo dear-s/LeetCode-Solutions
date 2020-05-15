@@ -1,0 +1,19 @@
+class Solution:
+    def smallestRangeI(self, A: List[int], K: int) -> int:
+        
+        # MIN ELEMENT - INCREASE K
+        # MAX ELEMENT - DECREMENT K
+        
+        min_ele = min(A)
+        max_ele = max(A)
+        
+        first = min_ele + K
+        second = max_ele - K
+        
+        if first > second:
+            return 0
+        
+        diff = second - first
+        return diff
+        
+        
