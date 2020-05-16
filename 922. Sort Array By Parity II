@@ -1,0 +1,23 @@
+class Solution:
+    def sortArrayByParityII(self, A: List[int]) -> List[int]:
+        
+        ans = [0] * len(A)
+        even = []
+        odd = []
+        for a in A:
+            if a % 2 == 0:
+                even.append(a)
+            else:
+                odd.append(a)
+                
+        
+        for i in range(len(A)):
+            if i % 2 == 0:
+                e = even.pop()
+                ans[i] = e
+            else:
+                o = odd.pop()
+                ans[i] = o
+                
+        return ans
+        
