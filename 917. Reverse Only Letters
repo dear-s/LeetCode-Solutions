@@ -1,0 +1,29 @@
+class Solution:
+    def reverseOnlyLetters(self, S: str) -> str:
+        
+        index_same = []
+        index_to_change = []
+        letters = []
+        alpha = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+        
+        for s in range(len(S)):
+            if S[s] not in alpha:
+                index_same.append(s)
+            else:
+                index_to_change.append(s)
+                letters.append(S[s])
+
+        
+        rev_letters = letters[::-1]
+        
+        ans = [0] * len(S)
+        for i in range(len(S)):
+            if i in index_same:
+                ans[i] = S[i]
+            else:
+                a = rev_letters.pop(0)
+                ans[i] = a
+        
+
+        final = "".join(x for x in ans)
+        return final
