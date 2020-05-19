@@ -1,0 +1,83 @@
+class Solution:
+    def isLongPressedName(self, name: str, typed: str) -> bool:
+
+        # array formed for name
+        i = 0
+        name_tuple = []
+        temp = [] # [letter, number]
+        while i < len(name):
+            if i == 0:
+                letter = name[i]
+                number = 1
+                
+            else:
+                if name[i] == name[i-1]:
+                    number += 1
+                else:
+                    # if different letter
+                    temp.append(letter)
+                    temp.append(number)
+                    name_tuple.append(temp)
+                    temp = []
+                    letter = name[i]
+                    number = 1    
+                    
+            if i == len(name) -1:
+                temp.append(letter)
+                temp.append(number)
+                name_tuple.append(temp)
+            
+            i+=1
+        
+        print("name_tuple: ", name_tuple)
+        
+        
+        
+        # array formed for typed
+        j = 0
+        typed_tuple = []
+        temp_ = [] # [letter, number]
+        while j < len(typed):
+            if j == 0:
+                letter = typed[j]
+                number = 1
+                
+            else:
+                if typed[j] == typed[j-1]:
+                    number += 1
+                else:
+                    # if different letter
+                    temp_.append(letter)
+                    temp_.append(number)
+                    typed_tuple.append(temp_)
+                    temp_ = []
+                    letter = typed[j]
+                    number = 1    
+                    
+            if j == len(typed) -1:
+                temp_.append(letter)
+                temp_.append(number)
+                typed_tuple.append(temp_)
+            
+            j+=1
+        
+        print("typed_tuple: ", typed_tuple)
+        
+        
+        
+        if len(name_tuple) != len(typed_tuple):
+            return False
+        
+        
+        index = 0
+        while index < len(name_tuple):
+            if name_tuple[index][0] == typed_tuple[index][0]:
+                if name_tuple[index][1] > typed_tuple[index][1]:
+                    return False       
+            else:
+                return False
+            
+            index += 1
+            
+        return True
+            
