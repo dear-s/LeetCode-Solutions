@@ -1,0 +1,50 @@
+class Solution:
+    def numUniqueEmails(self, emails: List[str]) -> int:
+        
+        # print("emails: ", emails)
+        output = []
+        alpha = "abcdefghijklmnopqrstuvwxyz"
+
+        for e in emails:
+            temp = ""
+            local_domain = e.split("@")
+            # print("local_domain: ", local_domain)
+            found_plus = False
+            found_at = False
+
+            i = 0
+            while i < len(e):
+                if e[i] == "@":
+                    found_at = True
+                if found_at:
+                    temp += e[i]
+                    i+=1
+
+
+                if found_plus and found_at == False:
+                    i+=1
+                elif found_at == False and found_plus == False:
+                    if e[i] in alpha:
+                        temp += e[i]
+                        i+=1
+                    elif e[i] == ".":
+                        i+=1
+                    elif e[i] == "+":
+                        found_plus = True
+                        i+=1
+                    else:
+                        temp += e[i]
+                        i+=1
+
+
+            output.append(temp)
+
+        # print("output: ", output)
+
+        out_set = set(output)
+        # print("out_set: ", out_set)
+        return len(out_set)
+
+
+            
+        
