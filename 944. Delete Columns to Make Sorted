@@ -1,0 +1,31 @@
+class Solution:
+    def minDeletionSize(self, A: List[str]) -> int:
+        
+        # D --- deletion indices - how many?
+        all_arrays = []
+        for i in range(len(A[0])):
+            all_arrays.append([])
+
+        for a in A:
+            for b in range(len(a)):
+                all_arrays[b].append(a[b])
+
+        # checking deletions - counting
+        del_index = 0
+
+        for d in range(len(all_arrays)):
+            temp = []
+            rev_temp = []
+
+            for i in all_arrays[d]:
+                temp.append(i)
+                rev_temp.append(i)
+
+            temp.sort()
+            rev_temp.sort()
+            rev_temp = rev_temp[::-1]
+
+            if temp != all_arrays[d]:
+                del_index +=1
+
+        return del_index
