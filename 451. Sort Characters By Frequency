@@ -1,0 +1,37 @@
+class Solution:
+    def frequencySort(self, s: str) -> str:
+        
+        freq = {}
+        
+        for S in s:
+            if S in freq:
+                freq[S] += 1
+            else:
+                freq[S] = 1
+                
+        print("freq: ", freq)
+        
+        array = [] # [[letter, freq], [letter, freq], .... ]
+        for k,v in freq.items():
+            temp = []
+            temp.append(k)
+            temp.append(v)
+            array.append(temp)
+            
+        print("array: ", array)
+        
+        array.sort(key = lambda x: x[1])
+        print("array after sorting: ", array)
+        
+        array = array[::-1]
+        print("reversed_array: ", array)
+        
+        string = ""
+        for a in array:
+            i = 0
+            while i < a[1]:
+                string += a[0]
+                i+=1
+                
+        print("string: ", string)
+        return string
