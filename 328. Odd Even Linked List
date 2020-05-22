@@ -1,0 +1,60 @@
+class Solution:
+    def oddEvenList(self, head: ListNode) -> ListNode:
+        
+        # one pointer for odd - head
+        # one pointer for even - head
+        # and then merging
+        
+        if head is None: return
+        
+        l = head
+        length = 1
+        while l.next:
+            length += 1
+            l = l.next
+        
+        
+        even = []
+        odd = []
+        
+        odd_ll = head
+        even_ll = head.next
+        
+        odd_p = head
+        even_p = head.next
+        
+        cur_o = odd_p
+        cur_e = even_p
+        odd.append(cur_o.val)
+        while cur_o.next and cur_o.next.next:
+            
+            cur_o = cur_o.next
+            even.append(cur_o.val)
+            cur_o = cur_o.next
+            
+            temp = cur_o
+            odd_p.next = temp
+            odd_p = odd_p.next
+            odd.append(cur_o.val)
+            
+        
+        if length % 2 == 0:
+            even.append(l.val)
+        
+        
+        new_pointer = ListNode(odd[0])
+        pppp = new_pointer
+        
+        o = 1
+        while o < len(odd):
+            new_pointer.next = ListNode(odd[o])
+            new_pointer = new_pointer.next
+            o+=1
+        
+        e = 0
+        while e < len(even):
+            new_pointer.next = ListNode(even[e])
+            new_pointer = new_pointer.next
+            e+=1
+         
+        return pppp
