@@ -1,0 +1,54 @@
+
+class Solution:
+    def isAlienSorted(self, words: List[str], order: str) -> bool:
+        
+        # find the length of smallest word
+        len_long = float('-inf')
+        for w in words:
+            len_long = max(len_long, len(w))
+
+        # print("len_long: ", len_long)
+
+        i = 0
+        while i < len_long:
+            temp = ""
+            for w in words:
+                if i >= len(w):
+                    temp += " "
+                else:
+                    temp += w[i]
+
+            # print("temp: ", temp)
+
+            index = []
+            for t in temp:
+                if t != " ":
+                    ind = order.index(t)
+                    index.append(ind)
+                else:
+                    index.append(-100000000000000)
+
+            # print("index: ", index)
+            # print("temp: ", temp)
+
+            # compare index array
+            j = 1
+            equal = False
+            while j < len(index):
+                if index[j] < index[j-1]:
+                    return False
+                    # print("False")
+                elif index[j] == index[j-1]:
+                    equal = True
+
+                j+=1
+
+            if equal == False:
+                return True
+                # print("True")
+
+            i+=1
+
+        return True
+        # print("True")
+
