@@ -1,0 +1,14 @@
+class Solution:
+    def repeatedNTimes(self, A: List[int]) -> int:
+        
+        two_n = len(A)
+        
+        freq = {}
+        for a in A:
+            if a in freq:
+                freq[a] += 1
+            else:
+                freq[a] = 1
+                
+            if freq[a] == two_n//2:
+                return a
