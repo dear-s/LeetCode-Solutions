@@ -1,0 +1,23 @@
+class Solution:
+    def reorderLogFiles(self, logs: List[str]) -> List[str]:
+        
+        
+        letter_array = []
+        digit_array = []
+
+        for log in logs:
+            if (log.split()[1]).isdigit():
+                digit_array.append(log)
+            else:
+                letter_array.append(log.split())
+        
+        letter_array.sort(key = lambda x: x[0])
+        letter_array.sort(key = lambda x: x[1:])
+
+        for i in range(len(letter_array)):
+            letter_array[i] = " ".join(letter_array[i])
+
+        letter_array.extend(digit_array)
+        print("letter_array: ", letter_array)
+        return letter_array
+
