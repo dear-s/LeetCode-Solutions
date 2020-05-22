@@ -1,0 +1,36 @@
+
+class Solution:
+    def validMountainArray(self, A: List[int]) -> bool:
+        
+        if len(A) < 3: return False
+        
+        one_time_inc = False
+        one_time_dec = False
+        
+        any_False = False
+        temp = A[0]
+        
+        i = 1
+        while i < len(A):
+            if A[i] == A[i-1]:
+                return False
+            elif A[i] > A[i-1]:
+                # increasing
+                if one_time_dec == False:
+                    one_time_inc = True
+                else:
+                    return False
+            else:
+                # decreasing
+                if one_time_inc == True:
+                    one_time_dec = True
+                else:
+                    return False
+                
+            i+=1
+            
+        if one_time_inc and one_time_dec:
+            return True
+        else:
+            return False
+        
