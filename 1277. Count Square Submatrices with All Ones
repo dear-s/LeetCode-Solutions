@@ -1,0 +1,37 @@
+
+m = len(matrix)
+n = len(matrix[0])
+
+count = [0] * n
+topleft = 0
+result = 0
+
+for i in range(m):
+	for j in range(n):
+		if matrix[i][j] == 1:
+			if i == 0: # first row
+				top = 0
+			else:
+				top = count[j]
+			
+			if j == 0: # first column
+				left = 0
+			else:
+				left = count[j-1]
+				
+			count[j] = 1 + min(top, left, topleft)
+			
+			result += count[j]
+			
+			if j == n-1:
+				topleft = 0
+			else:
+				topleft = top
+		
+		else:
+			count[j] = 0
+			
+
+print("result: ", result)
+
+
