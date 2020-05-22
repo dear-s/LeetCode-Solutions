@@ -1,0 +1,20 @@
+class Solution:
+    def kthSmallest(self, root: TreeNode, k: int) -> int:
+        
+        self.traversal = []
+        self.dfs(root)
+        
+        print("self.traversal: ", self.traversal)
+        self.traversal.sort()
+        print("self.traversal after sorting: ", self.traversal)
+        
+        return self.traversal[k-1]
+        
+    def dfs(self, root):
+        
+        if root is None: return
+        
+        self.traversal.append(root.val)
+        self.dfs(root.left)
+        self.dfs(root.right)
+
