@@ -1,0 +1,48 @@
+
+
+class Solution:
+    def hasGroupsSizeX(self, deck: List[int]) -> bool:
+        
+        # X >= 2
+        # each group - X cards
+        # all the cards in each group same integer - same number of integer
+        # check partitions [1,1][2,2][3,3][4,4]...
+        
+        if len(deck) == 1:
+            return False
+        
+        num_freq = {}
+        
+        for d in deck:
+            if d in num_freq:
+                num_freq[d] += 1
+            else:
+                num_freq[d] = 1
+                
+        print("num_freq: ", num_freq)
+        
+        min_val = float('inf')
+        max_val = float('-inf')
+        frequency = []
+        for k,v in num_freq.items():
+            min_val = min(min_val, v)
+            max_val = max(max_val, v)
+            frequency.append(v)
+            
+        print("min_val: ", min_val)
+        print("max_val: ", max_val)
+        print("frequency: ", frequency)
+        
+        ans = frequency[0]
+        for f in range(1, len(frequency)):
+            g = gcd(ans, frequency[f])
+            ans = g
+            
+        print("ans: ", ans)
+    
+        if ans == 1:
+            return False
+        else:
+            return True
+    
+   
