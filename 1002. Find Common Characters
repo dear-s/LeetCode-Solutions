@@ -1,0 +1,30 @@
+class Solution:
+    def commonChars(self, A: List[str]) -> List[str]:
+        
+        alpha = "abcdefghijklmnopqrstuvwxyz"
+        ans = []
+        
+        words = []
+        for aa in A:
+            temp = []
+            for a in aa:
+                temp.append(a)
+            words.append(temp)
+        
+        print("words: ", words)
+        
+        al = 0
+        while al < len(alpha):
+            freq = 0
+            for w in words:
+                if alpha[al] in w:
+                    freq += 1
+            if freq == len(words):
+                for w in words:
+                    w.remove(alpha[al])
+                ans.append(alpha[al])
+            else:
+                al+=1
+                
+        print("ans: ", ans)
+        return ans
