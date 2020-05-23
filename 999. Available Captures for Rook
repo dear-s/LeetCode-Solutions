@@ -1,0 +1,142 @@
+class Solution:
+    def numRookCaptures(self, board: List[List[str]]) -> int:
+        
+        # uppercase - White pieces
+        # lowercase - Black pieces
+        
+        # R - white rook ---------------------------exactly one cell with R [white rook]
+        # . - empty spaces
+        # B - white bishop
+        # p - black pawns
+        
+        # directions - N S W E
+        # stop when - reaches the edge, captures an opp colored pawn[same sq]
+        # rooks cannot move into the same square as other friendly bishops
+        
+        # the number of pawns the rook can capture in one move ??????----------------
+      
+        # find the loc of R - white rook
+        # loc_R = []
+
+        for i in range(0,8):
+            for j in range(0,8):
+                if board[i][j] == "R":
+                    loc_R = [i, j]
+                    
+        print("loc_R: ", loc_R)
+        
+        row_of_rook = []
+        col_of_rook = []
+        # index_R_row
+        # index_R_col
+
+        for j in range(0,8):
+            i = loc_R[0]
+            if board[i][j] in ["R", "B", "p"]:
+                row_of_rook.append(board[i][j])
+                if row_of_rook[len(row_of_rook)-1] == "R":
+                    index_R_row = len(row_of_rook) - 1
+
+        print("row_of_rook: ", row_of_rook)
+        print("index_R_row: ", index_R_row)
+
+        for i in range(0,8):
+            j = loc_R[1]
+            if board[i][j] in ["R", "B", "p"]:
+                col_of_rook.append(board[i][j])
+                if col_of_rook[len(col_of_rook)-1] == "R":
+                    index_R_col = len(col_of_rook) - 1
+
+        print("col_of_rook: ", col_of_rook)
+        print("index_R_col: ", index_R_col)
+        
+        ans = 0
+        
+        # traverse these two arrays from "R" location
+        # check for row_of_rook
+        r = index_R_row
+        before_row = row_of_rook[:r]
+        after_row = row_of_rook[r+1:]
+
+        print("before_row: ", before_row)
+        print("after_row: ", after_row)
+
+        # check for row_of_rook
+        if len(before_row) > 0:
+            found_before_row = False
+            find = len(before_row)-1
+            while find >= 0:
+                if before_row[find] == "p":
+                    ans += 1
+                    found_before_row = True
+                elif before_row[find] == "B":
+                    break
+                else:
+                    find -= 1
+
+                if found_before_row:
+                    break
+
+        if len(after_row) > 0:
+            found_after_row = False
+            find = 0
+            while find < len(after_row):
+                if after_row[find] == "p":
+                    ans += 1
+                    found_after_row = True
+                elif after_row[find] == "B":
+                    break
+                else:
+                    find += 1
+
+                if found_after_row:
+                    break
+
+        print("ans after row check: ", ans)
+
+
+        # check for col_of_rook
+        c = index_R_col
+        before_col = col_of_rook[:c]
+        after_col = col_of_rook[c+1:]
+
+        print("before_col: ", before_col)
+        print("after_col: ", after_col)
+
+        # check for col_of_rook
+        if len(before_col) > 0:
+            found_before_col = False
+            find = len(before_col)-1
+            while find >= 0:
+                if before_col[find] == "p":
+                    ans += 1
+                    found_before_col = True
+                elif before_col[find] == "B":
+                    break
+                else:
+                    find -= 1
+
+                if found_before_col:
+                    break
+
+        if len(after_col) > 0:
+            found_after_col = False
+            find = 0
+            while find < len(after_col):
+                if after_col[find] == "p":
+                    ans += 1
+                    found_after_col = True
+                elif after_col[find] == "B":
+                    break
+                else:
+                    find += 1
+
+                if found_after_col:
+                    break
+
+        print("ans after col check: ", ans)
+        return ans
+        
+        
+        
+        
