@@ -1,0 +1,23 @@
+
+class Solution:
+    def singleNonDuplicate(self, nums: List[int]) -> int:
+        
+        # nums is an array
+        
+        dict_ = {}
+        
+        
+        for n in nums:
+            if n in dict_:
+                dict_[n] += 1
+            else:
+                dict_[n] = 1
+                
+        print("dict_: ", dict_)
+        
+        
+        for k,v in dict_.items():
+            if v == 1:
+                return k
+            
+        
