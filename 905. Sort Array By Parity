@@ -1,0 +1,22 @@
+
+class Solution:
+    def sortArrayByParity(self, A: List[int]) -> List[int]:
+        
+        # returning all the even elements of A
+        # followed by odd elements of A
+        
+        ans = []
+        
+        for a in A:
+            if a % 2 == 0:
+                # even
+                ans.append(a)
+                
+        for a in A:
+            if a % 2 != 0:
+                # odd
+                ans.append(a)
+                
+        print("ans: ", ans)
+        return ans
+        
