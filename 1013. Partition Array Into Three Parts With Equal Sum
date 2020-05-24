@@ -1,0 +1,26 @@
+class Solution:
+    def canThreePartsEqualSum(self, A: List[int]) -> bool:
+        
+        s = sum(A)
+        print("s: ", s)
+        
+        if s %3 != 0:
+            return False
+        
+        ind_sum = s // 3
+        print("ind_sum: ", ind_sum)
+        
+        count = 0
+        i = 0
+        temp_sum = 0
+        while i < len(A):
+            temp_sum += A[i]
+            if temp_sum == ind_sum:
+                count += 1
+                temp_sum = 0
+            
+            if count == 3:
+                return True
+            
+            i+=1
+        
