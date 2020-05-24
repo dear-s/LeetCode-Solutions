@@ -1,0 +1,36 @@
+
+class Solution:
+    def removeKdigits(self, num: str, k: int) -> str:
+        
+        # make a stack
+        # if top element is greater than the upcoming one - pop
+        # pop - "k" times
+        
+        stack = []
+        pop_times = 0
+        
+        for n in num:
+            while pop_times < k and stack and stack[-1] > n:
+                stack.pop()
+                pop_times += 1
+            stack.append(n)
+            
+        # print("stack: ", stack)
+        
+        while pop_times < k:
+            stack.pop()
+            pop_times += 1
+
+        if len(stack) == 0:
+            return "0"
+        
+        str_stack = ""
+        for s in stack:
+            str_stack += s
+        # print("str_stack: ", str_stack)
+        
+        convert_to_str = int(str_stack)
+        # print("final string: ", str(convert_to_str))
+        return str(convert_to_str)
+        
+        
