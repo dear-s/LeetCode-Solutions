@@ -1,0 +1,13 @@
+class Solution:
+    def sortedSquares(self, A: List[int]) -> List[int]:
+        
+        square = []
+        for a in A:
+            s = a*a
+            square.append(s)
+            
+        square.sort()
+        print("square: ", square)
+        return square
+        
+
