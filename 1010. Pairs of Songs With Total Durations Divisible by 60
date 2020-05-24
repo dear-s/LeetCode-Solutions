@@ -1,0 +1,7 @@
+answer = 0
+elements = [0] * 60
+
+for i in time:
+	answer = answer + elements[-i%60]
+	elements[i%60] = elements[i%60]+1
+return answer
