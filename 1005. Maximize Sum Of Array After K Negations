@@ -1,0 +1,17 @@
+class Solution:
+    def largestSumAfterKNegations(self, A: List[int], K: int) -> int:
+        
+        print("A: ", A)
+        A.sort()
+        print("A after sorting: ", A)
+        
+        i = 0
+        while i < K:
+            A[0] = A[0] * -1
+            A.sort()
+            i+=1
+            
+        print("A: after loop: ", A)
+        
+        sum_ = sum(A)
+        return sum_
