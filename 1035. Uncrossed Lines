@@ -1,0 +1,24 @@
+
+class Solution:
+    def maxUncrossedLines(self, A: List[int], B: List[int]) -> int:
+        
+        # dynamic programming
+        # dimension of matrix = mXn = len(A) X len(B)
+        
+        matrix = [[0 for b in range(len(B)+1)] for a in range(len(A)+1)]
+        print("matrix: ", matrix)
+        
+        for a in range(len(A)):
+            for b in range(len(B)):
+                if A[a] == B[b]:
+                    matrix[a+1][b+1] = 1 + matrix[a][b]
+                else:
+                    matrix[a+1][b+1] = max(matrix[a+1][b], matrix[a][b+1])
+                    
+        print("matrix after dp: ", matrix)
+        
+        ans = matrix[len(A)][len(B)]
+        print("ans: ", ans)
+        return ans
+        
+
