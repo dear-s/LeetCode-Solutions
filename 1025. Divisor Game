@@ -1,0 +1,24 @@
+"""# this will just check for whether the number is even or not!!
+        # one liner
+        if N % 2 == 0:
+            return True
+        else:
+            return False"""
+        
+        willAliceWin = [False]*(N+1)
+        
+        if(N==1):
+            return False
+
+        if(N==2):
+            return True
+        
+        willAliceWin[1]=False
+        willAliceWin[2]=True
+        
+        for i in range(3,N+1):
+            willAliceWin[i]= (not willAliceWin[i-1])
+        
+        return willAliceWin[N]
+
+ 
