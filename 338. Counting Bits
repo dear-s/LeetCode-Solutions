@@ -1,0 +1,28 @@
+
+class Solution:
+    def countBits(self, num: int) -> List[int]:
+        
+        arr = []
+        for i in range(num+1):
+            arr.append(i)
+                    
+        # convert each number in the array to binary
+        # count the number of 1s and append to final answer array
+        ans = []
+        
+        all_binary = []
+        for a in arr:
+            c = 0
+            # convert dec to binary
+            temp = ""
+            while a > 0 :
+                t = a%2
+                a = a//2
+                if t == 1:
+                    c += 1
+                temp+=str(t)
+            ans.append(c)
+            
+        return ans
+
+
