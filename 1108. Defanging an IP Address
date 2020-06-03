@@ -1,0 +1,17 @@
+class Solution:
+    def defangIPaddr(self, address: str) -> str:
+        
+        # return defanged version
+        # replaces period "." ---->>>> "[.]"
+        
+        temp = ""
+        for s in address:
+            if s != ".":
+                temp += s
+            else:
+                temp += "[.]"
+        
+        print("temp: ", temp)
+        return temp
+		
+		
