@@ -1,0 +1,63 @@
+class Solution:
+    def numEquivDominoPairs(self, dominoes: List[List[int]]) -> int:
+        
+        count = 0
+        
+        domi = []
+        for d in dominoes:
+            d.sort()
+            domi.append(d)
+            
+        print("domi: ", domi)
+        
+        numbers = []
+        for d in domi:
+            string = ""
+            for dd in d:
+                string += str(dd)
+            num = int(string)
+            
+            numbers.append(num)
+            
+        print("numbers: ", numbers)
+        
+        
+        hashset = {}
+        for n in numbers:
+            if n in hashset:
+                hashset[n] += 1
+            else:
+                hashset[n] = 1
+                
+        print("hashset: ", hashset)
+        
+        for k,v in hashset.items():
+            # combination question [nC2] - ( [n*(n-1)] // 2 )
+            count += ((v * (v-1))//2)
+        
+        
+        print("count: ", count)
+        return count
+        
+        
+        """
+        TIME LIMIT EXCEEDED
+        # basically any two pairs
+        
+        count = 0
+        
+        for i in range(len(dominoes)):
+            for j in range(i+1, len(dominoes)):
+                
+                a = dominoes[i][0]
+                b = dominoes[i][1]
+                
+                c = dominoes[j][0]
+                d = dominoes[j][1]
+                
+                if (a == c and b == d) or (a == d and b == c):
+                    count += 1
+                    
+        print("count: ", count)
+        return count
+    """
