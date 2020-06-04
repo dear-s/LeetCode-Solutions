@@ -1,0 +1,28 @@
+		
+class Solution:
+    def countCharacters(self, words: List[str], chars: str) -> int:
+        
+        
+        good_strings = []
+        
+        for w in words:
+            temp = chars
+            
+            ind = 0
+            l_check = 0  # if covered all chars or not
+            while ind < len(w):
+                if w[ind] in temp:
+                    ind_to_del = temp.index(w[ind])
+                    new_arr = temp[:ind_to_del] + temp[ind_to_del+1:]
+                    temp = new_arr
+                    l_check += 1
+                ind += 1
+                
+            if l_check == len(w):
+                good_strings.append(l_check)
+                
+        print("good_strings: ", good_strings)
+        
+        answer = sum(good_strings)
+        return answer
+		
