@@ -1,0 +1,31 @@
+		
+class Solution:
+    def numSmallerByFrequency(self, queries: List[str], words: List[str]) -> List[int]:
+        
+        output = []
+        for q in queries:
+            one = self.f(q)
+            count = 0
+            for w in words:
+                two = self.f(w)
+                if one < two:
+                    count += 1
+            output.append(count)
+        return output
+        
+        
+    def f(self, s):
+        # freq of smallest character
+
+        s = sorted(s)
+        letter = s[0]
+
+        freq = 0
+        for i in s:
+            if i == letter:
+                freq += 1
+
+        # print("freq of ", letter, " is: ", freq)
+        return freq
+        
+		
