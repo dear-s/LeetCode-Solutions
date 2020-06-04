@@ -1,0 +1,38 @@
+class Solution:
+    def distanceBetweenBusStops(self, distance: List[int], start: int, destination: int) -> int:
+        
+        
+        # if we start from beginning - right - [start, dest)
+        # if we start from the back - left - (start, dest]
+        
+        # start, dest -- indexes
+        
+        if start == destination: return 0
+        
+        # case when start < destination
+        elif start < destination:
+            right_distance = 0
+            right_arr = []
+            i = start
+            while i != destination:
+                right_arr.append(distance[i])
+                i+=1
+
+            left_distance = 0
+            left_arr = []
+            j = destination
+            while j!= start:
+                if j == len(distance)-1:
+                    left_arr.append(distance[j])
+                    j = -1
+                else:
+                    left_arr.append(distance[j])
+
+                j+=1
+
+            return min(sum(left_arr), sum(right_arr))
+        
+        # if start > destination
+        else:
+            return self.distanceBetweenBusStops(distance, destination, start)
+           
