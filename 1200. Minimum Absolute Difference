@@ -1,0 +1,32 @@
+class Solution:
+    def minimumAbsDifference(self, arr: List[int]) -> List[List[int]]:
+        
+        # sort
+        # diff consecutive ones - min diff
+        # loop first - i - if (diff - i) is in rest of the array or not or consecutive one
+        
+        arr.sort()
+        min_diff = float('inf')
+        pairs_diff = [] # [[1,2], 1]
+        # diff - abs diff
+        i = 0
+        while i < len(arr)-1:
+            t_arr = [arr[i], arr[i+1]]
+            diff = abs(arr[i+1] - arr[i])
+            min_diff = min(min_diff, diff)
+            pairs_diff.append([t_arr, diff])
+            
+            i+=1
+            
+        print("pairs_diff: ", pairs_diff)
+        
+        final = []
+        for p in pairs_diff:
+            if p[1] == min_diff:
+                final.append(p[0])
+                
+        print("final: ", final)
+        return final
+        
+        
+		
