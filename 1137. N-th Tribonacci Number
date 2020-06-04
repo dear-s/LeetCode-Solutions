@@ -1,0 +1,29 @@
+class Solution:
+    def tribonacci(self, n: int) -> int:
+        
+        a = 0
+        b = 1
+        c = 1
+        
+        if n == 0:
+            return 0
+        elif n == 1:
+            return 1
+        elif n == 2:
+            return 1
+        
+        else:
+        
+            seq = [a,b,c]
+
+            i = 3
+            while i < n+1:
+                series = seq[i-1] + seq[i-2] + seq[i-3]
+                seq.append(series)
+
+                i+=1
+
+            print("seq: ", seq)
+            return seq[-1]
+        
+		
