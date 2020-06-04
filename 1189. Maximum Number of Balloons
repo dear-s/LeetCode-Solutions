@@ -1,0 +1,43 @@
+		
+class Solution:
+    def maxNumberOfBalloons(self, text: str) -> int:
+        
+        
+        hashmap = {}
+        
+        for t in text:
+            if t in hashmap:
+                hashmap[t] +=1
+            else:
+                hashmap[t] = 1
+                
+        print("hashmap: ", hashmap)
+        
+        # form "balloon"
+        
+        out = 0
+        word = "balloon"
+        w = 0
+        temp = ""
+        
+        while w < len(word):
+            if word[w] in hashmap:
+                if hashmap[word[w]] > 0:
+                    temp += word[w]
+                    hashmap[word[w]] -=1
+                elif hashmap[word[w]] == 0:
+                    break
+            else:
+                break
+            
+            if w == len(word) - 1:
+                if temp == word:
+                    out += 1
+                    temp = ""
+                    w = -1
+                
+            w+=1
+            
+        print("out: ", out)
+        return out
+    
