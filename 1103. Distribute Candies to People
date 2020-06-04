@@ -1,0 +1,39 @@
+	
+class Solution:
+    def distributeCandies(self, candies: int, num_people: int) -> List[int]:
+        
+        answer_candies = []
+        # print("answer_candies: ", answer_candies)
+        
+        index_candy = {}
+        
+        i = 0
+        for n in range(num_people):
+            index_candy[n] = 0
+            
+        # print("initial index_candy: ", index_candy)
+            
+        can = candies
+        rounds = 1
+        while can > 0:
+            for k,v in index_candy.items():
+                if can >= rounds:
+                    index_candy[k] += rounds
+                    can -= rounds
+                    rounds+=1
+                else:
+                    # left = can
+                    index_candy[k] += can
+                    can = 0
+                    
+                if can == 0:
+                    break
+                    
+        # print("index_candy: ", index_candy)
+        
+        for k,v in index_candy.items():
+            answer_candies.append(v)
+            
+        # print("answer_candies: ", answer_candies)
+        return answer_candies
+        
