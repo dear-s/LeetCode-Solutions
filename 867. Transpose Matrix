@@ -1,0 +1,23 @@
+	class Solution:
+    def transpose(self, A: List[List[int]]) -> List[List[int]]:
+        
+        
+        length = len(A[0])
+        # print(length)
+        final = []
+        
+        i = 0
+        while i < length:
+            temp = []
+            for arr in A:
+                temp.append(arr[i])
+                # print("temp: ", temp)
+            final.append(temp)
+            # print("final: ", final)
+            i+=1
+            
+        
+        # print("final matrix [transpose]: ", final)
+        return final
+        
+       
