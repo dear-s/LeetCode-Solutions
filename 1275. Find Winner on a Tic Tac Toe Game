@@ -1,0 +1,57 @@
+class Solution:
+    def tictactoe(self, moves: List[List[int]]) -> str:
+        
+        # tic tac toe
+        # players take turns - place into empty chars (" ")
+        # player A --- "X"
+        # player B --- "O"
+        
+        # any 3 same - game ends - winner name - [[[[[[[[row, col, diagonal]]]]]]]]
+        # all squares filled - game ends - draw
+        # still movements - "Pending" after traversing through the whole array "moves"
+        
+        grid = [[" " for x in range(3)] for x in range(3)]
+        
+        # keep track of a and b turns
+        # a-turn [even places]
+        # b-turn [odd places]
+        
+        # initial flags -- keep switching them
+        a_turn = True
+        b_true = False
+        
+        for m in moves:
+            i = m[0]
+            j = m[1]
+            
+            # i, j will be the position in grid ---- fill it up (verifying whose chance is it)
+            if a_turn:
+                # a's turn --- "X"
+                grid[i][j] = "X"
+                a_turn = False
+                b_turn = True
+            
+            elif b_turn:
+                # b's turn --- "O"
+                grid[i][j] = "O"
+                a_turn = True
+                b_turn = False
+        
+            
+            # check if all 3 cols/rows are same - game end -- announce winner
+            if (grid[0][0] == grid[0][1] == grid[0][2] != " ") or (grid[1][0] == grid[1][1] == grid[1][2] != " ") or (grid[2][0] == grid[2][1] == grid[2][2] != " ") or (grid[0][0] == grid[1][0] == grid[2][0] != " ") or (grid[0][1] == grid[1][1] == grid[2][1] != " ") or (grid[0][2] == grid[1][2] == grid[2][2] != " ") or (grid[0][0] == grid[1][1] == grid[2][2] != " ") or (grid[0][2] == grid[1][1] == grid[2][0] != " "):
+                # false party is the winner
+                if a_turn == False: return "A"
+                elif b_turn == False: return "B"
+                
+            elif grid[0][0] != " " and grid[0][1] != " " and grid[0][2] != " " and grid[1][0] != " " and grid[1][1] != " " and grid[1][2] != " " and grid[2][0] != " " and grid[2][1] != " " and grid[2][2] != " ":
+                # all spaces are filled -- hit draw
+                return "Draw"
+            
+        
+        if grid[0][0] != " " and grid[0][1] != " " and grid[0][2] != " " and grid[1][0] != " " and grid[1][1] != " " and grid[1][2] != " " and grid[2][0] != " " and grid[2][1] != " " and grid[2][2] != " ":
+            return "Draw"
+        else:
+            return "Pending"
+        
+            
