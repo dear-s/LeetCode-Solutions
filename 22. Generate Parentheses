@@ -1,0 +1,27 @@
+class Solution:
+    def generateParenthesis(self, n: int) -> List[str]:
+        
+        # n --- n open and n closing brackets
+        self.n = n
+        open = 0 # both has to be less than or equal to n
+        close = 0 # close cant be greater than open
+        string = ""
+        self.ans = []
+        self.helper(open, close, string)
+        return self.ans
+
+
+    def helper(self, open, close, string):
+
+        if len(string) == 2 * self.n:
+            self.ans.append(string)
+            return
+
+        # check for open
+        if open < self.n:
+            self.helper(open+1, close, string+"(")
+
+        if open > close:
+            self.helper(open, close+1, string+")")
+        
+        
