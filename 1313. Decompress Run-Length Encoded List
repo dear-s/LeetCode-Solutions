@@ -1,0 +1,27 @@
+class Solution:
+    def decompressRLElist(self, nums: List[int]) -> List[int]:
+        
+        # nums -- [1,2][3,4][][][]...        - subdivide into a length of 2
+        
+        output = []
+        temp_num = []
+        
+        i = 0
+        while i < len(nums)-1:
+            arr = [nums[i], nums[i+1]]
+            temp_num.append(arr)
+            i+=2
+            
+        print("temp_num: ", temp_num)
+        
+        # generate output array
+        for t in temp_num:
+            freq = t[0]
+            val = t[1]
+            
+            while freq > 0:
+                output.append(val)
+                freq -=1
+                
+        print("output: ", output)
+        return output
