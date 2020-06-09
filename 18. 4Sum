@@ -1,0 +1,44 @@
+class Solution:
+    def fourSum(self, nums: List[int], target: int) -> List[List[int]]:
+        
+        # recursion -- timeout
+        # 4 elements [a,b,c,d] -- sum = target
+        # unique quadruplets
+        
+        final_array = []
+        nums.sort()
+
+        for i in range(len(nums)-3):
+            # base conditions to eliminate duplicate quadruplets
+            if target > 0:
+                if nums[i] > target: break
+            if i > 0 and nums[i] == nums[i-1]: continue
+            # 3 sum - code
+            for j in range(i+1, len(nums)-2):
+                # base conditions
+                sum_to_find = target - nums[i]
+                if sum_to_find > 0:
+                    if nums[j] > sum_to_find: break
+                if j > i+1 and nums[j] == nums[j-1]: continue
+                
+                # can start with the two pointers (Left and Right)
+                L = j+1
+                R = len(nums)-1
+                
+                while L < R:
+                    quadruplet = [nums[i], nums[j], nums[L], nums[R]]
+                    sum_ = sum(quadruplet)
+                    if sum_ > target:
+                        R-=1
+                    elif sum_ < target:
+                        L+=1
+                    else:
+                        final_array.append(quadruplet)
+                        while L<R and nums[L] == nums[L+1]: L+=1
+                        while L<R and nums[R] == nums[R-1]: R-=1
+                        L+=1
+                        R-=1
+
+        return final_array
+        
+        
