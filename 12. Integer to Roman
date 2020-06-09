@@ -1,0 +1,80 @@
+class Solution:
+    def intToRoman(self, num: int) -> str:
+        
+        roman = {1: "I", 5: "V", 10:"X", 50:"L", 100:"C", 500:"D", 1000:"M"}
+        
+        # we can check by significant bits
+        ans = ""
+        string = str(num)
+        list_num = []
+        for s in string:
+            list_num.append(int(s))
+            
+        print("list_num: ", list_num)
+        
+        length = len(list_num)
+        temp = length
+        
+        for l in range(length):
+            unit_place = list_num[l] * temp
+            print("temp: ", temp)
+            if temp == 4:
+                for kk in range(list_num[l]):
+                    ans+="M"               
+            elif temp == 3:
+                if list_num[l] == 0:
+                    temp -= 1
+                    continue
+                elif list_num[l] > 0 and list_num[l] < 4:
+                    for kk in range(list_num[l]):
+                        ans += "C"
+                elif list_num[l] == 4:
+                    ans += "CD"
+                elif list_num[l] == 5:
+                    ans += "D"
+                elif list_num[l] > 5 and list_num[l] < 9:
+                    ans+= "D"
+                    for kk in range(list_num[l] - 5):
+                        ans += "C"
+                elif list_num[l] == 9:
+                    ans += "CM"
+            elif temp == 2:
+                if list_num[l] == 0:
+                    temp -= 1
+                    continue
+                elif list_num[l] > 0 and list_num[l] < 4:
+                    for kk in range(list_num[l]):
+                        ans += "X"
+                elif list_num[l] == 4:
+                    ans += "XL"
+                elif list_num[l] == 5:
+                    ans += "L"
+                elif list_num[l] > 5 and list_num[l] < 9:
+                    ans+= "L"
+                    for kk in range(list_num[l] - 5):
+                        ans += "X"
+                elif list_num[l] == 9:
+                    ans += "XC"
+            elif temp == 1:
+                if list_num[l] == 0:
+                    temp -= 1
+                    continue
+                elif list_num[l] > 0 and list_num[l] < 4:
+                    for kk in range(list_num[l]):
+                        ans += "I"
+                elif list_num[l] == 4:
+                    ans += "IV"
+                elif list_num[l] == 5:
+                    ans += "V"
+                elif list_num[l] > 5 and list_num[l] < 9:
+                    ans+= "V"
+                    for kk in range(list_num[l] - 5):
+                        ans += "I"
+                elif list_num[l] == 9:
+                    ans += "IX"
+                
+            
+            temp -= 1
+        
+        print("ans: ", ans)
+        return ans
