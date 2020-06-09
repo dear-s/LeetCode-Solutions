@@ -1,0 +1,33 @@
+class Solution:
+    def letterCombinations(self, digits: str) -> List[str]:
+        
+        # recursive way [slow but intuitive]
+        
+        if len(digits) == 0: return
+        self.digits = digits
+        # letter combinations - by number "digits"
+        dict = {2:"abc", 3:"def", 4:"ghi", 5:"jkl", 6:"mno", 7:"pqrs", 8:"tuv", 9:"wxyz"}
+        string = ""
+        self.answer = []
+
+        # array_strings
+        array_strings = []
+        for d in digits:
+            array_strings.append(dict[int(d)])
+        print("array_strings: ", array_strings)
+
+        # nested loop problem
+        self.combinations(string, array_strings)
+        print("self.answer: ", self.answer)
+        return self.answer
+
+
+    def combinations(self, string, array_strings):
+        # check for the length
+        if len(string) == len(self.digits):
+            self.answer.append(string)
+            return
+
+        for a in array_strings[0]:
+            self.combinations(string+a, array_strings[1:])
+        
