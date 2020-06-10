@@ -1,0 +1,68 @@
+class Solution:
+    def searchRange(self, nums: List[int], target: int) -> List[int]:
+        
+        # binary search - O(log n) - log time
+        ans = [-1,-1] # result
+        
+        ans[0] = self.startingPosition(nums, target)
+        ans[1] = self.endingPosition(nums, target)
+        return ans
+        
+        
+    def startingPosition(self, nums, target):
+        
+        index = -1 # will update and return
+        left = 0
+        right = len(nums) - 1
+        
+        while left <= right:
+            mid = left + (right-left) // 2 # avoiding overflow [in python, no issues]
+            
+            if nums[mid] >= target:
+                right = mid-1
+            else:
+                left = mid + 1
+            
+            if nums[mid] == target:
+                index = mid
+        
+        return index
+        
+        
+    def endingPosition(self, nums, target):
+        
+        index = -1
+        left = 0
+        right = len(nums) - 1
+        
+        while left <= right:
+            mid = left + (right-left) // 2
+            
+            if nums[mid] <= target:
+                left = mid + 1
+            else:
+                right = mid - 1
+                
+            if nums[mid] == target:
+                index = mid
+        
+        return index
+        
+        
+        # time complexity - O(n) - linear time
+        """
+        indexes = [] # all the occurences
+        
+        for a in range(len(nums)):
+            if nums[a] == target:
+                indexes.append(a)
+                
+        if len(indexes) == 0:
+            return [-1, -1]
+        
+        min_index = min(indexes)
+        max_index = max(indexes)
+        return [min_index, max_index]
+        """
+        
+        
