@@ -1,0 +1,20 @@
+class Solution:
+    def subsets(self, nums: List[int]) -> List[List[int]]:
+        
+        # all possible subsets
+        # recursion approach
+        nums.sort()
+        array = []
+        self.answer = []
+        self.subs(nums, array)
+        return self.answer
+    
+    def subs(self, nums, array):
+
+        if array not in self.answer:
+            self.answer.append(array)
+
+        for n in range(len(nums)):
+            self.subs(nums[n+1:], array+[nums[n]])
+            
+            
