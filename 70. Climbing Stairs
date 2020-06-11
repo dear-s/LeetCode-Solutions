@@ -1,0 +1,22 @@
+		
+class Solution:
+    def climbStairs(self, n: int) -> int:
+        
+        # distinct ways you can climb
+        # either 1 or 2 steps - climb the top
+        
+        # fn = f(n) + f(n-1) -- just like fibonacci
+        
+        dp = [0 for x in range(n+1)]
+        print("dp: ", dp)
+        
+        dp[0] = 1
+        dp[1] = 1
+        
+        for i in range(2, len(dp)):
+            dp[i] = dp[i-1] + dp[i-2]
+            
+        return dp[len(dp)-1]
+        
+    
+        
