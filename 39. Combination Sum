@@ -1,0 +1,29 @@
+class Solution:
+    def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
+        
+        # recursion
+        # unique combinations
+        
+        self.answer = []
+        candidates.sort()
+        print("sorted array candidates: ", candidates)
+        array = []
+        self.combination(candidates, target, array)
+        
+        return self.answer
+        
+    
+    def combination(self, candidates, target, array):
+        
+        array.sort()
+        if sum(array) == target and array not in self.answer:
+            self.answer.append(array)
+            return
+        elif sum(array) > target:
+            return
+        
+        for c in candidates:
+            self.combination(candidates, target, array + [c])
+		
+		
+		
