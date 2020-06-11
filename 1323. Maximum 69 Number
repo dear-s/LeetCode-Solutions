@@ -1,0 +1,23 @@
+	
+class Solution:
+    def maximum69Number (self, num: int) -> int:
+        
+        max_num = float('-inf')
+        str_num = str(num)
+        
+        for n in range(len(str_num)):
+            str_num = str(num)
+            if str_num[n] == "6":
+                # str_num[n] = "9"
+                new_string = str_num[:n] + "9" + str_num[n+1:]
+                str_num = new_string
+            else:
+                # str_num[n] = "6"
+                new_string = str_num[:n] + "6" + str_num[n+1:]
+                
+            integer = int(str_num)
+            max_num = max(max_num, integer)
+            
+        return max_num
+        
+        
