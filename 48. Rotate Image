@@ -1,0 +1,34 @@
+class Solution:
+    def rotate(self, matrix: List[List[int]]) -> None:
+        """
+        Do not return anything, modify matrix in-place instead.
+        """
+        
+        # inplace transpose -- > reverse each row
+        
+        indexes_visited = []
+        # inplace transpose
+        for i in range(len(matrix)):
+            for j in range(len(matrix[i])):
+                if [j,i] not in indexes_visited:
+                    indexes_visited.append([i,j])
+                    # transpose - swap diagonal elements
+
+                    temp = matrix[i][j]
+                    matrix[i][j] = matrix[j][i]
+                    matrix[j][i] = temp
+
+        for m in matrix:
+            # reverse the list - inplace
+            # two pointer method
+            i = 0
+            j = len(m)-1
+            while i < j:
+                temp = m[i]
+                m[i] = m[j]
+                m[j] = temp
+                i+=1
+                j-=1
+
+        return matrix
+        
