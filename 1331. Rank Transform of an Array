@@ -1,0 +1,21 @@
+class Solution:
+    def arrayRankTransform(self, arr: List[int]) -> List[int]:
+        
+        temp = []
+        for ar in arr:
+            temp.append(ar)
+        temp.sort()
+        
+        rank = 1
+        val_rank = {}
+        for i in temp:
+            if i not in val_rank:
+                val_rank[i] = rank
+                rank +=1
+        
+        res = []
+        for t in arr:
+            res.append(val_rank[t])
+            
+        return res
+     
