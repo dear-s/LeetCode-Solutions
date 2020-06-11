@@ -1,0 +1,25 @@
+class Solution:
+    def permute(self, nums: List[int]) -> List[List[int]]:
+        
+        # return permutations
+        self.answer = []
+        array = []
+        original = []
+        for n in nums:
+            original.append(n)
+        
+        self.permutations(nums, array, original)
+        return self.answer
+        
+        
+    def permutations(self, nums, array, original):
+        
+        # print("array repeated: ", array)
+        if set(array) == set(original) and len(array) == len(original):
+            self.answer.append(array)
+            return
+        
+        for a in range(len(nums)):
+            self.permutations(nums[:a] + nums[a+1:], array + [nums[a]], original)
+        
+        
