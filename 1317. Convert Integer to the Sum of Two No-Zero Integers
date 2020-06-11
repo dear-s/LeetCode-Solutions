@@ -1,0 +1,17 @@
+		
+class Solution:
+    def getNoZeroIntegers(self, n: int) -> List[int]:
+        
+        # integers should not have zero digit
+        
+        for temp in range(n-1, 0, -1):
+            a = temp
+            b = n - temp
+            
+            if "0" in str(a) or "0" in str(b):
+                continue
+            else:
+                arr = [a,b]
+                return arr
+        
+        
