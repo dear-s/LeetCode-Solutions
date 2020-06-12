@@ -1,0 +1,15 @@
+class Solution:
+    def inorderTraversal(self, root: TreeNode) -> List[int]:
+        
+        # this is recursive
+        self.traversal = []
+        self.tra(root)        
+        return self.traversal
+        
+    def tra(self, root):        
+        if root is None: return
+        # left, root, right
+        self.tra(root.left)
+        self.traversal.append(root.val)
+        self.tra(root.right)
+		
