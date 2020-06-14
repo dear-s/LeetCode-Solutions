@@ -1,0 +1,23 @@
+		
+class Solution:
+    def change(self, amount: int, coins: List[int]) -> int:
+        
+        # total number of combinations
+        
+        dp = [0] * (amount + 1)
+        dp[0] = 1
+        print("dp: ", dp)
+            
+        # amount ==       0  1  2  3  4  5   [first example] ---- from top + dp[index - coin]
+        # coins:
+        #     [ ]         1  0  0  0  0  0  ---- one array dp
+        #     [1]         1  1 (1) 1  1  1 
+        #     [1,2]      (1) 1  2  2  3 {3} 
+        #     [1,2,5]    {1} 1  2  2  3  4 
+        
+        for c in coins:
+            for i in range(c, amount+1):
+                dp[i] += dp[i-c]
+        
+        return dp[amount]
+		
