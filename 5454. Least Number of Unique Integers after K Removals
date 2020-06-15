@@ -1,0 +1,48 @@
+
+# https://leetcode.com/problems/least-number-of-unique-integers-after-k-removals/		
+class Solution:
+    def findLeastNumOfUniqueInts(self, arr: List[int], k: int) -> int:
+        
+        # start removing ones that have less frequency
+        array_num_freq = []
+
+        num_freq = {}
+        for a in arr:
+            if a in num_freq:
+                num_freq[a] += 1
+            else:
+                num_freq[a] = 1
+
+        for keys,values in num_freq.items():
+            array_num_freq.append([keys, values])
+
+        # arrange in decreasing order of frequency
+
+        max_freq = float('-inf')
+        freq_array = []
+        for key,val in num_freq.items():
+            max_freq = max(max_freq, val)
+            freq_array.append(val)
+        freq_array.sort()
+        freq_array = freq_array[::-1]
+        
+        # sort the array with the most freq ele to least freq elem
+        array_num_freq.sort(key = lambda x:x[1])
+        new_array = []
+        
+        indexie = 0
+        while (indexie < len(array_num_freq)) and (array_num_freq[indexie][1] != 0):
+            new_array.append(array_num_freq[indexie][0])
+            array_num_freq[indexie][1]-=1
+            
+            if array_num_freq[indexie][1] == 0:
+                indexie +=1
+        
+        new_array = new_array[::-1]
+
+        while k > 0:
+            new_array.pop()
+            k-=1
+
+        return len(set(new_array))
+    
