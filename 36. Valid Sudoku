@@ -1,0 +1,106 @@
+class Solution:
+    def isValidSudoku(self, board: List[List[str]]) -> bool:
+        
+        # first condition - checking row
+        for row in board:
+            list_row = []
+            for r in row:
+                if r != ".":
+                    list_row.append(r)
+            
+            if len(list_row) != len(set(list_row)):
+                return False
+            
+        
+        # second condition - checking column
+        columns = [[] for x in range(len(board[0]))] # grid matrix
+        for r in range(len(board)):
+            for c in range(len(board[0])):
+                columns[c].append(board[r][c])
+                        
+        for col in columns: # follow the same path as checking with the row condition
+            list_col = []
+            for c in col:
+                if c != ".":
+                    list_col.append(c)
+            
+            if len(list_col) != len(set(list_col)):
+                return False
+        
+        
+        # third condition - check boxes
+        # can check for separate boxes and making an array of integer values
+        box1 = []
+        for i in range(3):
+            for j in range(3):
+                if board[i][j] != ".":
+                    box1.append(board[i][j])
+        if len(box1) != len(set(box1)):
+            return False
+        
+        box2 = []
+        for i in range(3):
+            for j in range(3, 6):
+                if board[i][j] != ".":
+                    box2.append(board[i][j])
+        if len(box2) != len(set(box2)):
+            return False
+        
+        box3 = []
+        for i in range(3):
+            for j in range(6, 9):
+                if board[i][j] != ".":
+                    box3.append(board[i][j])
+        if len(box3) != len(set(box3)):
+            return False
+        
+        box4 = []
+        for i in range(3, 6):
+            for j in range(3):
+                if board[i][j] != ".":
+                    box4.append(board[i][j])
+        if len(box4) != len(set(box4)):
+            return False
+        
+        box5 = []
+        for i in range(3, 6):
+            for j in range(3, 6):
+                if board[i][j] != ".":
+                    box5.append(board[i][j])
+        if len(box5) != len(set(box5)):
+            return False
+        
+        box6 = []
+        for i in range(3, 6):
+            for j in range(6, 9):
+                if board[i][j] != ".":
+                    box6.append(board[i][j])
+        if len(box6) != len(set(box6)):
+            return False
+        
+        box7 = []
+        for i in range(6, 9):
+            for j in range(3):
+                if board[i][j] != ".":
+                    box7.append(board[i][j])
+        if len(box7) != len(set(box7)):
+            return False
+        
+        box8 = []
+        for i in range(6, 9):
+            for j in range(3, 6):
+                if board[i][j] != ".":
+                    box8.append(board[i][j])
+        if len(box8) != len(set(box8)):
+            return False
+        
+        box9 = []
+        for i in range(6, 9):
+            for j in range(6, 9):
+                if board[i][j] != ".":
+                    box9.append(board[i][j])
+        if len(box9) != len(set(box9)):
+            return False
+        
+        
+        return True
