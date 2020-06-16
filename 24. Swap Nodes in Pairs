@@ -1,0 +1,43 @@
+class Solution:
+    def swapPairs(self, head: ListNode) -> ListNode:
+        
+        # swapping every two adjacent nodes
+        
+        temp = head
+        length = 0
+        while temp:
+            length += 1
+            temp = temp.next
+                    
+        start = head
+        count = 0
+        while start and start.next:
+            if count == 0:
+                head = head.next
+            
+            count += 1
+            self.swap(start, count, head)
+            start = start.next
+            
+        return head
+        
+    def swap(self, cur_head, count, head):
+        # swap cur_head and cur_head.next
+        
+        if count > 1:
+            k = 0
+            prev = head
+            while k < ((count-1)*2)-1:
+                prev = prev.next
+                k+=1
+        
+        a = cur_head
+        b = cur_head.next
+        c = b.next
+        
+        if count > 1:
+            prev.next = b
+        b.next = a
+        a.next = c
+        
+        
