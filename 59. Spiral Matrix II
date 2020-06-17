@@ -1,0 +1,73 @@
+class Solution:
+    def generateMatrix(self, n: int) -> List[List[int]]:
+        
+        # spiral matrix I -- return traversal
+        # spiral matrix II -- return matrix
+        
+        self.N = n
+        count = 0
+        self.output = [["" for c in range(n)] for r in range(n)]
+        
+        numbers = [x for x in range(1, n*n+1)]        
+        self.form_matrix(numbers, n, count)
+        return self.output
+        
+        
+    def form_matrix(self, number, n, count):
+        
+        # creating first row
+        first_row = []
+        for i in range(n):
+            if len(number) > 0:
+                a = number.pop(0)
+                first_row.append(a)
+            
+        # creating last col
+        last_col = []
+        for j in range(n-2):
+            if len(number) > 0:
+                b = number.pop(0)
+                last_col.append(b)
+            
+        # creating last row
+        last_row = [] # reverse it at the end - for appending in the grid
+        for z in range(n):
+            if len(number) > 0:
+                c = number.pop(0)
+                last_row.append(c)
+        last_row = last_row[::-1]
+            
+        # creating first col
+        first_col = [] # reverse it for appending in the grid
+        for k in range(n-2):
+            if len(number) > 0:
+                d = number.pop(0)
+                first_col.append(d)
+        first_col = first_col[::-1]
+        
+        
+        # adding the values in the grif from the 4 lists created earlier
+        ii = count
+        for f_row in first_row:
+            self.output[count][ii] = f_row
+            ii += 1
+        
+        roww = count+1
+        for l_col in last_col:
+            self.output[roww][count+n-1] = l_col
+            roww += 1
+        
+        coll = count
+        for l_row in last_row:
+            self.output[count+n-1][coll] = l_row
+            coll += 1
+            
+        rowws = count+1
+        for f_col in first_col:
+            self.output[rowws][count] = f_col
+            rowws += 1
+                    
+        if len(number) > 0:
+            self.form_matrix(number, n-2, count+1)
+        else:
+            return
