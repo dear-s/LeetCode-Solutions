@@ -1,0 +1,58 @@
+class Solution:
+    def solve(self, board: List[List[str]]) -> None:
+        """
+        Do not return anything, modify board in-place instead.
+        """
+        # reference - https://www.youtube.com/watch?v=0ZJViJEdtEc [2nd method]
+        
+        # 1. looping over boundary elements - if O - making it 1 and the whole chain of Os connecting with the boundary O
+        for i in range(len(board)):
+            for j in range(len(board[0])):
+                if board[0][j] == "O":
+                    # start the dfs loop and make every connected Os - into 1s
+                    board[0][j] = "1"
+                    self.dfs(0, j, board)
+                if board[i][len(board[0])-1] == "O":
+                    board[i][len(board[0])-1] = "1"
+                    self.dfs(i, len(board[0])-1, board)
+                if board[len(board)-1][j] == "O":
+                    board[len(board)-1][j] = "1"
+                    self.dfs(len(board)-1, j, board)
+                if board[i][0] == "O":
+                    board[i][0] = "1"
+                    self.dfs(i, 0, board)
+        
+        # again looping - making 1 - Os and O - Xs
+        for r in range(len(board)):
+            for c in range(len(board[0])):
+                if board[r][c] == "1":
+                    board[r][c] = "O"
+                elif board[r][c] == "O":
+                    board[r][c] = "X"
+        
+    
+    def dfs(self, cur_row, cur_col, board):
+        # up
+        if cur_row != 0:
+            if board[cur_row-1][cur_col] == "O":
+                board[cur_row-1][cur_col] = "1"
+                self.dfs(cur_row-1, cur_col, board)
+        # down
+        if cur_row != len(board)-1:
+            if board[cur_row+1][cur_col] == "O":
+                board[cur_row+1][cur_col] = "1"
+                self.dfs(cur_row+1, cur_col, board)
+        # left
+        if cur_col != 0:
+            if board[cur_row][cur_col-1] == "O":
+                board[cur_row][cur_col-1] = "1"
+                self.dfs(cur_row, cur_col-1, board)
+        # right
+        if cur_col != len(board[0])-1:
+            if board[cur_row][cur_col+1] == "O":
+                board[cur_row][cur_col+1] = "1"
+                self.dfs(cur_row, cur_col+1, board)
+        
+        return
+        
+        
