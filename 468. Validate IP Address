@@ -1,0 +1,45 @@
+		
+class Solution:
+    def validIPAddress(self, IP: str) -> str:
+        
+        # check for IPv4
+        length = len(IP)
+        if length >=7 and length <= 15:
+            list_ip = IP.split(".")
+            if len(list_ip) == 4:
+                # check for individual digits
+                true = 0
+                for x in list_ip:
+                    letters = False
+                    for i in x:
+                        if i not in "0123456789":
+                            letters = True
+                    
+                    if letters == False and len(x)>1 and int(x) in range(0, 256):
+                        if x[0] != "0":
+                            true += 1
+                    if len(x) == 1:
+                        true += 1
+                if true == 4:
+                    return "IPv4"
+                
+                
+        # check for IPv6
+        if length >= 14 and length <= 39:
+            list_ip6 = IP.split(":")
+            hexdigit = "0123456789abcdefABCDEF"
+            if len(list_ip6) == 8:
+                # check for individual digits
+                true = 0
+                for x in list_ip6:
+                    if len(x) > 0 and len(x) <= 4:
+                        if all(c in hexdigits for c in x): # added this
+                            true += 1
+                        
+                if true == 8:
+                    return "IPv6"
+        
+        return "Neither"
+
+	
+	
