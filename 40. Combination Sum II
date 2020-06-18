@@ -1,0 +1,27 @@
+
+class Solution:
+    def combinationSum2(self, candidates: List[int], target: int) -> List[List[int]]:
+        
+        # unique combinations - sum to target
+        # recursion
+        
+        candidates.sort()
+        temp = []
+        self.answer = []
+        
+        self.comb(temp, target, candidates)
+        return self.answer
+        
+        
+    def comb(self, temp, target, candidates):
+        
+        if len(temp) > 0 and sum(temp) == target and temp not in self.answer:
+            self.answer.append(temp)
+            return
+        if sum(temp) > target:
+            return
+            
+        for c in range(len(candidates)):
+            self.comb(temp + [candidates[c]], target, candidates[c+1:])
+        
+        
