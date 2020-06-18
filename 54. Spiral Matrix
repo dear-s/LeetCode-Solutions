@@ -1,0 +1,66 @@
+		
+class Solution:
+    def spiralOrder(self, matrix: List[List[int]]) -> List[int]:
+        
+        self.output = []
+        grid = []
+        self.spiral_round(matrix, grid)
+        
+        return self.output
+                
+    
+    def spiral_round(self, matrix, grid):
+        
+        if len(matrix) == 0:
+            return
+        
+        if len(matrix) > 0:
+            first_col = []
+            last_col = []
+            for r in range(len(matrix)):
+                last_row = []
+                for c in range(len(matrix[0])):
+                    # spiral - one round
+                    if r==0:
+                        self.output.append(matrix[0][c])
+                        matrix[0][c] = ""
+                    elif r!=0 and r!=len(matrix)-1:
+                        if c == len(matrix[0])-1:
+                            if r!=0 and r!=len(matrix)-1:
+                                last_col.append(matrix[r][c])
+                                matrix[r][c] = "" 
+                        elif c == 0:
+                            if r!=0 and r!=len(matrix)-1:
+                                first_col.append(matrix[r][0])
+                                matrix[r][c] = ""
+                        else:
+                            continue
+                    else:
+                        last_row.append(matrix[r][c])
+                        matrix[r][c] = ""
+       
+            
+            for l_col in last_col:
+                self.output.append(l_col)
+            last_row = last_row[::-1]
+            for l_row in last_row:
+                self.output.append(l_row)
+            first_col = first_col[::-1]
+            for f_row in first_col:
+                self.output.append(f_row)
+            
+            for i in range(len(matrix)):
+                temp = []
+                for j in range(len(matrix[0])):
+                    if matrix[i][j] != "":
+                        temp.append(matrix[i][j])
+                if len(temp) > 0:
+                    grid.append(temp)
+                
+            self.spiral_round(grid, [])
+            
+        else:
+            return
+                
+        
+        
