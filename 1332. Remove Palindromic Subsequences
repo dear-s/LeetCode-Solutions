@@ -1,0 +1,44 @@
+class Solution:
+    def removePalindromeSub(self, s: str) -> int:
+        
+        # stupid question
+        # only answers - [0,1,2]
+        if len(s) == 0:
+            return 0
+        elif s == s[::-1]:
+            return 1
+        else:
+            return 2
+        
+        """
+        NOTE - subsequence doesn't have to continuous whattt
+        
+        count = 0
+        i = 0
+        j = len(s)-1
+
+        # if both pointers - value - same, then check for palindrome feature
+        # if palindrome -- start from j+1
+        # if not decrease j until find the palindrome
+
+        while i < len(s) and j >= 0:
+            print("updated s: ", s)
+            print("value i: ", i)
+            print("value j: ", j)
+            if s[i] == s[j]:
+                # check for palindromic string
+                check_string = s[i:j+1]
+                if check_string == check_string[::-1]: # palindrome condition
+                    # it is a palindrome --- delete it from s
+                    s = s[j+1:]
+                    count +=1
+                    i = 0
+                    j = len(s)-1
+                else:
+                    j-=1
+            else:
+                j-=1
+
+        print("count: ", count)
+        print("last s: ", s)
+        return count"""
