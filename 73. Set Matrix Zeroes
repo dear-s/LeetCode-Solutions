@@ -1,0 +1,45 @@
+class Solution:
+    def setZeroes(self, matrix: List[List[int]]) -> None:
+        """
+        Do not return anything, modify matrix in-place instead.
+        """
+        
+        for i in range(len(matrix)):
+            for j in range(len(matrix[0])):
+                if matrix[i][j] == 1:
+                    matrix[i][j] = ""
+                if matrix[i][j] == 0:
+                    matrix[i][j] = "zero"
+        # print("matrix after 1: ", matrix)
+                    
+        for i in range(len(matrix)):
+            for j in range(len(matrix[0])):
+                if matrix[i][j] == "zero":
+                    self.dfs(matrix, i, j)
+        # print("matrix after 2: ", matrix)
+                
+        for i in range(len(matrix)):
+            for j in range(len(matrix[0])):
+                if matrix[i][j] == "":
+                    matrix[i][j] = 1
+        # print("matrix after 3: ", matrix)
+        
+        for ii in range(len(matrix)):
+            for jj in range(len(matrix[0])):
+                if matrix[ii][jj] == "haha" or matrix[ii][jj] == "zero":
+                    matrix[ii][jj] = 0
+       
+        # print("final matrix after 4: ", matrix)
+        return matrix
+    
+    
+    def dfs(self, matrix, row, col):
+        # have to update grid -- whole row and col - with 0
+        for r in range(len(matrix)):
+            for c in range(len(matrix[0])):
+                if r == row and matrix[r][c] != "zero":
+                    matrix[row][c] = "haha"
+                if c == col and matrix[r][c] != "zero":
+                    matrix[r][col] = "haha"
+        
+        # print("matrix after each dfs call: ", matrix)
