@@ -1,0 +1,43 @@
+
+class Solution:
+    def freqAlphabets(self, s: str) -> str:
+
+        
+        # if # is there -- more 2 indexes back [compare or replace/map]
+        # no hashtag after 2 indexes -- then go with first hashmap
+        
+        first_letter = "abcdefghi"
+        first_number = "123456789"
+        
+        second_letter = "jklmnopqrstuvwxyz"
+        second_number = []
+        n = 10
+        for i in second_letter:
+            string = str(n) + "#"
+            second_number.append(string)
+            n+=1
+            
+        # print("second_number: ", second_number)
+        
+        output = []
+        ind = len(s) - 1
+        while ind >= 0:
+            if s[ind] == "#":
+                # check two indexes - before
+                number = s[ind-2:ind+1] # will be string
+                # find index from sc_num --- then return corresponding from second_letter
+                find_index = second_number.index(number)
+                output.insert(0, second_letter[find_index])
+                ind -= 3
+            
+            else:
+                # follow the first condition
+                find_index = first_number.index(s[ind])
+                output.insert(0, first_letter[find_index])
+                ind -= 1
+                
+        # print("output: ", output)
+        return_out = "".join(x for x in output)
+        # print("return_out: ", return_out)
+        return return_out
+    
