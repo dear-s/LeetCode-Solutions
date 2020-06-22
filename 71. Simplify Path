@@ -1,0 +1,22 @@
+
+	
+class Solution:
+    def simplifyPath(self, path: str) -> str:
+        
+        # simple logic - explanation - https://www.youtube.com/watch?v=sCO_qyIDs3k
+        stack = []
+        
+        strings = path.split('/')
+        
+        for s in strings:
+            if s:
+                if s == "..":
+                    # pop the last element from stack
+                    stack = stack[:-1]
+                elif s != ".":
+                    # simply append
+                    stack.append(s)
+                            
+        return "/" + "/".join(stack)
+    
+    
