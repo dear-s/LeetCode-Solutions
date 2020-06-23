@@ -1,0 +1,27 @@
+class Solution:
+    def removeDuplicates(self, nums: List[int]) -> int:
+        
+        # nums - sorted
+        # remove more than 2 occured numbers
+        
+        if len(nums) == 0: return
+        
+        count = 1
+        
+        i = 1
+        prev = nums[0] # first element
+        while i < len(nums):
+            if nums[i] == prev:
+                count += 1
+                if count > 2:
+                    # delete and decrease the value of count
+                    nums.pop(i)
+                    # don't increase i
+                    count -= 1
+                else:
+                    i+=1
+
+            else:
+                prev = nums[i]
+                count = 1
+                i+=1
