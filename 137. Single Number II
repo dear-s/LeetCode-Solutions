@@ -1,0 +1,18 @@
+class Solution:
+    def singleNumber(self, nums: List[int]) -> int:
+        
+        ele_freq = {}
+        
+        for n in nums:
+            if n in ele_freq:
+                ele_freq[n] += 1
+            else:
+                ele_freq[n] = 1
+                
+        print("ele_freq: ", ele_freq)
+        
+        for k,v in ele_freq.items():
+            if v == 1:
+                return k
+		
+
