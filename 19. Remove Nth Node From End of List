@@ -1,0 +1,41 @@
+
+class Solution:
+    def removeNthFromEnd(self, head: ListNode, n: int) -> ListNode:
+        
+        # count the length of the linked list
+        # count - 2 --- traverse the linked list to count - 2 [remove that node]
+        # return head
+        
+        cur = head
+        length = 0
+        while cur:
+            length += 1
+            cur = cur.next
+        
+        # remove nth node from the end - traverse and keep a counter
+        if n < length:
+            temp = head
+            i = 1
+            while temp:
+                if i == length-n:
+                    temp.next = temp.next.next
+                    temp = temp.next
+                else:
+                    temp = temp.next
+                
+                i+= 1
+            return head
+        
+        elif n == length:
+            # remove first element
+            if head.next:
+                head = head.next
+                return head
+            else:
+                return None
+        
+        else:
+            return None
+        
+	
+	 
