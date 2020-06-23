@@ -1,0 +1,19 @@
+		
+array = []        
+while head:
+	array.append(head.val)
+	head = head.next
+	
+bin_str = "".join(str(x) for x in array)
+bin_num = int(bin_str)
+
+num = 0
+blen = len(bin_str)-1
+# binary to decimal
+for b in bin_str:
+	num += (2**blen) * int(b)
+	blen -= 1
+	
+return num
+		
+		
