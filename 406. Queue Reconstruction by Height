@@ -1,0 +1,43 @@
+	
+class Solution:
+    def reconstructQueue(self, people: List[List[int]]) -> List[List[int]]:
+        
+        # understood from youtube
+        
+        # ALGORITHM TO FOLLOW!!
+	    # 1. sorting acc to h (decreasing)
+	    # 2. ascending acc to k
+	    # 3. place at kth location
+        
+        
+        # 1 - sorting acc to h - decreasing
+        people.sort(key = lambda x:x[0])
+        people = people[::-1]
+        
+        
+        second_people = []
+        # 2 - ascending acc to k if h are same
+        i = 0
+        while i < len(people):
+            j = i+1
+            temp = []
+            temp.append(people[i])
+            while j < len(people) and people[i][0] == people[j][0]:
+                temp.append(people[j])
+                j+=1
+                
+            temp.sort(key = lambda x:x[1])
+            for t in temp:
+                second_people.append(t)
+                
+            i = j
+            
+            
+        third_people = []
+        # 3 - place at k'th location
+        for sp in second_people:
+            third_people.insert(sp[1], sp)
+            
+        return third_people
+        
+	
