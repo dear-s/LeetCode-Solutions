@@ -1,0 +1,16 @@
+ 
+class Solution:
+    def subtractProductAndSum(self, n: int) -> int:
+        
+        # digits === product - sum
+        
+        product = 1
+        summ = 0
+        
+        for s in str(n):
+            num = int(s)
+            product *= num
+            summ += num
+        
+        return product - summ
+        		
