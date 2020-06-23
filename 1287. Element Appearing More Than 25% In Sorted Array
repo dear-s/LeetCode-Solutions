@@ -1,0 +1,16 @@
+	
+class Solution:
+    def findSpecialInteger(self, arr: List[int]) -> int:
+        
+        length = len(arr)
+        freq = {}
+        for a in arr:
+            if a in freq:
+                freq[a] += 1
+            else:
+                freq[a] = 1
+        
+            if freq[a] > length//4:
+                return a
+		
+		
