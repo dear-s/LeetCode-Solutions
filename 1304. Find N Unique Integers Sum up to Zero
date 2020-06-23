@@ -1,0 +1,40 @@
+
+import random
+
+class Solution:
+    def sumZero(self, n: int) -> List[int]:
+        
+        # even - odd approach
+        res = []
+        
+        if n%2 == 0:
+            # if even , same positive, same negative
+            pos = []
+            digit = n//2
+            while digit > 0:
+                pos.append(digit)
+                digit -= 1
+            
+            for p in pos:
+                res.append(p)
+                res.append(-1*p)
+                
+        else:
+            # if odd -- same n-1(even) and then add 0
+            pos = []
+            digit = (n-1)//2
+            while digit > 0:
+                pos.append(digit)
+                digit -= 1
+            
+            for p in pos:
+                res.append(p)
+                res.append(-1*p)
+            
+            res.append(0)
+        
+        
+        print("res: ", res)
+        return res
+        
+	
