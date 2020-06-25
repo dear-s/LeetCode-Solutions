@@ -1,0 +1,18 @@
+class Solution:
+    def findDuplicate(self, nums: List[int]) -> int:
+        
+        
+#         prev_track = []
+        
+#         for n in nums:
+#             if n not in prev_track:
+#                 prev_track.append(n)
+#             else:
+#                 # found
+#                 return n
+
+
+        for n in range(len(nums)-1):
+            if nums[n] in nums[n+1:]:
+                return nums[n]
+        
