@@ -1,0 +1,35 @@
+
+class Solution:
+    def sumNumbers(self, root: TreeNode) -> int:
+        
+        if root is None: return 0
+        self.traversals = []
+        
+        array = [root.val]
+        self.find_paths(root, array)
+        
+        # print("self.traversals: ", self.traversals)
+        
+        ans = 0
+        for st in self.traversals:
+            string = "".join(str(x) for x in st)
+            integer = int(string)
+            ans += integer
+            
+        # print("ans: ", ans)
+        return ans
+        
+    
+    def find_paths(self, root, array):
+        
+        
+        if root.left is None and root.right is None:
+            self.traversals.append(array)
+            return
+        
+        if root.left:
+            self.find_paths(root.left, array + [root.left.val])
+        if root.right:
+            self.find_paths(root.right, array + [root.right.val])
+        
+        
