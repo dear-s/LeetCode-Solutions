@@ -1,0 +1,20 @@
+class Solution:
+    def findMin(self, nums: List[int]) -> int:
+       
+        if len(nums) == 0: return 0
+        if len(nums) == 1:
+            return nums[0]
+       
+       
+        last_ele = nums[0] # tracking
+        check_min = nums[0]
+       
+        for i in range(1, len(nums)):
+            # check for increase
+            if nums[i] > last_ele:
+                last_ele = nums[i]
+            else:
+                # decrease
+                check_min = min(check_min, nums[i])
+               
+        return check_min
