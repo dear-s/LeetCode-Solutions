@@ -1,0 +1,24 @@
+class Solution:
+    def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:
+       
+        if len(matrix) == 0 or len(matrix[0]) == 0:
+            return False
+       
+        r = 0
+        selected_row = 0 # update this
+        while r < len(matrix):
+            if target >= matrix[r][0] and target <= matrix[r][len(matrix[r])-1]:
+                selected_row = r
+               
+            r+=1
+       
+       
+        # loop through that row
+        c = 0
+        while c < len(matrix[selected_row]):
+            if matrix[selected_row][c] == target:
+                return True
+           
+            c+=1
+           
+        return False
