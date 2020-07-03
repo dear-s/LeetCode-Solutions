@@ -1,0 +1,21 @@
+class Solution:
+    def prisonAfterNDays(self, cells: List[int], N: int) -> List[int]:
+
+#         rule
+#         1. both neighbors occupied[1]/vacant[0] --- occupied[cell]
+#         2. otherwise, vacant[cell]
+        
+        looper = N%14 # since it's repeating and we are trying to decrease the number of loop calls
+        
+        for n in range(14+looper):
+            # updating
+            output = [0 for x in range(8)]
+            for i in range(1,7):
+                if cells[i-1] == cells[i+1]:
+                    output[i] = 1
+                    
+            cells = output
+            # print(n, "th iteration: ", output) # print and check for the number 14 (check for repeating pattern and decrease the number of calls)
+            
+        return cells
+                
