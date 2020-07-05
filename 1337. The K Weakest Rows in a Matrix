@@ -1,0 +1,26 @@
+		
+class Solution:
+    def kWeakestRows(self, mat: List[List[int]], k: int) -> List[int]:
+        
+        #        weakest to strongest
+        # ------->>>---->>>----->>>------>>>
+                        
+        # index : length of 1 's' [hashmap]
+        
+        index_total_ones_array = []
+        
+        for row in range(len(mat)):
+            total_ones = 0
+            for i in range(len(mat[row])):
+                if mat[row][i] == 1:
+                    total_ones += 1
+            index_total_ones_array.append([row, total_ones])
+            
+        index_total_ones_array.sort(key = lambda x:x[1])
+        
+        output = []
+        for arr in index_total_ones_array:
+            output.append(arr[0])
+        
+        return output[:k]
+    
