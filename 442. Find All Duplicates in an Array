@@ -1,0 +1,31 @@
+class Solution:
+    def findDuplicates(self, nums: List[int]) -> List[int]:
+        
+        hashmap = {}
+        output = []
+        
+        for i in nums:
+            if i in hashmap:
+                output.append(i)
+            else:
+                hashmap[i] = 1
+                
+        return output
+        
+        
+        # time limit 
+#         i = 0
+#         while i < len(nums):
+#             if nums[i] not in nums[i+1:]:
+#                 nums.pop(i)
+#             else:
+#                 # find index from nums[i+1:] and pop
+#                 index = nums[i+1:].index(nums[i])
+#                 nums[i+1:].pop(index)
+#                 i+=1
+                
+#         print("nums: ", nums)
+        
+#         return nums
+        
+		
