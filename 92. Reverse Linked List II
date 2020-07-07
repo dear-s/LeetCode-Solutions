@@ -1,0 +1,75 @@
+
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def reverseBetween(self, head: ListNode, m: int, n: int) -> ListNode:
+        
+        # base conditions
+        if head is None or head.next is None or m == n: return head
+        
+        # only two elements
+        if head.next.next is None: # only 2 elements
+            # just reverse
+            first = head
+            second = head.next
+            first.next = None
+            second.next = first
+            
+            return second
+        
+        # 1 <= m <= n <= length --- no need to check for out of the boundary cases
+        
+        temp = head
+        one = None # just initializing
+        two = None # just initializing
+        before_m = None
+        after_n = None
+        prev = ListNode()
+        prev.val = None
+        prev.next = temp
+        count = 1 # since we are starting from head
+        
+        while temp:
+            if count == m:
+                one = temp
+                before_m = prev
+            if count == n:
+                two = temp
+            
+            if two == prev:
+                after_n = temp
+                
+            count += 1
+            prev = prev.next
+            temp = temp.next
+            
+            
+        # print("one: ", one)
+        # print("two: ", two)
+        # print("before_m: ", before_m)
+        # print("after_n: ", after_n)
+        
+        
+        neww = one.next
+        one.next = after_n
+        before_m.next = two
+        before_m = one
+        one = neww
+        neww = neww.next
+        
+        while neww is not None and neww != after_n:
+            one.next = before_m
+            before_m = one
+            one = neww
+            neww = neww.next
+            
+        one.next = before_m
+            
+        if m!=1:
+            return head
+        else:
+            return two
+        
