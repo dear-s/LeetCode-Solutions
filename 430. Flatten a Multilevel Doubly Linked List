@@ -1,0 +1,65 @@
+"""
+# Definition for a Node.
+class Node:
+    def __init__(self, val, prev, next, child):
+        self.val = val
+        self.prev = prev
+        self.next = next
+        self.child = child
+"""
+
+class Solution:
+    def flatten(self, head: 'Node') -> 'Node':
+        
+        # check if it has a pointer coming back or not
+        # if no.. move towards that and hold the rest in a data structure [for adding it later on]
+        # if yes, move ahead
+        
+        if head is None: return
+        
+        # check for the child pointer
+        # if child - not none - then move towards that linked list
+        # then one traversing - go back to that
+        
+        cur = head
+        newHead = Node()
+        newHead.val = " " # empty node
+        newNode = newHead
+        newNode.next = cur
+        queue_for_followed_nodes = []
+        
+        self.traversing(newNode, cur, queue_for_followed_nodes)
+        return newNode.next
+    
+        
+    def traversing(self, newNode, cur, queue_for_followed_nodes): # you can update this node
+        while cur.next or cur.child:
+            if cur.child is None: # simply move to next node
+                if cur.next is not None:
+                    cur = cur.next
+            else: # move to child and hold the leftover part in a queue
+                
+                # set up a back/prev pointer too
+                save_for_prev = cur
+                
+                leftover = cur.next
+                if leftover is not None:
+                    queue_for_followed_nodes.append(leftover)
+                cur.next = cur.child
+                cur.child = None
+                
+                if cur.next is not None:
+                    cur = cur.next
+                    
+                cur.prev = save_for_prev
+                
+        # append the rest of the leftover nodes
+        while len(queue_for_followed_nodes):
+            a = queue_for_followed_nodes.pop()
+            cur.next = a
+            a.prev = cur
+            
+            while cur.next:
+                cur = cur.next
+                
+            
