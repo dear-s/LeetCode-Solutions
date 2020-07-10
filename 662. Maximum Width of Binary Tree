@@ -1,0 +1,36 @@
+	
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def widthOfBinaryTree(self, root: TreeNode) -> int:
+        
+        # brute-force (TLE) - level-order-traversal, find the depth, fill out the null nodes, again traverse the whole tree with max_width (by popping from front and end of the queue)
+        
+        # more efficient solution
+        if root is None: return
+        
+        tuple_root_index = [(root, 0)]
+        traversal = []
+        max_width = 1
+        
+        while tuple_root_index:
+            
+            max_width = max(max_width, tuple_root_index[-1][1] - tuple_root_index[0][1]+1)
+            temp = []
+            
+            for rt, index in tuple_root_index:
+                if rt.left:
+                    temp.append((rt.left, 2*index)) # leftmost index
+                if rt.right:
+                    temp.append((rt.right, 2*index + 1)) # rightmost index
+                    
+            tuple_root_index = temp
+            
+        return max_width
+                    
+        
+		
