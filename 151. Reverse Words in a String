@@ -1,0 +1,17 @@
+
+class Solution:
+    def reverseWords(self, s: str) -> str:
+        
+        
+        list = s.split(" ")
+        
+        final_list = []
+        for l in list:
+            if len(l) > 0:
+                final_list.append(l)
+        
+        final_list = final_list[::-1]
+        string = " ".join(x for x in final_list)
+        
+        return string
+    
