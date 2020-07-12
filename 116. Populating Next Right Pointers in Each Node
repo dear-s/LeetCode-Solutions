@@ -1,0 +1,42 @@
+
+class Solution:
+    def connect(self, root: 'Node') -> 'Node':
+        
+        # check for right child from the parent
+        # level order processing
+        
+        if root is None: return None
+        
+        queue = [root]
+        
+        temp = []
+        traversal = []
+        temp_node_like =[]
+        queue.append("d") # delimiter
+        
+        while queue:
+            a = queue.pop(0)
+            if a == "d":
+                if len(temp) > 0:
+                    # assign the next pointer to the suitable right node
+                    for t_node in range(len(temp_node_like)):
+                        # tweak a little to add the next pointer for each node that is left to the right one
+                        if t_node != len(temp_node_like)- 1:
+                            temp_node_like[t_node].next = temp_node_like[t_node+1]
+                    
+                    traversal.append(temp)
+                    temp = []
+                    temp_node_like = []
+                    queue.append("d")
+                    
+            else:
+                temp_node_like.append(a)
+                temp.append(a.val)
+                if a.left:
+                    queue.append(a.left)
+                    a.left.next = a.right
+                if a.right:
+                    queue.append(a.right)
+                    
+        return root
+    
