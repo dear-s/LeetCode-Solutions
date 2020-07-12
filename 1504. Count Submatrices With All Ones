@@ -1,0 +1,47 @@
+
+class Solution:
+    def numSubmat(self, mat: List[List[int]]) -> int:
+        
+        no_of_rows = len(mat)
+        no_of_cols = len(mat[0])
+
+        p_mat = [[0 for i in range(no_of_cols)] for j in range(no_of_rows)]
+
+        self.findPrefixCount(p_mat, mat)
+
+        ans = 0
+
+        for j in range(no_of_cols):
+
+            i = no_of_rows-1
+            q = []
+            to_sum = 0
+
+            while i >= 0:
+                c = 0
+                while len(q) != 0 and q[-1][0] > p_mat[i][j]:
+                    to_sum -= (q[-1][1] + 1) * (q[-1][0] - p_mat[i][j])
+                    c += q[-1][1] +1
+                    q.pop()
+
+                to_sum += p_mat[i][j]
+                ans += to_sum
+
+                q.append((p_mat[i][j], c))
+                i -= 1
+
+        return ans
+
+
+    def findPrefixCount(self, p_mat, mat):
+        no_of_rows = len(mat)
+        no_of_cols = len(mat[0])
+        for i in range(no_of_rows):
+            for j in range(no_of_cols-1, -1, -1):
+                if not mat[i][j]:
+                    continue
+                if j != no_of_cols-1:
+                    p_mat[i][j] += p_mat[i][j+1]
+
+                p_mat[i][j] += mat[i][j]
+
