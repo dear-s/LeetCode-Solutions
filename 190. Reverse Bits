@@ -1,0 +1,26 @@
+class Solution:
+    def reverseBits(self, n: int) -> int:
+        
+        # decimal to binary
+        bin_n_array = []
+        
+        while n:
+            rem = n % 2
+            n = n//2
+            bin_n_array.append(rem)
+                    
+        # add zeroes
+        while len(bin_n_array) != 32:
+            bin_n_array.append(0)
+                    
+        # binary to decimal
+        dec_n = 0
+        k = 0
+        for number in range(len(bin_n_array)-1, -1, -1):
+            a = bin_n_array[number] * (2**k)
+            dec_n += a
+            k += 1
+            
+        return dec_n
+        
+        
