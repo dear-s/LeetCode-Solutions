@@ -1,0 +1,37 @@
+
+class Solution:
+    def connect(self, root: 'Node') -> 'Node':
+        
+        if root is None: return
+        
+        # level order traversal
+        traversal = []
+        
+        temp = []
+        root_temp = []
+        queue = []
+        queue.append(root)
+        queue.append("d") # delimiter
+        
+        while queue:
+            a = queue.pop(0)
+            if a == "d":
+                traversal.append(temp)
+                temp = []
+                for i in range(len(root_temp)-1):
+                    root_temp[i].next = root_temp[i+1]
+                
+                root_temp = []
+                if len(queue)>0:
+                    queue.append("d")
+            else:
+                temp.append(a.val)
+                root_temp.append(a)
+                if a.left:
+                    queue.append(a.left)
+                if a.right:
+                    queue.append(a.right)
+        
+        return root
+		
+		
