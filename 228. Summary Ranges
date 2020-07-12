@@ -1,0 +1,42 @@
+	
+class Solution:
+    def summaryRanges(self, nums: List[int]) -> List[str]:
+        
+        
+        if len(nums) == 0: return nums
+        if len(nums) == 1:
+            return [str(nums[0])]
+        
+        # store the continuing numbers and make a range
+        new = []
+        start = nums[0]
+        temp = [start]
+        i = 1
+        while i < len(nums):
+            if nums[i] - nums[i-1] == 1:
+                temp.append(nums[i])
+                i+=1
+            else:
+                new.append(temp)
+                temp = [nums[i]]
+                i+=1
+                
+        if len(temp) > 0:
+            new.append(temp)
+            
+        
+        range = []
+        for n in new:
+            string = ""
+            if len(n) == 1:
+                string += str(n[0])
+                range.append(string)
+            else:
+                string += str(n[0])
+                string += "->"
+                string += str(n[len(n)-1])
+                range.append(string)
+                
+        
+        return range
+        
