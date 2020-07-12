@@ -1,0 +1,30 @@
+
+class Solution:
+    def largestNumber(self, nums: List[int]) -> str:
+                
+        if len(nums) == 0: return
+        
+        # convert into string array
+        str_nums = []
+        for n in nums:
+            str_nums.append(str(n))
+                    
+        for i in range(0, len(str_nums)-1):
+            j = i+1
+            while j < len(str_nums):
+                comp1 = str_nums[i] + str_nums[j]
+                comp2 = str_nums[j] + str_nums[i]
+                
+                if int(comp1) > int(comp2):
+                    pass
+                else:
+                    # swap
+                    temp = str_nums[i]
+                    str_nums[i] = str_nums[j]
+                    str_nums[j] = temp
+                j+=1
+            
+        
+        answer = "".join(x for x in str_nums)
+        return str(int(answer))
+        
