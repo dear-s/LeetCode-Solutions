@@ -1,0 +1,25 @@
+		
+class Solution:
+    def singleNumber(self, nums: List[int]) -> List[int]:
+        
+        
+#         output = []
+#         i = 0
+#         while i < len(nums):
+#             if nums[i] not in nums[:i] + nums[i+1:]:
+#                 output.append(nums[i])
+                
+#             i+=1
+                
+#         return output
+
+
+        track = []
+        for n in nums:
+            if n in track:
+                track.remove(n)
+            else:
+                track.append(n)
+                
+        return track
+	
