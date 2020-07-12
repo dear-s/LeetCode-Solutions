@@ -1,0 +1,27 @@
+class Solution:
+    def topKFrequent(self, nums: List[int], k: int) -> List[int]:
+        
+        frequency = [] # (number, frequency)
+        number_frequency = {}
+        
+        for n in nums:
+            if n in number_frequency:
+                number_frequency[n] += 1
+            else:
+                number_frequency[n] = 1
+                        
+        for key,val in number_frequency.items():
+            frequency.append((key, val))
+            
+        frequency.sort(key=lambda x:x[1])
+        frequency = frequency[::-1]
+        
+        output = []
+        i = 0
+        while i < k:
+            output.append(frequency[i][0])
+            i+=1
+        
+        return output
+    
+		
