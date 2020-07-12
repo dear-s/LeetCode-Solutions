@@ -1,0 +1,34 @@
+
+class Solution:
+    def sortedListToBST(self, head: ListNode) -> TreeNode:
+        
+        # convert linked list to sorted array and then follow the last question [array to binary tree]
+        sorted_array = []
+        
+        while head:
+            sorted_array.append(head.val)
+            head = head.next
+            
+        # print("sorted_array: ", sorted_array)
+        
+        if len(sorted_array) == 0: return
+        
+        a = self.sortedArrayToBST(sorted_array)
+        # print("a: ", a)
+        return a
+        
+        
+    def sortedArrayToBST(self, array):
+        
+        if len(array) == 0: return
+        
+        index_of_head = int(len(array)/2)
+        bin_root = TreeNode(array[index_of_head])
+        
+        if len(array[index_of_head+1:]) > 0:
+            bin_root.right = self.sortedArrayToBST(array[index_of_head+1:])
+        if len(array[:index_of_head]) > 0:
+            bin_root.left = self.sortedArrayToBST(array[:index_of_head])
+            
+        return bin_root
+       
