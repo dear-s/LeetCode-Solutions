@@ -1,0 +1,26 @@
+class Solution:
+    def hammingWeight(self, n: int) -> int:
+        
+        
+        # decimal to binary [then count the 1s]
+        
+        bin_n = []
+        while n:
+            rem = n % 2
+            n = n//2
+            bin_n.append(rem)
+            
+        bin_n = bin_n[::-1]
+        
+        str_n = str(bin_n)
+        count = 0
+        
+        if len(str_n) == 0: return count
+        
+        for s in str_n:
+            if s == "1":
+                count += 1
+                
+        return count
+        
+        
