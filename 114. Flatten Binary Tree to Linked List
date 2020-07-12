@@ -1,0 +1,59 @@
+class Solution:
+    def flatten(self, root: TreeNode) -> None:
+        """
+        Do not return anything, modify root in-place instead.
+        """
+        
+        # make left side - right
+        # make right side - right of right side
+        
+        self.dfs(root)        
+        
+    
+    def dfs(self, root):
+        
+        if root is None: return
+        
+        # dfs recursive calls
+        if root.left:
+            self.dfs(root.left)
+        
+        self.flatten_helper(root)
+
+        if root.right:
+            self.dfs(root.right)
+        
+        
+        
+    def flatten_helper(self, root):
+        
+        # checking the base case - if both child nodes are None
+        if root.left is None and root.right is None: return
+        
+        # what if they have only one child node - check for left and right separately too
+        if root.left is None: # have right node only
+            return
+            
+        if root.right is None: # have left node only - make left - their right node
+            temp = root.left
+            root.left = root.right
+            root.right = temp
+            
+            
+        # they have both child nodes - check for grand child nodes - has to be None(both)
+        if root.left is not None and root.right is not None:
+            original_left = root.left
+            temp_right_saved = root.right
+            temp_left_saved = root.left
+            root.left = None
+            
+            # last_node
+            while temp_left_saved.right:
+                temp_left_saved = temp_left_saved.right
+                
+            temp_left_saved.right = temp_right_saved
+            temp_left_saved.left = None
+        
+            root.right = original_left
+                    
+		
