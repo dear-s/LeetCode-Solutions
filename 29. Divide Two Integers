@@ -1,0 +1,19 @@
+
+class Solution:
+    def divide(self, dividend: int, divisor: int) -> int:
+        
+        
+        a = ""
+        
+        a += str(dividend)
+        a += "/"
+        a += str(divisor)
+        
+        # evaluate expression  
+        ans = int(eval(a))
+        
+        if ans in range(pow(-2, 31), pow(2, 31)):
+            return ans
+        
+        return ans-1
+        
