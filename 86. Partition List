@@ -1,0 +1,37 @@
+
+class Solution:
+    def partition(self, head: ListNode, x: int) -> ListNode:
+        
+        if head is None: return head
+        if head.next is None: return head
+        
+        # make two pointers, linked lists -- then, combine them at the end
+        
+        left = ListNode()
+        left.val = "S"
+        first = left
+        right = ListNode()
+        right.val = "S"
+        second = right
+        
+        # if less than x -- left linked list
+        # more or equal -- right linked list
+        
+        cur = head
+        while cur:
+            if cur.val < x:
+                new = ListNode()
+                new.val = cur.val
+                left.next = new
+                left = left.next
+            else:
+                new = ListNode()
+                new.val = cur.val
+                right.next = new
+                right = right.next
+            
+            cur = cur.next
+        
+        left.next = second.next
+        return first.next
+        
