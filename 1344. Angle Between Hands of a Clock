@@ -1,0 +1,22 @@
+class Solution:
+    def angleClock(self, hour: int, minutes: int) -> float:
+        
+        # to handle the condition with hour = 12 (making it hour = 0)
+        hr = hour % 12
+        
+        # 30 degrees per hour [360/12]
+        h = (hr + minutes/60) * 30
+        
+        # 6 degrees per minute [360/60]
+        m = minutes * 6
+        
+        # difference in degrees
+        angle = abs(h - m)
+        
+        # checking for the smaller angle
+        if angle > 180:
+            return 360 - angle #returning the 360-x value
+        
+        return angle
+        
+        
