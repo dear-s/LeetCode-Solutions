@@ -1,0 +1,33 @@
+
+class Solution:
+    def isValidSerialization(self, preorder: str) -> bool:
+        
+        # approach: https://www.youtube.com/watch?v=_mbnPPHJmTQ&t=11s [algorithm explanation]
+        
+        # keep a track of arrow
+        # arrow - no. of places to add stuff
+        
+        # preorder - root, left, right
+        
+        # converting to list
+        list_pre = preorder.split(",")
+        
+        no_of_arrows = 1 # initially one, add root, decrease, add 2 arrows and so on...
+        # stack = [] # append node values to this - do not have to include this
+        
+        while no_of_arrows > 0 and len(list_pre) > 0:
+            a = list_pre.pop(0) # first element pop
+            
+            if no_of_arrows > 0:
+                # stack.append(a)
+                no_of_arrows -= 1
+            
+                if a != "#": # a number - add 2 more arrows
+                    no_of_arrows += 2
+            
+            
+        if len(list_pre) > 0 or no_of_arrows != 0:
+            return False
+        
+        return True
+        
