@@ -1,0 +1,22 @@
+class Solution:
+    def numberOfArithmeticSlices(self, A: List[int]) -> int:
+        
+        
+        # atleast 3 elements
+        # AP
+        
+        n = len(A)
+        count = 0
+        
+        for i in range(n-2):
+            for j in range(i+2, n):
+                diff_1 = A[i+1] - A[i]
+                diff_2 = A[j] - A[j-1]
+                if diff_1 == diff_2:
+                    count += 1
+                else:
+                    break
+                    
+        return count
+                
+        
