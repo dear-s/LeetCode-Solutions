@@ -1,0 +1,36 @@
+class Solution:
+    def getAllElements(self, root1: TreeNode, root2: TreeNode) -> List[int]:
+        
+        
+        common = [] # elements from both trees
+        
+        # 1. traverse it and then join both the traversals
+        
+        traverse1 = []
+        traverse2 = []
+        
+        self.dfs(root1, traverse1)
+        self.dfs(root2, traverse2)
+        
+        print("traverse1: ", traverse1)
+        print("traverse2: ", traverse2)
+        
+        out = []
+        out += traverse1
+        out += traverse2
+        
+        out.sort()
+        print("out: ", out)
+        return out
+        
+        
+    def dfs(self, root, array):
+        
+        
+        if root is None: return
+        
+        array.append(root.val)
+        self.dfs(root.left, array)
+        self.dfs(root.right, array)
+        
+        
