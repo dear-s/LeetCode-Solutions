@@ -1,0 +1,24 @@
+
+class Solution:
+    def subsetsWithDup(self, nums: List[int]) -> List[List[int]]:
+        
+        nums.sort()
+        self.power_set = []
+        arr = []
+        
+        self.subsets(arr, nums)
+        print("self.power_set: ", self.power_set)
+        return self.power_set
+    
+    
+    def subsets(self, array, nums):
+        
+        if array not in self.power_set:
+            self.power_set.append(array)
+            
+            
+        for n in range(len(nums)):
+            self.subsets(array+[nums[n]], nums[n+1:])
+            
+ 
+ 
