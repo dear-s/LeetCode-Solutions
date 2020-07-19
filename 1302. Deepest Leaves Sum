@@ -1,0 +1,34 @@
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def deepestLeavesSum(self, root: TreeNode) -> int:
+        
+        
+        # take level order traversal
+        # sum of the last array in the traversal
+        
+        queue = [root, "d"]
+        temp = []
+        traversal = []
+        
+        while queue:
+            a = queue.pop(0)
+            if a == "d":
+                traversal.append(temp)
+                temp = []
+                if len(queue) > 0:
+                    queue.append("d")
+                
+            else:
+                temp.append(a.val)
+                if a.left:
+                    queue.append(a.left)
+                if a.right:
+                    queue.append(a.right)
+        
+        return sum(traversal[-1])
+        
