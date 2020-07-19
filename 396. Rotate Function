@@ -1,0 +1,50 @@
+        
+class Solution:
+    def maxRotateFunction(self, A: List[int]) -> int:
+        
+        # F(1) = F(0) + sum - (length) * first_element
+        
+        total = sum(A)
+        f_zero = 0
+        for a in range(len(A)):
+            f_zero += a * A[a]
+            
+        function = f_zero        
+        
+        for k in range(len(A)-1):
+            number = A[k]
+            function = function - total + len(A)*number
+            if function > f_zero:
+                f_zero = function
+            
+        return f_zero
+        
+        
+        
+#         if len(A) == 0: return 0
+#         max_val = float('-inf')
+        
+#         # rotate and run function 'k' many times
+#         for k in range(len(A)):
+#             # rotate array once
+#             new_array = [A[-1]] + A[:len(A)-1]
+#             ans_sum = self.function_f_of_k(new_array)
+#             if ans_sum > max_val:
+#                 max_val = ans_sum
+            
+#             A = new_array
+            
+#         return max_val
+
+        
+#     def function_f_of_k(self, array):
+        
+#         sum_return = 0
+
+#         for i in range(len(array)):
+#             sum_return += i * array[i] # index * value
+            
+#         return sum_return
+
+        
+ 
