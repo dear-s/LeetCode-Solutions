@@ -1,0 +1,35 @@
+		
+class Solution:
+    def maxArea(self, height: List[int]) -> int:
+        
+        # can find the max area = [max x axis and y axis === (x_distance) * (y_distance)]
+
+        coords = []
+        for h in range(len(height)):
+            coords.append([h+1, height[h]])
+            
+        max_area = float('-inf') # return this
+        
+        # x distance = x2 - x1
+        # y distance = min(y1, y2)
+        
+        a = 0
+        b = len(height) - 1
+        while a < b:
+            # a and b -- two coords
+            x_distance = coords[b][0] - coords[a][0]
+            y_distance = min(coords[a][1], coords[b][1])
+
+            area = x_distance * y_distance
+            max_area = max(max_area, area)
+            
+            y_coord_a = coords[a][1]
+            y_coord_b = coords[b][1]
+            
+            if y_coord_a > y_coord_b: # always decrease the shortest side --- as area depends on y coord
+                b-=1
+            else:
+                a+=1
+        
+        return max_area
+        
