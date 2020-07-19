@@ -1,0 +1,32 @@
+
+class Solution:
+    def pathSum(self, root: TreeNode, sum: int) -> int:
+        
+        if root is None: return 0
+        # track all the paths from top to bottom
+        self.sum = sum
+        self.count = 0
+        self.starter(root)        
+        return self.count
+        
+        
+    def starter(self, root):
+        if root is None: return
+        temp = root.val
+        
+        self.dfs(root, temp)
+        self.starter(root.left)
+        self.starter(root.right)
+        
+    def dfs(self, root, temp):
+        
+        if temp == self.sum:
+            self.count += 1
+        
+        if root.left:
+            self.dfs(root.left, temp + root.left.val)
+        if root.right:
+            self.dfs(root.right, temp + root.right.val)
+            
+  
+  
