@@ -1,0 +1,73 @@
+		
+class Solution:
+    def minTimeToVisitAllPoints(self, points: List[List[int]]) -> int:
+        
+        # start = points[0]
+        # dest = points[1]
+        total_time = 0
+
+        i = 1
+        while i < len(points):
+            start = points[i-1] # keep updating
+            # will update dest and find another optimal path -- and add it to the total time
+            dest = points[i]
+
+            start_x = start[0]
+            start_y = start[1]    
+            dest_x = dest[0]
+            dest_y = dest[1]
+
+            # path finding code - from 'start' to 'dest'
+            while start_x != dest_x or start_y != dest_y:
+                if dest_x != start_x and dest_y != start_y:
+                    # if both dest x,y > start x,y
+                    if dest_x > start_x and dest_y > start_y:
+                        # can go for diagonal
+                        start_x += 1
+                        start_y += 1
+                        total_time += 1
+
+                    # if both dest x,y < start x,y
+                    elif dest_x < start_x and dest_y < start_y:
+                        start_x -= 1
+                        start_y -= 1
+                        total_time += 1
+
+                    # if dest x < start x and dest y > start y
+                    elif dest_x < start_x and dest_y > start_y:
+                        start_x -= 1
+                        start_y += 1
+                        total_time += 1
+
+                    # if dest x > start x and dest y < start y
+                    elif dest_x > start_x and dest_y < start_y:
+                        start_x += 1
+                        start_y -= 1
+                        total_time += 1
+
+
+                elif dest_x == start_x and dest_y != start_y:
+                    if dest_y > start_y:
+                        start_y += 1
+                        total_time += 1
+                    elif dest_y < start_y:
+                        start_y -= 1
+                        total_time += 1
+
+
+                elif dest_x != start_x and dest_y == start_y:
+                    if dest_x > start_x:
+                        start_x += 1
+                        total_time += 1
+                    elif dest_x < start_x:
+                        start_x -= 1
+                        total_time += 1
+
+
+                elif dest_x == start_x and dest_y == start_y:
+                    break
+            i+=1
+
+        print("total_time: ", total_time)
+        return total_time
+
