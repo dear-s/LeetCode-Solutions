@@ -1,0 +1,129 @@
+class Solution:
+    def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
+        
+        # KAHN ALGORITHM (topological sort + BFS)
+        # understood from - https://www.youtube.com/watch?v=u4v_kvOfumU&t=390s
+        
+        # graph array [go to]
+        # dependency array [coming from]
+        # queue - push only with 0 dependency
+        
+        
+        # graph array
+        graph = [[] for x in range(numCourses)]
+        print("starter graph: ", graph)
+        
+        for p in prerequisites:
+            graph[p[1]].append(p[0])
+        
+        print("graph updated: ", graph)
+        
+        
+        # dependency array
+        dependency = [0 for x in range(numCourses)]
+        print("starter dependency: ", dependency)
+        
+        for p in prerequisites:
+            dependency[p[0]] += 1
+            
+        print("dependency updated: ", dependency)
+        
+        
+        # counter - for cleared nodes from queue - should be numCourses at the end [for True]
+        cleared = 0
+        # introduce queue - add with 0 dependency
+        queue = []
+        
+        if 0 in dependency:
+            index_with_0 = dependency.index(0)
+            queue.append(index_with_0)
+            dependency[index_with_0] = ""
+        else:
+            return False
+        
+        
+        print("start queue: ", queue)
+        
+        visited = [] # to not add again from dependency
+        while queue:
+            a = queue.pop(0)
+            cleared += 1
+            visited.append(a)
+            
+            arr_num_to_decrement_from_dependency = graph[a]
+            for arr_num in arr_num_to_decrement_from_dependency:
+                dependency[arr_num] -= 1
+                
+            for d in range(len(dependency)):
+                if dependency[d] == 0 and d not in visited:
+                    queue.append(d)
+                    dependency[d] = ""
+                    
+            print("updated queue: ", queue)
+            print("updated cleared: ", cleared)
+            
+        if cleared == numCourses:
+            return True
+        
+        return False
+            
+        
+            
+        
+#         # hashmap: key -> value
+#         # course - from this course what other courses i can do
+#         # prerequisite - course
+        
+#         pre_course = {}
+        
+#         for p in prerequisites:
+#             if p[1] in pre_course:
+#                 pre_course[p[1]].append(p[0])
+#             else:
+#                 pre_course[p[1]] = [p[0]]
+                        
+#         count = 0 # check and return true if it reaches numCourses
+        
+        
+#         # make an array storing the dependencies count
+#         dep_count = {}
+#         dep_count_array = []
+        
+#         for i in range(numCourses):
+#             c = 0
+#             for k,v in pre_course.items():
+#                 if i in v:
+#                     c += 1
+                    
+#             dep_count[i] = c
+#             dep_count_array.append(c)
+      
+    
+#         # let's traverse [check if topological sort is possible]
+#         # dependency count should be 0 for that node and then only we can traverse it
+        
+#         topological_sort = [] # how to study [courses studied will get appended]
+#         all_negatives = 0
+#         new = 0
+        
+#         while all_negatives < numCourses:
+#             before = all_negatives
+#             for course, depend in dep_count.items():
+#                 if depend == 0:
+#                     if course in pre_course:
+#                         arr = pre_course[course]
+#                         for ar in arr:
+#                             dep_count[ar] -= 1
+                    
+#                     dep_count[course] -= 1
+#                     topological_sort.append(course)
+#                     if dep_count[course] == -1:
+#                         all_negatives +=1
+#             after = all_negatives
+#             if before == after:
+#                 return False
+                
+#         return True
+    
+    
+        
