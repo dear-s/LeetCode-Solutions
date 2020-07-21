@@ -1,0 +1,11 @@
+class Solution:
+    def firstMissingPositive(self, nums: List[int]) -> int:
+        
+        integer = 1
+        max_num = float("inf")
+        
+        while integer < max_num:
+            if integer not in nums:
+                return integer
+            integer += 1
+
