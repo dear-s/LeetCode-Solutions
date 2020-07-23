@@ -1,0 +1,66 @@
+
+class Solution:
+    def decodeString(self, s: str) -> str:
+        
+        
+        integers = "0123456789"
+
+        list_s = []
+        number = ""
+        for i in s:
+            if i in integers:
+                number += i
+            else:
+                if len(number)>0:
+                    list_s.append(int(number))
+                    number = ""
+                list_s.append(i)
+
+        stack = []
+        n_index = []
+        o_index = []
+        c_index = []
+
+        i = 0
+        while i < len(list_s):
+            if isinstance(list_s[i], int):
+                n_index.append(i)
+                stack.append(list_s[i])
+                i+=1
+            elif list_s[i] == "[":
+                o_index.append(i)
+                stack.append(list_s[i])
+                i+=1
+            elif list_s[i] == "]":
+                stack.append(list_s[i])
+                close = i
+                open = o_index.pop()
+                number_index_exact = n_index.pop()
+                num = int(list_s[number_index_exact])
+
+                to_decode = list_s[open+1:close] # convert into string
+                to_decode_string = "".join(x for x in to_decode)
+                decoding = ""
+                count = 0
+                while count < num:
+                    decoding += to_decode_string
+                    count += 1
+                len_to_pop = len(to_decode) + 3
+                pop_count = 0
+                while pop_count < len_to_pop:
+                    stack.pop()
+                    pop_count += 1
+
+                decoded_list = list(decoding)
+                list_s = list(list_s[:number_index_exact]) + decoded_list + list(list_s[i+1:])
+                i = 0
+                stack = []
+                n_index = []
+                o_index = []
+                c_index = []
+            else:
+                stack.append(list_s[i]) # alphabets - simple append
+                i+=1
+                
+        ret_str = "".join(x for x in list_s)
+        return ret_str
