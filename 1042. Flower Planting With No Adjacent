@@ -1,0 +1,50 @@
+	
+		
+class Solution:
+    def gardenNoAdj(self, N: int, paths: List[List[int]]) -> List[int]:
+        
+
+        adja = {}
+        flowers = [1,2,3,4] # 4 types of flowers --- choose the minimum type of flowers [no adj has]
+        
+        answer = []
+        for ans in range(N):
+            answer.append(1)
+
+        flower_arr = {}
+        if len(paths) == 0:
+            return [1 for i in range(N)]
+
+        for p in paths:
+            if p[0] not in adja:
+                adja[p[0]] = [p[1]]
+                flower_arr[p[0]] = 0
+            else:
+                adja[p[0]].append(p[1])
+
+            if p[1] not in adja:
+                adja[p[1]] = [p[0]]
+                if p[1] not in flower_arr:
+                    flower_arr[p[1]] = 0
+            else:
+                adja[p[1]].append(p[0])
+
+        for k,v in flower_arr.items():
+            array = adja[k]
+            types_flowers_in_array = []
+            for arr in array:
+                types_flowers_in_array.append(flower_arr[arr])
+
+            avail_flowers = set(flowers) - set(types_flowers_in_array)
+
+            av_f_array = []
+            for s in avail_flowers:
+                av_f_array.append(s)
+
+            flower_arr[k] = av_f_array[0]
+        
+        for key,val in flower_arr.items():
+            answer[key-1] = val
+            
+        return answer
+
