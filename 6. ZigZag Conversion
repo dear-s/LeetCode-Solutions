@@ -1,0 +1,48 @@
+
+	
+class Solution:
+    def convert(self, s: str, numRows: int) -> str:
+        
+        
+        # reference - https://www.youtube.com/watch?v=-fFDzIWebA4 [approach 1]
+        
+        # make lists in order - traverse in order too
+        if len(s) <= numRows or numRows == 1:
+            return s
+        
+        output = []
+        
+        # introduce numRows arrays in output
+        n = 0
+        while n < numRows:
+            output.append([])
+            n+=1
+            
+        i = 0
+        go = True
+        comeback = False
+        for letter in s:
+            if go and i < numRows:
+                output[i].append(letter)
+                i += 1
+                if i == numRows:
+                    comeback = True
+                    go = False
+                    i-=2
+            elif comeback and i >= 0:
+                output[i].append(letter)
+                i -= 1
+                if i == -1:
+                    go = True
+                    comeback = False
+                    i+=2
+                
+        final_str = ""
+        for out in output:
+            for o in out:
+                final_str += o
+                
+        return final_str
+        
+        
+		
