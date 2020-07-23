@@ -1,0 +1,81 @@
+
+
+class Solution:
+    def compareVersion(self, version1: str, version2: str) -> int:
+        
+        list1 = list(version1)
+        list2 = list(version2)
+        
+        # print("list1: ", list1)
+        # print("list2: ", list2)
+        
+        # make them into subarrays
+        first = [] # [[]]
+        second = []
+        temp1 = []
+        temp2 = []
+        
+        for l1 in list1:
+            if l1 == ".":
+                first.append(temp1)
+                temp1 = []
+            else:
+                temp1.append(l1)
+        first.append(temp1)
+        for l2 in list2:
+            if l2 == ".":
+                second.append(temp2)
+                temp2 = []
+            else:
+                temp2.append(l2)
+        second.append(temp2)
+        
+        # print("first: ", first)
+        # print("second: ", second)
+        
+        # check lengths
+        if len(first) < len(second):
+            # append empty arrays
+            while len(first) != len(second):
+                first.append([])
+        if len(second) < len(first):
+            while len(second) != len(first):
+                second.append([])
+        
+        # print("after equal lengths, first: ", first)
+        # print("after equal lengths, second: ", second)
+        
+        # equal subarrays too
+        f_strings = []
+        s_strings = []
+        i = 0
+        while i < len(first):
+            if len(first[i]) < len(second[i]):
+                while len(first[i]) != len(second[i]):
+                    first[i].insert(0, "0") # index, element
+            if len(first[i]) > len(second[i]):
+                while len(second[i]) != len(first[i]):
+                    second[i].insert(0, "0")
+                    
+            i+=1
+            
+        # print("updated subs, first: ", first)
+        # print("updated subs, second: ", second)
+        
+        # now compare sub wise
+        i = 0
+        while i < len(first):
+            j = 0
+            while j < len(first[i]):
+                if first[i][j] > second[i][j]:
+                    return 1
+                elif first[i][j] < second[i][j]:
+                    return -1
+                
+                j+=1
+            i+=1
+        
+        # equal
+        return 0
+        
+		
