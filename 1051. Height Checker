@@ -1,0 +1,27 @@
+	
+class Solution:
+    def heightChecker(self, heights: List[int]) -> int:
+        
+        # simply comparing the index values of original array and the sorted one
+        
+        temp = []
+        for hh in heights:
+            temp.append(hh)        
+        
+        sorted_height = []
+        temp.sort()
+        for hh in temp:
+            sorted_height.append(hh)
+        
+        output = 0
+        for h in range(len(heights)):
+            
+            if heights[h] != sorted_height[h]:
+                output += 1
+                
+        return output
+            
+            
+		
+		
+		
