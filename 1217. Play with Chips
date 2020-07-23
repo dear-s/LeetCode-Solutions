@@ -1,0 +1,41 @@
+		
+class Solution:
+    def minCostToMoveChips(self, chips: List[int]) -> int:
+  
+        # 2 moves
+        # move by 2 units [L or R] - cost 0
+        # move by 1 unit [L or R] - cost 1                        
+
+        index_loc = {}
+        locations = []
+        for c in range(len(chips)):
+            index_loc[c+1] = chips[c]
+            if chips[c] not in locations:
+                locations.append(chips[c])
+
+        # print("index_loc: ", index_loc)
+
+        # to minimize cost
+        # make an array - that has all the possible locations
+        # print("locations: ", locations)
+
+
+        min_cost = float('inf')
+        # let's consider one by one - and cost for each location
+        for l in locations:
+            # move every chip to location "l"
+            cost = 0
+            for k,v in index_loc.items():
+                if v != l:
+                    temp_v = v
+                    diff = abs(temp_v - l)
+                    if diff % 2==0:
+                        # cost remains zero
+                        continue
+                    else:
+                        cost += 1
+
+            min_cost = min(min_cost, cost)
+
+        # print("min_cost: ", min_cost)
+        return min_cost
