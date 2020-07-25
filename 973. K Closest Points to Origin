@@ -1,0 +1,29 @@
+class Solution:
+    def kClosest(self, points: List[List[int]], K: int) -> List[List[int]]:
+        
+        # abs(x1-x2) + abs(y1-y2) - euclidean distance
+        
+        # KNN - just like k closest points to origin
+        # point is origin(0,0) - from which we have to find the distance
+        # find distance from each point to origin
+        
+        distance_index = [] # [[2,3],0], [[7,8],3]]
+        count_index = 0
+        minimum_distance = float('inf')
+        for p in points:
+            # distance
+            dist = (p[0])**2 + (p[1])**2
+            temp = [dist, count_index]
+            minimum_distance = min(minimum_distance, dist)
+            count_index += 1
+            distance_index.append(temp)
+            
+        distance_index.sort(key=lambda x:x[0])
+
+        ans_points_sorted = []
+        for d in distance_index:
+            ans_points_sorted.append(points[d[1]])
+        
+        ans = ans_points_sorted[:K]
+        return ans
+        
