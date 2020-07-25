@@ -1,0 +1,29 @@
+
+class Solution:
+    def allCellsDistOrder(self, R: int, C: int, r0: int, c0: int) -> List[List[int]]:
+        
+        arr = []
+        for i in range(R):
+            for j in range(C):
+                temp = [i,j]
+                arr.append(temp)
+                    
+        out = []
+        for i in range(len(arr)):
+            a = arr[i]
+            print("a: ", a)
+            # distance between a and r0,c0
+            row_dis = abs(a[0] - r0)
+            col_dis = abs(a[1] - c0)
+            manhattan = row_dis + col_dis
+            temp_distance = [[a[0], a[1]], manhattan]
+            out.append(temp_distance)
+            
+        out.sort(key=lambda x:x[1])
+        
+        answer = []
+        for o in out:
+            answer.append(o[0])
+                
+        return answer
+       
