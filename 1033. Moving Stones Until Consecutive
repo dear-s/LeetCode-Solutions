@@ -1,0 +1,35 @@
+
+class Solution:
+    def numMovesStones(self, a: int, b: int, c: int) -> List[int]:
+        
+        arr = [a,b,c]
+        arr.sort()
+        low = arr[0]
+        mid = arr[1]
+        high = arr[2]
+        
+        min_dis = 0
+        max_dis = 0
+
+        if mid-low == 0 and high - mid == 0:
+            return [0,0]
+
+        first_distance = mid - low
+        second_distance = high - mid
+
+        if first_distance == 2 or second_distance == 2:
+            min_dis = 1
+        else:
+            if first_distance != 1:
+                min_dis +=1
+            if second_distance != 1:
+                min_dis += 1
+
+        if first_distance != 1:
+            max_dis += first_distance-1
+        if second_distance != 1:
+            max_dis += second_distance-1
+
+        out = [min_dis, max_dis]
+        return out
+       
