@@ -1,0 +1,30 @@
+
+class Solution:
+    def allPathsSourceTarget(self, graph: List[List[int]]) -> List[List[int]]:
+        
+        
+        # index is the node number - in a list - index is node
+        # track ways from 0 to n-1 (connect pieces)
+        
+        source = 0
+        target = len(graph)-1
+        
+        self.array_path = [] # save all the unique paths
+        path = [0]
+        
+        self.path_source_target(source, target, path, graph)
+        return self.array_path
+        
+    
+    def path_source_target(self, source, target, path, graph):
+        
+        if source == target:
+            # add path to array_path
+            self.array_path.append(path)
+            return
+            
+        value_array_to_traverse = graph[source]
+        for v in value_array_to_traverse:
+            self.path_source_target(v, target, path + [v], graph)
+        
+        
