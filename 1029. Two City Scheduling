@@ -1,0 +1,43 @@
+
+
+class Solution:
+    def twoCitySchedCost(self, costs: List[List[int]]) -> int:
+        
+        # sort in descending order of difference 0-1 index values
+        
+        N = len(costs)
+        
+        diff = []
+        index = 0
+        for c in costs:
+            d = c[1] - c[0]
+            temp = [index, d]
+            diff.append(temp)
+            index += 1
+        print("diff: ", diff)
+        
+        diff.sort(key= lambda x:x[1])
+        diff = diff[::-1]
+        
+        print("diff after sorting asc: ", diff)
+        
+        first_n = []
+        second_n = []
+        s = 0
+
+        for d in range(len(diff)//2):
+            index = diff[d][0]
+            first_n.append(costs[index][0])
+            s += costs[index][0]
+        for d in range(len(diff)//2, len(diff)):
+            index = diff[d][0]
+            second_n.append(costs[index][1])
+            s += costs[index][1]
+            
+        print("first_n: ", first_n)
+        print("second_n: ", second_n)
+        
+        print("total sum: ", s)
+        return s
+        
+        
