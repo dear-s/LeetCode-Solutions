@@ -1,0 +1,49 @@
+
+class Solution:
+    def sumRootToLeaf(self, root: TreeNode) -> int:
+        
+        self.final_array = []
+        temp = []
+        sum = 0        
+        self.dfs(root, temp)
+        
+        for i in self.final_array:
+            # convery f - binary to decimal
+            num = 0
+
+            l = len(i)-1
+            ii = 0
+            while l >=0 and ii < len(i):
+                num += i[ii] * (2**l)
+                l-=1
+                ii += 1
+            sum += num
+        return sum
+        
+    def dfs(self, root, temp):
+        
+        if root is None: return
+        
+        temp.append(root.val)
+        
+        if root.left and root.right:
+            left = []
+            right = []
+            for t in temp:
+                left.append(t)
+                right.append(t)
+                
+            self.dfs(root.left, left)
+            self.dfs(root.right, right)
+            
+        if root.left is None and root.right:
+            # only right
+            self.dfs(root.right, temp)
+        if root.right is None and root.left:
+            # only left
+            self.dfs(root.left, temp)
+        if root.left is None and root.right is None:
+            # leaf node
+            self.final_array.append(temp)            
+            
+        
