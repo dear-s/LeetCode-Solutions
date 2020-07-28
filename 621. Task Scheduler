@@ -1,0 +1,25 @@
+class Solution:
+    def leastInterval(self, tasks: List[str], n: int) -> int:
+        
+        # formula - (highest freq -1) * (n+1) + 1
+        
+        letter_freq = {}
+        for t in tasks:
+            if t in letter_freq:
+                letter_freq[t] += 1
+            else:
+                letter_freq[t] = 1
+        
+        highest_freq = float('-inf')
+        for k,v in letter_freq.items():
+            highest_freq = max(highest_freq, v)
+        
+        count_high = 0
+        for k,v in letter_freq.items():
+            if v == highest_freq:
+                count_high += 1
+
+        ret = (highest_freq - 1) * (n+1) + count_high        
+        return max(ret, len(tasks))
+    
+    
