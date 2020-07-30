@@ -1,0 +1,61 @@
+class Solution:
+    def wordBreak(self, s: str, wordDict: List[str]) -> List[str]:        
+        
+        
+        # recursive approach with memoization
+        map = {}
+        ans = self.wordy(s, wordDict, map)
+        return ans
+
+    def wordy(self, s, wordDict, map):
+        if s in map:
+            return map[s]
+
+        result = []
+        if s in wordDict:
+            result.append(s)
+
+        for i in range(1, len(s)+1):
+            left = s[:i]
+            if left in wordDict:
+                sublist = self.wordy(s[i:], wordDict, map)
+                for sen in sublist:
+                    result.append(left + " " + sen)
+
+        map[s] = result
+        return result
+
+
+        """
+        # recursive approach
+        
+        self.original_s = s
+        self.dict_to_compare = {}
+        
+        dict_ = {}
+        for w in wordDict:
+            dict_[w] = 1
+                    
+        self.output = [] # to return
+        temp = []
+        memo = {}
+        self.recursive(dict_, temp, s, memo)
+        return self.output
+        
+        
+    def recursive(self, dict_, temp, s, memo):
+        
+        make_string_temp_without_spaces = "".join(x for x in temp)
+        
+        if make_string_temp_without_spaces == self.original_s:
+            make_string_temp = " ".join(x for x in temp)
+            if make_string_temp not in self.dict_to_compare:
+                self.output.append(make_string_temp)
+                self.dict_to_compare[make_string_temp] = 1
+                return
+            
+        for j in range(len(s)):
+            if s[:j+1] in dict_:
+                self.recursive(dict_, temp + [s[:j+1]], s[j+1:])
+        
+        """
