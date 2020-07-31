@@ -1,0 +1,28 @@
+
+class Solution:
+    def permuteUnique(self, nums: List[int]) -> List[List[int]]:
+        
+        
+        # nums has like different digits that we have to use to form diff arrays
+        self.output = []
+        temp = []
+        
+        length = len(nums)
+        
+        self.recursion(nums, temp, length)
+        # print("self.output: ", self.output)
+        return self.output
+        
+        
+    def recursion(self, nums, temp, length):
+        if temp not in self.output and len(temp) == length:
+            self.output.append(temp)
+            return
+            
+        for i in range(len(nums)):
+            self.recursion(nums[:i] + nums[i+1:], temp + [nums[i]], length)
+            
+            
+        
+
+ 
