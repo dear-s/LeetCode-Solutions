@@ -1,0 +1,76 @@
+
+class Solution:
+    def nextPermutation(self, nums: List[int]) -> None:
+        """
+        Do not return anything, modify nums in-place instead.
+        """
+        
+        # check if already in decreasing order [return sorted then]
+        if len(nums) == 0: return
+        
+        original_nums = []
+        for num in nums:
+            original_nums.append(num)
+                
+        original_nums_sort = []
+        for o in original_nums:
+            original_nums_sort.append(o)
+        original_nums_sort.sort()
+        
+        original_nums_reverse = original_nums_sort[::-1]
+        
+        if original_nums_reverse == nums:
+            nums.sort()
+            # return nums # [sorted nums only]
+        
+        else:
+            # loop - reach till that point where it's decreasing
+            i = 0
+            while i < len(nums)-1:
+                # if i == len(nums) - 1: replace with len(nums)-2 ----- should cover in decreasing array condition
+                ith_num = nums[i]
+                right_array = nums[i+1:]
+                # check if right_array is already in reverse position
+                test_right_array = []
+                for r in right_array:
+                    test_right_array.append(r)
+                test_right_array.sort()
+                test_right_array = test_right_array[::-1]
+                if test_right_array == right_array:
+                    # found the point - replace ith_num with the number greater than it
+                    # find the number just greater than this - loop through it
+                    # find_position = ???
+                    j = len(right_array) - 1
+                    swapped = False
+                    while j >= 0 and swapped == False:
+                        if right_array[j] > ith_num:
+                            # replace ith and jth number
+                            swap = nums[i+j+1]
+                            # swap = right_array[j]
+                            nums[i+j+1] = nums[i]
+                            nums[i] = swap
+                            swapped = True
+                            break
+                        else:
+                            j-=1
+                    # print("AFTER REPLACING... nums: ", nums)
+                    
+                    # sort the leftover after ith place array
+                    to_sort = nums[i+1:]
+                    # delete these number of items - pop from nums - then append the sorted version
+                    p = 0
+                    while p < len(to_sort):
+                        nums.pop()
+                        p+=1
+                    
+                    # append the sorted values
+                    to_sort.sort()
+                    for ts in to_sort:
+                        nums.append(ts)
+                    
+                    return nums
+                else:
+                    # nope increment i
+                    i+=1
+                
+       
