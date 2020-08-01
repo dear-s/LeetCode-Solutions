@@ -1,0 +1,61 @@
+
+class Solution:
+    def buildTree(self, inorder: List[int], postorder: List[int]) -> TreeNode:
+        
+        
+        # inorder - left, root, right
+        # postorder - left, right, root
+        
+        if len(inorder) != len(postorder) or len(inorder) == 0:
+            return None
+        
+        if len(inorder) == 1:
+            return TreeNode(inorder[0])
+        
+        # get root value from postorder
+        root_value = postorder[-1]
+        
+        rootNode = TreeNode(root_value)
+        # get it from inorder [left side - left tree, right side - right tree]
+        
+        index_of_root = inorder.index(root_value)
+        
+        left_tree_inorder = inorder[:index_of_root]
+        right_tree_inorder = inorder[index_of_root+1:]
+        leftover_postorder = postorder[:-1]
+        left_tree_postorder = leftover_postorder[:len(left_tree_inorder)]
+        right_tree_postorder = leftover_postorder[len(left_tree_inorder):]
+        
+        if len(left_tree_inorder) > 0:
+            rootNode.left = self.makeTreeNodes(left_tree_inorder, left_tree_postorder, rootNode)
+                
+        if len(right_tree_inorder) > 0:
+            rootNode.right = self.makeTreeNodes(right_tree_inorder, right_tree_postorder, rootNode)
+        
+        print(rootNode)
+        return rootNode
+        
+        
+    def makeTreeNodes(self, inor, postor, rootNode):
+        
+        if len(inor) == 1:
+            makeNewNode = TreeNode(inor[0]) # this is root only
+        else:
+            root_val = postor[-1]
+            makeNewNode = TreeNode(root_val) # this is root only
+            index_root = inor.index(root_val)
+            
+            left_tree_inorder = inor[:index_root]
+            right_tree_inorder = inor[index_root+1:]
+            leftover_postorder = postor[:-1]
+            left_tree_postorder = leftover_postorder[:len(left_tree_inorder)]
+            right_tree_postorder = leftover_postorder[len(left_tree_inorder):]
+            
+            
+            if len(left_tree_inorder) > 0:
+                makeNewNode.left = self.makeTreeNodes(left_tree_inorder, left_tree_postorder, makeNewNode)
+            if len(right_tree_inorder) > 0:
+                makeNewNode.right = self.makeTreeNodes(right_tree_inorder, right_tree_postorder, makeNewNode)
+        
+        return makeNewNode
+        
