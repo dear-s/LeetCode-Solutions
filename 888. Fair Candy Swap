@@ -1,0 +1,17 @@
+
+class Solution:
+    def fairCandySwap(self, A: List[int], B: List[int]) -> List[int]:
+        
+        each_should_have = (sum(A) + sum(B)) // 2
+        # print("each_should_have: ", each_should_have)
+        
+        ans = []
+        for x1 in A:
+            left = sum(A) - x1
+            if each_should_have - left in B:
+                ans.append(x1)
+                ans.append(each_should_have - left)
+                # print("ans: ", ans)
+                return ans
+
+     
