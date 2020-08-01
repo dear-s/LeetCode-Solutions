@@ -1,0 +1,57 @@
+	
+class Solution:
+    def uncommonFromSentences(self, A: str, B: str) -> List[str]:
+        
+        temp_A = []
+        temp_A = A.split(" ")
+        print("temp_A: ", temp_A)
+        
+        temp_B = []
+        temp_B = B.split(" ")
+        print("temp_B: ", temp_B)
+        
+        count_A = {}
+        count_B = {}
+        
+        for a in temp_A:
+            if a in count_A:
+                count_A[a] += 1
+            else:
+                count_A[a] = 1
+                
+        for b in temp_B:
+            if b in count_B:
+                count_B[b] += 1
+            else:
+                count_B[b] = 1
+                
+        
+        print("count_A: ", count_A)
+        print("count_B: ", count_B)
+        
+        freq1_A = []
+        freq1_B = []
+        
+        for k,v in count_A.items():
+            if v == 1:
+                freq1_A.append(k)
+        for k,v in count_B.items():
+            if v == 1:
+                freq1_B.append(k)
+                
+        print("freq1_A: ", freq1_A)
+        print("freq1_B: ", freq1_B)
+        
+        output = []
+        for letter in freq1_A:
+            if letter not in temp_B:
+                output.append(letter)
+        
+        for letter in freq1_B:
+            if letter not in temp_A:
+                output.append(letter)
+        
+        
+        print("output: ", output)
+        return output
+		
