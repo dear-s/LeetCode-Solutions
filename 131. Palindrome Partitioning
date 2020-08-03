@@ -1,0 +1,28 @@
+
+class Solution:
+    def partition(self, s: str) -> List[List[str]]:
+        
+        self.string_s = s
+        temp = []
+        self.output = []
+        
+        self.recursive(s, temp)
+        return self.output
+        
+        
+    def recursive(self, s, temp):
+        
+        if len(s) == 0:
+            string_check = "".join(t for t in temp)
+            if string_check == self.string_s:
+                if temp not in self.output:
+                    self.output.append(temp)
+                    return
+        
+        for i in range(len(s)+1):
+            # check for palindrome
+            check = s[:i]
+            if check == check[::-1] and len(check) > 0:
+                self.recursive(s[i:], temp + [check])
+        
+        
