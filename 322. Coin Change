@@ -1,0 +1,25 @@
+	
+class Solution:
+    def coinChange(self, coins: List[int], amount: int) -> int:
+        
+        # coins are infinite - can reuse same type of coin again and again
+        # dynamic programming?? - minimum number of coins ???
+        
+        # single 1D dp array
+        # explanation/reference - https://backtobackswe.com/platform/content/the-change-making-problem/solutions
+        
+        dp = [amount+1 for x in range(amount+1)]
+        
+        dp[0] = 0
+        
+        for i in range(1, amount+1):
+            for j in coins:
+                if i >= j:
+                    dp[i] = min(dp[i-j]+1, dp[i])
+                    
+        print("dp: ", dp)
+        if dp[amount] > amount:
+            return -1
+        return dp[amount]
+        
+        
