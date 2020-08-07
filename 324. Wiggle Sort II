@@ -1,0 +1,95 @@
+
+class Solution:
+    def wiggleSort(self, nums: List[int]) -> None:
+        """
+        Do not return anything, modify nums in-place instead.
+        """
+        
+        duplicate_nums = []
+        for n in nums:
+            duplicate_nums.append(n) # parse this, change nums
+            
+        
+        # reversed sorted
+        duplicate_nums.sort(reverse = True)
+        print("(reversed)duplicate_nums: ", duplicate_nums)
+        
+        # update max elements on indexes 1,3,5... - odd indexes
+        # update min elements on indexes 0,2,4... - even indexes
+        
+        # odd indexes - pull elements from the front of duplicate_nums array
+        for i in range(1, len(nums), 2):
+            a = duplicate_nums.pop(0)
+            nums[i] = a
+            
+        # even indexes - pull elements from duplicate_nums
+        for i in range(0, len(nums), 2):
+            b = duplicate_nums.pop(0)
+            nums[i] = b
+            
+        print("final nums: ", nums)
+        
+        
+        
+        
+        """
+        # TLE
+        self.original_nums = []
+        for n in nums:
+            self.original_nums.append(n)
+        self.original_nums.sort()
+        array = []
+        self.answer = []
+        # let's start with 2 flags
+        
+        up = True
+        down = False
+        
+        past = 0 # update it with the last element of the array - easy to compare with
+        
+        # first has to be up
+        for i in range(len(nums)):
+            if up == True: # down == False
+                # compare with the last element - past
+                if nums[i] > past: # since we have to go up
+                    # use this and update the up and down
+                    # update rest_elements - not in array
+                    
+                    self.recursion(nums[:i] + nums[i+1:], True, False, array + [nums[i]], nums[i])
+                    
+           
+        # self.recursion(nums, up, own, array, past)
+        print("self.answer: ", self.answer)
+        
+        while len(nums) != 0:
+            nums.pop()
+            
+        for a in self.answer:
+            nums.append(a)
+        
+        
+    def recursion(self, nums, up, down, array, past):
+        
+        if len(nums) == 0 and len(array) == len(self.original_nums):
+            for arr in array:
+                self.answer.append(arr)
+            return
+        
+        if len(self.answer) != 0:
+            return 
+        
+        for i in range(len(nums)):
+            if up == True: # down == False
+                # compare with the last element - past
+                if nums[i] > past: # since we have to go up
+                    # use this and update the up and down
+                    # update rest_elements - not in array
+                    self.recursion(nums[:i] + nums[i+1:], False, True, array + [nums[i]], nums[i])
+                    
+            else:
+                # up == False & down == True
+                if nums[i] < past:
+                    # down condition
+                    self.recursion(nums[:i] + nums[i+1:], True, False, array + [nums[i]], nums[i])
+              """
+		
