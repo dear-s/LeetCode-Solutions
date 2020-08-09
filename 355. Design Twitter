@@ -1,0 +1,91 @@
+class Twitter:
+
+    def __init__(self):
+        """
+        Initialize your data structure here.
+        """
+        self.all_tweets_in_order = []
+        self.user_tweets = {} # {user_id: [t_id, t_id, t_id]}
+        self.user_follows = {} # {user_id: [follows, follows, follows]}
+
+
+    def postTweet(self, userId: int, tweetId: int) -> None:
+        """
+        Compose a new tweet.
+        """
+        if userId in self.user_tweets:
+            self.user_tweets[userId].append(tweetId)
+        else:
+            self.user_tweets[userId] = [tweetId]
+
+        self.all_tweets_in_order.append(tweetId)
+        
+
+    def getNewsFeed(self, userId: int) -> List[int]:
+        """
+        Retrieve the 10 most recent tweet ids in the user's news feed. Each item in the news feed must be posted by users who the user followed or by the user herself. Tweets must be ordered from most recent to least recent.
+        """
+        
+        recent_feeds = []
+        total_user_ids = [userId]
+        # add user_Id of followee too
+        if userId in self.user_follows:
+            for f_id in self.user_follows[userId]:
+                total_user_ids.append(f_id)
+
+        total_tweet_ids = []
+        for u_id in total_user_ids:
+            if u_id in self.user_tweets:
+                for t_id in self.user_tweets[u_id]:
+                    total_tweet_ids.append(t_id)
+
+        # add with respect to all_tweets_in_order
+        reverse_all_tweets_in_order_for_recent_ones = []
+        for i in self.all_tweets_in_order:
+            reverse_all_tweets_in_order_for_recent_ones.append(i)
+
+        reverse_all_tweets_in_order_for_recent_ones = reverse_all_tweets_in_order_for_recent_ones[::-1]
+
+        for ordered_tweets in reverse_all_tweets_in_order_for_recent_ones:
+            if ordered_tweets in total_tweet_ids:
+                recent_feeds.append(ordered_tweets)
+
+        if len(recent_feeds) > 10:
+            return recent_feeds[:10]
+
+        # print("userId: ", userId)
+        # print("feed: ", recent_feeds)
+        return recent_feeds
+    
+        
+    def follow(self, followerId: int, followeeId: int) -> None:
+        """
+        Follower follows a followee. If the operation is invalid, it should be a no-op.
+        """
+        
+        if followerId in self.user_follows:
+            if followeeId not in self.user_follows[followerId]:
+                self.user_follows[followerId].append(followeeId)
+        else:
+            self.user_follows[followerId] = [followeeId]
+        
+
+    def unfollow(self, followerId: int, followeeId: int) -> None:
+        """
+        Follower unfollows a followee. If the operation is invalid, it should be a no-op.
+        """
+        
+        if followerId in self.user_follows:
+            if followeeId in self.user_follows[followerId]:
+                self.user_follows[followerId].remove(followeeId)
+        
+
+        
+
+
+# Your Twitter object will be instantiated and called as such:
+# obj = Twitter()
+# obj.postTweet(userId,tweetId)
+# param_2 = obj.getNewsFeed(userId)
+# obj.follow(followerId,followeeId)
+# obj.unfollow(followerId,followeeId)
