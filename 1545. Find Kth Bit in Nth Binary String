@@ -1,0 +1,36 @@
+
+class Solution:
+    def findKthBit(self, n: int, k: int) -> str:
+        
+        s_function = []
+        s_function = ["0" for x in range(n+1)]
+        
+        if n == 0 or n == 1:
+            return "0"
+        
+        i = 2
+        while i <= n:
+            get_invert_last_s = self.invert_then_rev(s_function[i-1])
+            s_function[i] = s_function[i-1] + "1" + get_invert_last_s
+            i+=1
+            
+        last_sn = s_function[-1]
+        
+        # return kth bit
+        return last_sn[k-1]
+        
+        
+    def invert_then_rev(self, string):
+        
+        another_s = ""
+        
+        for s in string:
+            if s == "1":
+                another_s += "0"
+            else:
+                another_s += "1"
+                
+        another_s = another_s[::-1]
+        return another_s
+    
+
