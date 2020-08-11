@@ -1,0 +1,90 @@
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def lcaDeepestLeaves(self, root: TreeNode) -> TreeNode:
+        
+        
+        if root is None: return
+        if root.left is None and root.right is None: return root
+        
+        level_order = []
+        level_order_with_roots = []
+        temp_root = []
+        temp = []
+        queue = [root, "-"]
+        
+        while queue:
+            a = queue.pop(0)
+            if a == "-":
+                level_order.append(temp)
+                level_order_with_roots.append(temp_root)
+                temp = []
+                temp_root = []
+                if len(queue) > 0:
+                    queue.append("-")
+            else:
+                temp.append(a.val)
+                temp_root.append(a)
+                if a.left:
+                    queue.append(a.left)
+                if a.right:
+                    queue.append(a.right)
+                    
+        # print("level_order: ", level_order)
+        # print("level_order_with_roots: ", level_order_with_roots)
+        
+        if len(level_order[-1]) == 1:
+            return level_order_with_roots[-1][0]
+        
+        else:
+            # lowest common ancestor - return that node pointer
+            node_traversal = {} # node: []
+
+            # go for bfs for node traversal
+            t = []
+            queue = [root]
+            while queue:
+                a = queue.pop(0)
+                traversed = self.bfs(a)
+                node_traversal[a] = traversed
+                t.append(a.val)
+                if a.left:
+                    queue.append(a.left)
+                if a.right:
+                    queue.append(a.right)
+            
+            # print("node_traversal: ", node_traversal)
+            
+            # check where all the nodes from the last level order occur
+            all_leaf_nodes = level_order[-1]
+            count_leaf = len(all_leaf_nodes)
+            node_to_return = None # update this for the final answer
+            
+            for k, v in node_traversal.items():
+                count = 0
+                for vv in v:
+                    if vv in all_leaf_nodes:
+                        count += 1
+                if count == count_leaf:
+                    # update answer
+                    node_to_return = k
+                    
+            return node_to_return
+                
+                    
+    def bfs(self, root):
+        t = []
+        queue = [root]
+        while queue:
+            a = queue.pop(0)
+            t.append(a.val)
+            if a.left:
+                queue.append(a.left)
+            if a.right:
+                queue.append(a.right)
+
+        return t
