@@ -1,0 +1,46 @@
+class CombinationIterator:
+
+    def __init__(self, characters: str, combinationLength: int):
+        self.chars = characters
+        self.length = combinationLength
+        
+        self.iterator = 0 # increment after every next function call
+        
+        temp = ""
+        self.all_combs = []
+        self.find_combs(characters, temp)
+        
+        # sort in lexicographical order
+        self.all_combs.sort()
+        
+        
+        
+    def find_combs(self, char_str, temp):
+        
+        if len(temp) == self.length:
+            if temp not in self.all_combs:
+                self.all_combs.append(temp)
+            return
+        
+        for i in range(len(char_str)):
+            self.find_combs(char_str[i+1:], temp + char_str[i])
+        
+
+    def next(self) -> str:
+        # if iterator < len(self.all_combs):
+        ans = self.all_combs[self.iterator]
+        
+        self.iterator += 1
+        return ans # always valid - don't check
+
+    def hasNext(self) -> bool:
+        if self.iterator < len(self.all_combs):
+            return True
+        
+        return False
+
+
+# Your CombinationIterator object will be instantiated and called as such:
+# obj = CombinationIterator(characters, combinationLength)
+# param_1 = obj.next()
+# param_2 = obj.hasNext()
