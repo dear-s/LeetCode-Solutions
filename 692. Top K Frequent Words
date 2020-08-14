@@ -1,0 +1,44 @@
+
+class Solution:
+    def topKFrequent(self, words: List[str], k: int) -> List[str]:
+        
+        # sort with frequency higher to lower
+        # if same freq - lex order
+        
+        letter_frequency = {}
+        
+        for word in words:
+            if word in letter_frequency:
+                letter_frequency[word] += 1
+            else:
+                letter_frequency[word] = 1
+                
+        
+        freq_wordArray = {}
+        freq_types = []
+        
+        for w,f in letter_frequency.items():
+            if f in freq_wordArray:
+                freq_wordArray[f].append(w)
+            else:
+                freq_wordArray[f] = [w]
+                
+                
+        # arrange in lex order - every array in dict 'freq_wordArray'
+        for f, w in freq_wordArray.items():
+            freq_types.append(f)
+            w.sort()
+        
+        freq_types.sort(reverse = True) # highest to lowest
+        
+        frequent = []
+        
+        for fre in freq_types:
+            if fre in freq_wordArray:
+                for a in freq_wordArray[fre]:
+                    frequent.append(a)
+                    
+        output = frequent[:k]
+        return output
+        
+ 
