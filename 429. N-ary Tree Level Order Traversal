@@ -1,0 +1,26 @@
+class Solution:
+    def levelOrder(self, root: 'Node') -> List[List[int]]:
+        
+        # level order traversal
+        
+        if root is None: return None
+        
+        level_order = []
+        temp = []
+        queue = [root, "d"]
+        
+        while queue:
+            a = queue.pop(0)
+            if a == "d":
+                level_order.append(temp)
+                temp = []
+                if len(queue) > 0:
+                    queue.append("d")
+            else:
+                temp.append(a.val)
+                if a.children:
+                    for c in a.children:
+                        queue.append(c)
+        
+        print("level_order: ", level_order)
+        return level_order
