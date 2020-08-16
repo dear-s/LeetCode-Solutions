@@ -1,0 +1,47 @@
+
+class Solution:
+    def countBattleships(self, board: List[List[str]]) -> int:
+        
+        
+        # count the battleships
+        # board - always be valid - same as "number of islands" problem
+        
+        self.count = 0
+        
+        # traverse right (no up or down) and down (no left or right)
+        
+        for i in range(len(board)):
+            for j in range(len(board[i])):
+                    # dfs
+                    if board[i][j] == "X":
+                        self.count +=1
+                    self.dfs(board, i, j)
+                    
+        return self.count
+                    
+                    
+                    
+    def dfs(self, board, i, j):
+        
+        # base conditions
+        if i < 0 or i >= len(board) or j < 0 or j >= len(board[0]) or board[i][j] == ".":
+            return
+        
+        
+        # check valid conditions for the loop
+        if board[i][j] == "X":
+            board[i][j] = "."
+            
+        
+        # recursive calls
+        
+        # up
+        self.dfs(board, i-1, j)
+        # down
+        self.dfs(board, i+1, j)
+        # left
+        self.dfs(board, i, j-1)
+        # right
+        self.dfs(board, i, j+1)
+        
+        
