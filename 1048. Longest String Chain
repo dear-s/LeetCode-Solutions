@@ -1,0 +1,78 @@
+
+class Solution:
+    def longestStrChain(self, words: List[str]) -> int:
+        
+        
+        # sort them w.r.t. their lengths
+        indexes = {}
+        index_arr = []
+
+        for word in words:
+            if len(word) not in indexes:
+                indexes[len(word)] = [word]
+                index_arr.append(len(word))
+            else:
+                indexes[len(word)].append(word)
+
+        index_arr.sort()
+
+        wordy_list = []
+
+        for ind in index_arr:
+            if ind in indexes:
+                for append_this in indexes[ind]:
+                    wordy_list.append(append_this)
+
+        self.chains = []
+        self.max_length = float('-inf')
+
+        temp = []
+
+        for i in range(len(wordy_list)):
+            self.find_chains( wordy_list[i+1:], temp + [wordy_list[i]])
+
+        return self.max_length
+
+
+    def find_chains(self, words, temp):
+
+        if temp not in self.chains:
+            self.chains.append(temp)
+            self.max_length = max(self.max_length, len(temp))
+
+        if len(words) == 0:
+            return
+
+
+        temp_last_sequence = temp[-1]
+
+        for i in range(len(words)):
+            string_to_check = words[i]
+            # check length to be len + 1
+            if len(string_to_check) == len(temp[-1]) + 1:
+                # check for sequence and pop one by one
+                if self.check_predec(temp_last_sequence, string_to_check) == True:
+                    self.find_chains(words[i+1:], temp + [string_to_check])
+
+
+    def check_predec(self, string1, string2):
+
+        # string1 < string2
+        list1 = list(string1)
+        list2 = list(string2)
+
+        for i in range(len(list1)):
+            letter = list1[i]
+            if letter not in list2:
+                return False
+
+            j = 0
+            while j < len(list2):
+                if list2[j] == letter:
+                    list2 = list2[j+1:]
+                    break
+                else:
+                    j+=1
+
+        return True
+
