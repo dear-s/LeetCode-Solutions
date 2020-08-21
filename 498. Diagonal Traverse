@@ -1,0 +1,72 @@
+
+class Solution:
+    def findDiagonalOrder(self, matrix: List[List[int]]) -> List[int]:
+        
+        
+        # can apply bfs approach
+
+        # check for base case if it's empty or only one row and one col
+        if len(matrix) == 0:
+            return matrix
+        
+        if len(matrix) == 1 and len(matrix[0])==1:
+            return [matrix[0][0]]
+
+        rows = len(matrix)
+        columns = len(matrix[0])
+
+        # start bfs with delimiter [level order traversal]
+        queue = [[matrix[0][0], 0, 0], "d"] # [value, i, j]
+        diagonal_grid = []
+        temp = []
+
+        while queue:
+            a = queue.pop(0)
+            if a == "d":
+                diagonal_grid.append(temp)
+                temp = []
+                if len(queue) > 0:
+                    queue.append("d")
+            else:
+                temp.append(a)
+                i = a[1]
+                j = a[2]
+                # add down element
+                if i != rows -1:
+                    if [matrix[i+1][j], i+1, j] not in queue:
+                        queue.append([matrix[i+1][j], i+1, j])
+                # add right element
+                if j != columns - 1:
+                    if [matrix[i][j+1], i, j+1] not in queue:
+                        queue.append([matrix[i][j+1], i, j+1])
+
+
+        diagonal_only_values = []
+        for dg in diagonal_grid:
+            temp = []
+            for d in dg:
+                temp.append(d[0])
+            diagonal_only_values.append(temp)
+
+
+        # start from even i.e. 0 and reverse the numbers at odd places
+        output_grid = []
+        count = 0
+        while count < len(diagonal_only_values):
+            if count % 2 != 0:
+                # odd -- reverse
+                diagonal_only_values[count] = diagonal_only_values[count][::-1]
+            output_grid.append(diagonal_only_values[count])
+            count += 1
+
+        # print("output_grid: ", output_grid)
+
+        output = []
+        for og in output_grid:
+            for o in og:
+                output.append(o)
+
+        return output
+
+
+
