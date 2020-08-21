@@ -1,0 +1,33 @@
+class Solution:
+    def countLargestGroup(self, n: int) -> int:
+        
+        
+
+        # make groups - counting the sum of digits
+        # return their lengths - how many have maximum lengths
+
+        sum_numberList = {}
+
+        for i in range(1, n+1):
+            # count the sum of digits of i
+            list_i = list(str(i))
+            sum = 0
+            for l in list_i:
+                sum += int(l)
+            if sum in sum_numberList:
+                sum_numberList[sum].append(i)
+            else:
+                sum_numberList[sum] = [i]
+
+        max_sum_list = 0
+        for k,v in sum_numberList.items():
+            max_sum_list = max(max_sum_list, len(v))
+
+        # count max_sum_list
+        count = 0
+        for k,v in sum_numberList.items():
+            if len(v) == max_sum_list:
+                count += 1
+
+        return count
+
