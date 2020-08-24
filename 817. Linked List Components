@@ -1,0 +1,36 @@
+
+
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def numComponents(self, head: ListNode, G: List[int]) -> int:
+        
+        normal_list = []
+        while head:
+            normal_list.append(head.val)
+            head = head.next
+                    
+        G.sort()
+        
+        groups = 0
+        stack = []
+        group_started = False
+        
+        # traverse normal_list
+        while len(normal_list) > 0:
+            a = normal_list.pop(0)
+            if a in G:
+                group_started = True
+            else:
+                if group_started == True:
+                    groups += 1
+                    group_started = False
+        
+        if group_started == True:
+            groups += 1
+        
+        return groups
+  
