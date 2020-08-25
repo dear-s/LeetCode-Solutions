@@ -1,0 +1,61 @@
+
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def insertIntoBST(self, root: TreeNode, val: int) -> TreeNode:
+        
+        
+        # insert can be done at 2 places!!
+        
+        # 1. at root - make this node root node -- BAD OPTION - need to build it again
+        
+        # 2. at right/left - TRY this
+        
+        # find_place -- pointer
+        
+        if root is None:
+            new_node = TreeNode(val)
+            return new_node
+        
+        real_root = root
+        
+        while root:
+            if root.left is None and root.right is None:
+                if val < root.val:
+                    new_node = TreeNode(val)
+                    root.left = new_node
+                else:
+                    new_node = TreeNode(val)
+                    root.right = new_node
+                
+                return real_root
+            
+            elif root.left is None:
+                # right is not None
+                if val < root.val:
+                    new_node = TreeNode(val)
+                    root.left = new_node
+                    return real_root
+                    
+            elif root.right is None:
+                # left is not None
+                if val > root.val:
+                    new_node = TreeNode(val)
+                    root.right = new_node
+                    return real_root
+            
+            # check anyways
+            if val < root.val:
+                # move left
+                root = root.left
+            elif val > root.val:
+                # move right
+                root = root.right
+
+        return real_root
+    
+
