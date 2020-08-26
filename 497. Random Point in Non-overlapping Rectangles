@@ -1,0 +1,19 @@
+import random
+class Solution:
+        
+    def __init__(self, rects: List[List[int]]):
+        self.rects = rects
+        self.areas = []
+        for rec in rects:
+            area_value = (abs(rec[0]-rec[2])+1)*(abs(rec[1]-rec[3])+1)
+            self.areas.append(area_value)
+                
+    def pick(self) -> List[int]:
+        get_random_array = random.choices(self.rects, weights = self.areas)[0]
+        # picking up on the basis on areas
+        
+        random_x = random.randint(get_random_array[0], get_random_array[2])
+        random_y = random.randint(get_random_array[1], get_random_array[3])
+        
+        return [random_x, random_y]
+
