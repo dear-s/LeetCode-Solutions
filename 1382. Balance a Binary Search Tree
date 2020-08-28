@@ -1,0 +1,79 @@
+
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def balanceBST(self, root: TreeNode) -> TreeNode:
+        
+        
+        # differ not more than 1 [depth of left side and right side]
+        
+        # check depths first
+        if root is None:
+            return None
+        
+        new_root = root
+        
+        # max_depth_left, and max_depth_right
+        self.left_d = 0
+        self.comparing_left = True
+        self.dfs(root.left, 1)
+        self.comparing_left = False
+        self.right_d = 0
+        self.dfs(new_root.right, 1)
+        
+        # balance tree -- construct new one or balance it 
+        self.list_node_values = [] # could be traversal
+        self.dfs_traversal(root)
+        self.list_node_values.sort()
+
+        # start from middle and binary search types and generate a search tree
+        mid = len(self.list_node_values) // 2
+        newNode_rootNode = TreeNode(self.list_node_values[mid])
+        left_side_tree_nodeValues = self.list_node_values[:mid]
+        right_side_tree_nodeValues = self.list_node_values[mid+1:]
+        self.create_tree(left_side_tree_nodeValues, right_side_tree_nodeValues, newNode_rootNode)
+        
+        return newNode_rootNode
+            
+            
+    def create_tree(self, left_side, right_side, newNode_rootNode):
+        
+        if len(left_side) > 0:
+            mid_root_left = len(left_side)//2
+            new_left_node = TreeNode(left_side[mid_root_left])
+            newNode_rootNode.left = new_left_node
+            self.create_tree(left_side[:mid_root_left], left_side[mid_root_left+1:], new_left_node)
+
+        if len(right_side) > 0:
+            mid_root_right = len(right_side)//2
+            new_right_node = TreeNode(right_side[mid_root_right])
+            newNode_rootNode.right = new_right_node
+            self.create_tree(right_side[:mid_root_right], right_side[mid_root_right+1:], new_right_node)
+
+            
+    def dfs_traversal(self, root):
+        
+        if root is None: return
+        
+        self.list_node_values.append(root.val)
+        self.dfs_traversal(root.left)
+        self.dfs_traversal(root.right)
+        
+    
+    def dfs(self, root, length):
+        
+        if root is None:
+            if self.comparing_left == True:
+                self.left_d = max(self.left_d, length)
+            else:
+                self.right_d = max(self.right_d, length)
+            return
+        
+        self.dfs(root.left, length + 1)
+        self.dfs(root.right, length + 1)
+        
+        
