@@ -1,0 +1,22 @@
+class Solution:
+    def rand10(self):
+        """
+        :rtype: int
+        """
+        
+        # need to call rand7() twice to cover all the possibilities
+        
+        a = rand7()
+        b = rand7()
+        
+        while a > 5:
+            a = rand7()
+            
+        while b > 5:
+            b = rand7()
+            
+        # coz we need something in the range 1 to 5 inclusive
+        
+        b += 5
+        
+        return random.choice([a,b])
