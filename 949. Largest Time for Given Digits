@@ -1,0 +1,166 @@
+class Solution:
+    def largestTimeFromDigits(self, A: List[int]) -> str:
+        
+        self.all_times_possible = []
+        leftover = A.copy()
+
+        # call rec 3 times by changing the value of 'first'
+        if 0 in leftover:
+            self.rec_one([0,"","",""], leftover)
+        if 1 in leftover:
+            self.rec_one([1,"","",""], leftover)
+        if 2 in leftover:
+            self.rec_one([2,"","",""], leftover)
+
+
+        if len(self.all_times_possible) == 0:
+            return ""
+
+        combs = self.all_times_possible.copy()
+        # manipulate this
+
+        combs.sort(key = lambda x:[x[0], x[1]])
+
+        first_ele_from_last = combs[-1][0]
+
+        combs = combs[::-1]
+
+        array_with_max_first = []
+        for c in combs:
+            if c[0] == first_ele_from_last:
+                array_with_max_first.append(c)
+
+        get_second_max = float('-inf')
+        for a in array_with_max_first:
+            get_second_max = max(get_second_max, a[1])
+
+        array_with_max_till_second = []
+        for arr in array_with_max_first:
+            if arr[1] == get_second_max:
+                array_with_max_till_second.append(arr)
+
+        array_with_max_till_second.sort(key = lambda x:x[2])
+        third_max = array_with_max_till_second[-1][2]
+
+        new_last_array_till_third_max = []
+
+        for aaa in array_with_max_till_second:
+            if aaa[2] == third_max:
+                new_last_array_till_third_max.append(aaa)
+
+        new_last_array_till_third_max.sort(key = lambda x:x[3])
+
+        output_array = new_last_array_till_third_max[-1]
+        string = ""
+        string += str(output_array[0]) + str(output_array[1]) + ":" + str(output_array[2]) + str(output_array[3])
+
+        return string
+
+
+    def rec_one(self, temp, left):
+
+        leftover = left.copy()
+
+        if temp[0] == 0 or temp[0] == 1:
+            leftover.remove(temp[0])
+
+            if 0 in leftover:
+                self.rec_two([temp[0], 0, "", ""], leftover)
+            if 1 in leftover:
+                self.rec_two([temp[0], 1, "", ""], leftover)
+            if 2 in leftover:
+                self.rec_two([temp[0], 2, "", ""], leftover)
+            if 3 in leftover:
+                self.rec_two([temp[0], 3, "", ""], leftover)
+            if 4 in leftover:
+                self.rec_two([temp[0], 4, "", ""], leftover)
+            if 5 in leftover:
+                self.rec_two([temp[0], 5, "", ""], leftover)
+            if 6 in leftover:
+                self.rec_two([temp[0], 6, "", ""], leftover)
+            if 7 in leftover:
+                self.rec_two([temp[0], 7, "", ""], leftover)
+            if 8 in leftover:
+                self.rec_two([temp[0], 8, "", ""], leftover)
+            if 9 in leftover:
+                self.rec_two([temp[0], 9, "", ""], leftover)
+
+        elif temp[0] == 2:
+            leftover.remove(2)
+            if 0 in leftover:
+                self.rec_two([2, 0, "", ""], leftover)
+            if 1 in leftover:
+                self.rec_two([2, 1, "", ""], leftover)
+            if 2 in leftover:
+                self.rec_two([2, 2, "", ""], leftover)
+            if 3 in leftover:
+                self.rec_two([2, 3, "", ""], leftover)
+
+        return
+
+
+    def rec_two(self, temp, left):
+
+        leftover = left.copy()
+
+        leftover.remove(temp[1])
+
+        # calling third
+        if 0 in leftover:
+            self.rec_three([temp[0], temp[1], 0, ""], leftover)
+        if 1 in leftover:
+            self.rec_three([temp[0], temp[1], 1, ""], leftover)
+        if 2 in leftover:
+            self.rec_three([temp[0], temp[1], 2, ""], leftover)
+        if 3 in leftover:
+            self.rec_three([temp[0], temp[1], 3, ""], leftover)
+        if 4 in leftover:
+            self.rec_three([temp[0], temp[1], 4, ""], leftover)
+        if 5 in leftover:
+            self.rec_three([temp[0], temp[1], 5, ""], leftover)
+
+        return
+
+
+    def rec_three(self, temp, left):
+
+        leftover = left.copy()
+
+        # removing three added
+        leftover.remove(temp[2])
+
+        # setting and calling fourth
+        if 0 in leftover:
+            self.rec_four([temp[0], temp[1], temp[2], 0], leftover)
+        if 1 in leftover:
+            self.rec_four([temp[0], temp[1], temp[2], 1], leftover)
+        if 2 in leftover:
+            self.rec_four([temp[0], temp[1], temp[2], 2], leftover)
+        if 3 in leftover:
+            self.rec_four([temp[0], temp[1], temp[2], 3], leftover)
+        if 4 in leftover:
+            self.rec_four([temp[0], temp[1], temp[2], 4], leftover)
+        if 5 in leftover:
+            self.rec_four([temp[0], temp[1], temp[2], 5], leftover)
+        if 6 in leftover:
+            self.rec_four([temp[0], temp[1], temp[2], 6], leftover)
+        if 7 in leftover:
+            self.rec_four([temp[0], temp[1], temp[2], 7], leftover)
+        if 8 in leftover:
+            self.rec_four([temp[0], temp[1], temp[2], 8], leftover)
+        if 9 in leftover:
+            self.rec_four([temp[0], temp[1], temp[2], 9], leftover)
+
+        return
+
+
+    def rec_four(self, temp, left):
+
+        leftover = left.copy()
+
+        leftover.remove(temp[3])
+
+        if len(leftover) == 0:
+            if temp not in self.all_times_possible:
+                self.all_times_possible.append(temp)
+                return
