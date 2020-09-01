@@ -1,0 +1,32 @@
+class Solution:
+    def validateStackSequences(self, pushed: List[int], popped: List[int]) -> bool:
+        
+        
+        if len(pushed) == 0:
+            return True
+
+        a = pushed.pop(0)
+        stack = [a] # at the end it should be empty only
+
+        # push to the stack until the last elemennt in the stack matches with the jth element in popped
+        while len(pushed)>0 or len(popped)>0:
+
+            if len(pushed) == 0:
+                if len(stack)>0:
+                    if popped[0] != stack[-1]:
+                        return False
+
+            # keep on pushing
+            while len(stack) == 0 or (len(pushed) > 0 and stack[-1] != popped[0]):
+                a = pushed.pop(0)
+                stack.append(a)
+
+            # keep on popping
+            while len(stack)>0 and stack[-1] == popped[0]:
+                popped.pop(0)
+                stack.pop(len(stack)-1)
+
+        if len(stack) == 0:
+            return True
+
+        return False
