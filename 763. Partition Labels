@@ -1,0 +1,41 @@
+class Solution:
+    def partitionLabels(self, S: str) -> List[int]:
+        
+        
+        partitions = []
+
+        i = 0
+        while i < len(S):
+            # first_index = i
+            # last_index = j
+            j = len(S)-1
+            while j >= i:
+                if S[j] == S[i]:
+                    # get this array
+                    substring = S[i:j+1]
+                    # check all the elements in this
+                    ss = 0
+                    while ss < len(substring):
+                    # for ss in range(len(substring)):
+                        last = len(S)-1
+                        while last > j:
+                            if S[last] == substring[ss]:
+                                j = last
+                                substring = S[i:j+1]
+                                last  = j
+                            else:
+                                last -= 1
+
+                        ss+=1
+
+                    partitions.append(substring)
+                    i = j+1
+
+                else:
+                    j-=1
+
+        output = []
+        for parts in partitions:
+            output.append(len(parts))
+
+        return output
