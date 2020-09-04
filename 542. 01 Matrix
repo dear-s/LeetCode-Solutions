@@ -1,0 +1,111 @@
+class Solution:
+    def updateMatrix(self, mat: List[List[int]]) -> List[List[int]]:
+        
+        
+        # can go ahead with bfs approach
+        new_mat = [["" for y in range(len(mat[0]))] for x in range(len(mat))]
+
+        for i in range(len(mat)):
+            for j in range(len(mat[i])):
+                if mat[i][j] == 0:
+                    new_mat[i][j] = mat[i][j]
+                else:
+                    # get distance - using bfs
+                    a = self.bfs(mat, i, j, [[i,j,0]], [[i,j,0]])
+                    new_mat[i][j] = a
+
+        return new_mat
+
+
+    def bfs(self, mat, i, j, visited, queue):
+
+        while queue:
+            a = queue.pop(0)
+            # check validity
+            if self.check_valid(a, mat):
+                # found the 0 value -- check distance
+                return a[2]
+
+            ax = a[0]
+            ay = a[1]
+            dist = a[2]
+            # up
+            if [ax-1, ay] not in visited:
+                queue.append([ax-1, ay, dist+1])
+            # down
+            if [ax+1, ay] not in visited:
+                queue.append([ax+1, ay, dist+1])
+            # left
+            if [ax, ay-1] not in visited:
+                queue.append([ax, ay-1, dist+1])
+            # right
+            if [ax, ay+1] not in visited:
+                queue.append([ax, ay+1, dist+1])
+
+
+    def check_valid(self, arr, mat):
+
+        x = arr[0]
+        y = arr[1]
+        dist = arr[2]
+
+        if x < 0 or x > len(mat)-1 or y < 0 or y > len(mat[0])-1:
+            return False
+
+        if mat[x][y] == 0:
+            return True
+
+        return False
+    
+    
+        
+#        # dfs - timeout
+
+#         new_array = [["" for y in range(len(mat[0]))] for x in range(len(mat))]
+
+#         distance = 0
+
+#         for i in range(len(mat)):
+#             for j in range(len(mat[i])):
+#                 # bfs -- one layer
+#                 self.final = float('inf')
+#                 a = self.bfs(mat, i, j, 0)
+#                 new_array[i][j] = self.final
+
+#         return new_array
+
+
+
+#     def bfs(self, mat, i, j, dist):
+
+#         if i < 0 or i > len(mat)-1 or j < 0 or j > len(mat[0])-1:
+#             return
+
+#         if mat[i][j] == 0:
+#             self.final = min(self.final, dist)
+#             return
+
+#         if dist > self.final:
+#             return
+
+#         # check one layer
+#         if self.check(mat, i-1, j) or self.check(mat, i+1, j) or self.check(mat, i, j-1) or self.check(mat, i, j+1):
+#             # possible in this layer only
+#             dist += 1
+#             self.final = min(self.final, dist)
+#             return
+
+
+#         self.bfs(mat, i-1, j, dist+1) # up
+#         self.bfs(mat, i+1, j, dist+1) # down
+#         self.bfs(mat, i, j-1, dist+1) # left
+#         self.bfs(mat, i, j+1, dist+1) # right
+
+
+#     def check(self, mat, i, j):
+
+#         if i < 0 or i > len(mat)-1 or j < 0 or j > len(mat[0])-1:
+#             return False
+
+#         if mat[i][j] == 0:
+#             return True
