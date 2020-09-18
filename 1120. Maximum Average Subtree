@@ -1,0 +1,55 @@
+
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def maximumAverageSubtree(self, root: TreeNode) -> float:
+        
+        # we can count leaf nodes
+        # take traversal from each root
+        
+        if root is None:
+            return
+        
+        self.root_average = {}
+        self.helper(root)
+        
+        max_avg = float('-inf')
+        for k,v in self.root_average.items():
+            max_avg = max(max_avg, v)
+            
+        return max_avg
+        
+        
+        
+    def helper(self, root):
+        
+        
+        if root is None: return
+        
+        self.find_traversal_and_average(root)
+        
+        self.helper(root.left)
+        self.helper(root.right)
+        
+    def find_traversal_and_average(self, root):
+        
+        traversal = []
+        queue = [root]
+        while queue:
+            a = queue.pop(0)
+            traversal.append(a.val)
+            if a.left:
+                queue.append(a.left)
+            if a.right:
+                queue.append(a.right)
+                
+        # print("traversal with the node value of ", root.val, " is: ", traversal)
+        
+        # get_average
+        avg = sum(traversal) / len(traversal)
+        self.root_average[root] = avg
+        
