@@ -1,0 +1,50 @@
+
+
+class Solution:
+    def checkIfPrerequisite(self, n: int, prerequisites: List[List[int]], queries: List[List[int]]) -> List[bool]:
+        
+        
+        prereq_course = {}
+        for p in prerequisites:
+            if p[0] not in prereq_course:
+                prereq_course[p[0]] = [p[1]]
+            else:
+                prereq_course[p[0]].append(p[1])
+
+        # print("prereq_course: ", prereq_course)
+
+        # start dfs
+        # append to visited as soon as you append to queue
+        new_dict = {}
+        for k,v in prereq_course.items():
+            visited = [k]
+            queue = [k]
+            while len(queue):
+                a = queue.pop(0)
+                # visited.append(a)
+                if a in prereq_course:
+                    for courses in prereq_course[a]:
+                        if courses not in visited:
+                            queue.append(courses)
+                            visited.append(courses)
+            new_dict[k] = visited
+
+        # print('new_dict: ', new_dict)
+
+        # checking queries
+        output = []
+        for query in queries:
+            pre = query[0]
+            course = query[1]
+            if pre not in new_dict:
+                output.append(False)
+            else:
+                if course in new_dict[pre]:
+                    output.append(True)
+                else:
+                    output.append(False)
+
+        # print("output: ", output)
+        return output
+        
+       
