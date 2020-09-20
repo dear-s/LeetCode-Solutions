@@ -1,0 +1,32 @@
+class Solution:
+    def suggestedProducts(self, products: List[str], searchWord: str) -> List[List[str]]:
+        
+        
+        # search letter wise - prefix (should match with string and searchWord)
+        
+        output = []
+        
+        for i in range(1, len(searchWord)+1):
+            prefix = searchWord[:i]
+            temp = []
+            
+            # search for words starts with prefix in "products"
+            for p in products:
+                if p[:i] == prefix:
+                    temp.append(p)
+                    
+                    
+            output.append(temp)
+            
+        new_out = []
+            
+        for o in output:
+            if len(o) > 3:
+                o.sort()
+                o = o[:3]
+                new_out.append(o)
+            else:
+                o.sort()
+                new_out.append(o)
+                
+        return new_out
