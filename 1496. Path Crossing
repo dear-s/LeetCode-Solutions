@@ -1,0 +1,57 @@
+
+
+class Solution:
+    def isPathCrossing(self, path: str) -> bool:
+        
+        
+        hashmap = {0:[0]}
+        x = 0
+        y = 0
+        
+        for p in path:
+            if p == "N":
+                y += 1
+                if x in hashmap and y in hashmap[x]:
+                    return True
+                
+                if x in hashmap:
+                    hashmap[x].append(y)
+                else:
+                    hashmap[x] = [y]
+                    
+                    
+            elif p == "S":
+                y-=1
+                if x in hashmap and y in hashmap[x]:
+                    return True
+                
+                if x in hashmap:
+                    hashmap[x].append(y)
+                else:
+                    hashmap[x] = [y]
+                    
+                    
+            elif p == "E":
+                x+=1
+                if x in hashmap and y in hashmap[x]:
+                    return True
+                
+                if x in hashmap:
+                    hashmap[x].append(y)
+                else:
+                    hashmap[x] = [y]
+                    
+                    
+            elif p == "W":
+                x-=1
+                if x in hashmap and y in hashmap[x]:
+                    return True
+                
+                if x in hashmap:
+                    hashmap[x].append(y)
+                else:
+                    hashmap[x] = [y]
+                
+                
+        return False
+            
