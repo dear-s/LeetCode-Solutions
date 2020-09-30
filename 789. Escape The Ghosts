@@ -1,0 +1,20 @@
+
+class Solution:
+    def escapeGhosts(self, ghosts: List[List[int]], target: List[int]) -> bool:
+        
+        
+        # manhattan distance = abs(x1-x2) + abs(y1-y2)
+        our_distance = abs(target[0]) + abs(target[1])
+        ghosts_d = []
+        
+        for ghost in ghosts:
+            d = abs(target[0]-ghost[0]) + abs(target[1]-ghost[1])
+            ghosts_d.append(d)
+            
+            
+        for dis in ghosts_d:
+            if dis <= our_distance:
+                return False
+                    
+        return True
+        
