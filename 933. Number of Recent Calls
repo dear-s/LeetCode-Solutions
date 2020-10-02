@@ -1,0 +1,30 @@
+
+class RecentCounter:
+
+    def __init__(self):
+        
+        # counts the number of recent requests within a certain time frame
+        
+        self.each_time = []
+        
+
+    def ping(self, t: int) -> int:
+        
+        self.each_time.append(t)
+        count = 0
+        # return last numbers - before 3000 milliseconds
+        
+        
+        while len(self.each_time) > 0:
+            if self.each_time[0] < self.each_time[-1] - 3000:
+                self.each_time.pop(0) # useless - no need to count again and again
+            else:
+                return len(self.each_time) # simply return - no need for counter
+            
+        return len(self.each_time)
+                
+                
+
+# Your RecentCounter object will be instantiated and called as such:
+# obj = RecentCounter()
+# param_1 = obj.ping(t)
