@@ -1,0 +1,31 @@
+
+        intervals_original = intervals.copy()
+        
+        # return - number of remaining intervals
+        for i in range(len(intervals)):
+            for j in range(len(intervals)):
+                
+                if i != j:
+
+                    # if found a covered one -- simply pop from the copied one
+                    a = intervals[i][0]
+                    b = intervals[i][1]
+
+                    c = intervals[j][0]
+                    d = intervals[j][1]
+
+                    if c <= a and b <= d:
+                        # covered
+                        intervals_original[i] = "empty"
+                    
+        
+        # print("intervals_original: ", intervals_original)
+        
+        count = 0
+        for interval in intervals_original:
+            if interval != "empty":
+                count += 1
+                
+        return count
+        
+        
