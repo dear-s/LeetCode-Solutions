@@ -1,0 +1,83 @@
+
+class Solution:
+    def isSelfCrossing(self, x: List[int]) -> bool:
+        
+        
+        # approach 1 - store the path coords in one array and check if we have already covered that point
+        # north, west, south, east --- continue...
+        
+        N = True
+        W = False
+        S = False
+        E = False
+        
+        x_coord = 0
+        y_coord = 0
+        travelled = [[x_coord, y_coord]]
+        hashmap = {0:[0]}
+        
+        for distance in x:
+            if N == True:
+                # store all the paths as well
+                k = 1
+                while k <= distance:
+                    y_coord += 1
+                    if x_coord in hashmap and y_coord in hashmap[x_coord]:
+                        return True
+                    k += 1
+                    if x_coord in hashmap:
+                        hashmap[x_coord].append(y_coord)
+                    else:
+                        hashmap[x_coord] = [y_coord]
+            elif W == True:
+                k = 1
+                while k <= distance:
+                    x_coord -= 1
+                    if x_coord in hashmap and y_coord in hashmap[x_coord]:
+                        return True
+                    k += 1
+                    if x_coord in hashmap:
+                        hashmap[x_coord].append(y_coord)
+                    else:
+                        hashmap[x_coord] = [y_coord]
+            elif S == True:
+                k = 1
+                while k <= distance:
+                    y_coord -= 1
+                    if x_coord in hashmap and y_coord in hashmap[x_coord]:
+                        return True
+                    k += 1
+                    if x_coord in hashmap:
+                        hashmap[x_coord].append(y_coord)
+                    else:
+                        hashmap[x_coord] = [y_coord]
+            elif E == True:
+                k = 1
+                while k <= distance:
+                    x_coord += 1
+                    if x_coord in hashmap and y_coord in hashmap[x_coord]:
+                        return True
+                    k += 1
+                    if x_coord in hashmap:
+                        hashmap[x_coord].append(y_coord)
+                    else:
+                        hashmap[x_coord] = [y_coord]
+                
+            # update directions
+            if N == True:
+                W = True
+                N = False
+            elif W == True:
+                S = True
+                W = False
+            elif S == True:
+                E = True
+                S = False
+            elif E == True:
+                N = True
+                E = False
+                
+                
+        return False
+        
+
