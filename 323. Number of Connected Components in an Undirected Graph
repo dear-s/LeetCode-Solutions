@@ -1,0 +1,68 @@
+
+class Solution:
+    def countComponents(self, n: int, edges: List[List[int]]) -> int:
+        
+        
+        # dfs from the start and make groups [return number of groups formed without intersecting]
+        
+        groups = []
+        seen_numbers = []
+        edges.sort()
+        
+        # start maybe recursive function calls
+        # dfs in the edges list only
+        
+        dict = {}
+        
+        for edge in edges:
+            if edge[0] in dict:
+                dict[edge[0]].append(edge[1])
+            else:
+                dict[edge[0]] = [edge[1]]
+                
+            if edge[1] in dict:
+                dict[edge[1]].append(edge[0])
+            else:
+                dict[edge[1]] = [edge[0]]
+                
+            if edge[0] not in seen_numbers:
+                seen_numbers.append(edge[0])
+            if edge[1] not in seen_numbers:
+                seen_numbers.append(edge[1])
+                
+        new_dict = {}
+        total_visited = []
+        for k, v in dict.items():
+            if k not in total_visited:
+                queue = [k]
+                visited = []
+                while len(queue)>0:
+                    a = queue.pop(0)
+                    if a not in visited:
+                        visited.append(a)
+                        total_visited.append(a)
+                    if a in dict:
+                        for values in dict[a]:
+                            if values not in visited and values not in queue:
+                                queue.append(values)
+                new_dict[k] = visited
+                    
+        check = {}
+        
+        for k,v in new_dict.items():
+            if k not in check:
+                groups.append(v)
+                for vv in v:
+                    check[vv] = 1
+
+        
+        # check for leftover numbers
+        # n -- total numbers from 0 to n-1
+        # seen_numbers is a set only
+        if len(seen_numbers) != n:
+            leftover = n - len(seen_numbers)
+        else:
+            leftover = 0
+        
+        return len(groups) + leftover
+    
