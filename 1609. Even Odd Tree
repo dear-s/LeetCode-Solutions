@@ -1,0 +1,93 @@
+
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def isEvenOddTree(self, root: TreeNode) -> bool:
+        
+        
+        # level order traversal - to find the values at each level
+        queue = [root, "d"]
+        lvl_order = []
+        
+        temp = []
+        while queue:
+            a = queue.pop(0)
+            if a == "d": # delimiter
+                lvl_order.append(temp)
+                temp = []
+                if len(queue) > 0:
+                    queue.append("d")
+            else:
+                temp.append(a.val)
+                if a.left:
+                    queue.append(a.left)
+                if a.right:
+                    queue.append(a.right)
+        
+        print("lvl_order: ", lvl_order)
+        
+        
+        for i in range(len(lvl_order)):
+            # even indexed values
+            if i % 2 == 0:
+                # should be strictly increasing
+                if self.strictly_inc(lvl_order[i]) == False or self. check_odd(lvl_order[i]) == False:
+                    return False
+            
+            # odd indexed values
+            else:
+                # should be strictly decreasing
+                if self.strictly_dec(lvl_order[i]) == False or self.check_even(lvl_order[i]) == False:
+                    return False
+                
+        
+        return True
+                
+                
+    def check_odd(self, array):
+        for a in array:
+            if a%2 == 0:
+                return False
+        return True
+        
+    def check_even(self, array):
+        for a in array:
+            if a %2 != 0:
+                return False
+        return True
+        
+    
+    def strictly_inc(self, array):
+        
+        if len(array) == 0 or len(array) == 1:
+            return True
+        
+        last = array[0]
+        for i in range(1, len(array)):
+            if array[i] <= last:
+                return False
+            
+            last = array[i]
+        
+        return True
+    
+    
+    def strictly_dec(self, array):
+        
+        if len(array) == 0 or len(array) == 1:
+            return True
+        
+        last = array[0]
+        for i in range(1, len(array)):
+            if array[i] >= last:
+                return False
+            
+            last = array[i]
+            
+        return True
+        
+        
