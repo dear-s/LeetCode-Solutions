@@ -1,0 +1,81 @@
+
+
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution:
+    def mergeTrees(self, t1: TreeNode, t2: TreeNode) -> TreeNode:
+        
+        
+        # check for both the tree nodes
+        new_node = TreeNode()
+        
+        if t1 is None and t2 is None:
+            return None
+        
+        if t1 is None:
+            return t2
+        if t2 is None:
+            return t1
+        
+        # both are not None -- solve
+        new_node.val = t1.val + t2.val
+        self.dfs(new_node, t1, t2)
+        
+        # print(new_node)
+        return new_node
+            
+        
+    def dfs(self, new_node, t1, t2):
+        
+        if t1 and t2:
+            # both are not None
+            if t1.left and t2.left:
+                left_node = TreeNode()
+                left_node.val = t1.left.val + t2.left.val
+                new_node.left = left_node
+                self.dfs(left_node, t1.left, t2.left)
+            elif t1.left and t2.left is None:
+                left_node = TreeNode()
+                left_node = t1.left
+                new_node.left = left_node
+                # self.dfs(left_node, t1.left, None)
+            elif t2.left and t1.left is None:
+                left_node = TreeNode()
+                left_node = t2.left
+                new_node.left = left_node
+                # self.dfs(left_node, None, t2.left)
+            elif t1.left is None and t2.left is None:
+                pass
+            
+            
+            # let's check right
+            if t1.right and t2.right:
+                right_node = TreeNode()
+                right_node.val = t1.right.val + t2.right.val
+                new_node.right = right_node
+                self.dfs(right_node, t1.right, t2.right)
+            elif t1.right and t2.right is None:
+                right_node = TreeNode()
+                right_node = t1.right
+                new_node.right = right_node
+                # self.dfs(right_node, t1.right, None)
+            elif t2.right and t1.right is None:
+                right_node = TreeNode()
+                right_node = t2.right
+                new_node.right = right_node
+                # self.dfs(right_node, None, t2.right)
+            elif t1.right is None and t2.right is None:
+                pass
+            
+            return
+        
+        else:
+            return
+        
+		
+		
