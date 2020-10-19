@@ -1,0 +1,44 @@
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def largestValues(self, root: TreeNode) -> List[int]:
+        
+        
+        if root is None:
+            return []
+        
+        # level order - return maximum in the array
+        output = []
+        
+        traversal = []
+        
+        queue = [root, "d"] # delimiter
+        temp = []
+        
+        while queue:
+            a = queue.pop(0)
+            if a == "d":
+                traversal.append(temp)
+                temp = []
+                if len(queue) > 0:
+                    queue.append("d")
+            else:
+                temp.append(a.val)
+                if a.left:
+                    queue.append(a.left)
+                if a.right:
+                    queue.append(a.right)
+                    
+        print("traversal: ", traversal)
+        
+        # get max from each arr
+        
+        for t in traversal:
+            output.append(max(t))
+            
+        return output
+        
