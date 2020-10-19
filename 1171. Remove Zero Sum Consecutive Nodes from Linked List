@@ -1,0 +1,71 @@
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def removeZeroSumSublists(self, head: ListNode) -> ListNode:
+        
+        
+        # once sum = 0 -- delete everything
+        
+        array = []
+        
+        cur = head
+        while cur:
+            array.append(cur.val)
+            cur = cur.next
+            
+        # print("initial array: ", array)
+            
+        i = 0
+        while i < len(array) and i >= 0:
+            j = i
+            arr = []
+            while j < len(array):
+                arr.append(array[j])
+                s = sum(arr) 
+
+                # pop and decrement i
+                if s == 0:
+                    x = 0
+                    timesPop = 0
+                    while x < len(arr):
+                        array.pop(j)
+                        timesPop += 1
+                        j-=1
+                        x+=1
+                    if x == len(arr):
+                        i = 0
+                        c = 0
+                        while c < timesPop:
+                            arr.pop()
+                            c+=1
+                j+=1
+
+            i+=1
+            
+        # print("array: ", array)
+            
+        
+        if len(array) == 0:
+            return None
+        
+        if len(array) == 1:
+            return ListNode(array[0])
+        
+        new_head = ListNode(array[0])
+        temp = new_head
+        i = 1
+        while i < len(array):
+            node = ListNode(array[i])
+            temp.next = node
+            temp = temp.next
+            i+=1
+            
+        # print("new_head: ", new_head)
+        return new_head
+            
+            
+            
+        
