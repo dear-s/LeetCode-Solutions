@@ -1,0 +1,68 @@
+
+"""
+# Definition for a Node.
+class Node:
+    def __init__(self, val = 0, neighbors = None):
+        self.val = val
+        self.neighbors = neighbors if neighbors is not None else []
+"""
+
+class Solution:
+    def cloneGraph(self, node: 'Node') -> 'Node':
+        
+        
+        if node is None:
+            return None
+        
+        node_neighbors = {}
+        
+        # bfs approach
+        head_node_value = node.val
+        
+        queue = [node]
+        visited = [node.val]
+        
+        while queue:
+            a = queue.pop(0)
+            neighbors_array = []
+            
+            # get neighbors
+            get_neighbors = a.neighbors
+            for n in get_neighbors:
+                neighbors_array.append(n.val)
+                if n.val not in visited:
+                    queue.append(n)
+                    visited.append(n.val)
+            
+            node_neighbors[a.val] = neighbors_array
+        
+        # make nodes and neighbors from the hashmap - node_neighbors
+        
+        all_nodes = [] # make from visited
+        
+        for v in visited:
+            new_node = Node(v)
+            all_nodes.append(new_node)
+        
+        val_node = {}
+        node_nnodes = {}
+        
+        for node in all_nodes:
+            val_node[node.val] = node
+        
+        for k,v in node_neighbors.items():
+            nn_array = []
+            for nbs in v:
+                nbs_node = val_node[nbs]
+                nn_array.append(nbs_node)
+                
+            node_nnodes[val_node[k]] = nn_array
+            
+            if k == head_node_value:
+                root_pointer = val_node[k]
+        
+        for keys, values in node_nnodes.items():
+            keys.neighbors = values
+            
+        return root_pointer
+        
