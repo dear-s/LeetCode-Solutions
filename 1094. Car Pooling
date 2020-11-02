@@ -9,20 +9,15 @@ class Solution:
         # sort with start_location
         trips.sort(key = lambda x:x[1])
         
-        print("trips after sorting: ", trips)
+        # print("trips after sorting: ", trips)
         
         all_locations = []
-        pick_ups = []
-        drop_offs = []
         startloc_passengers = {}
         endloc_passengers = {}
         
         for trip in trips:
             if trip[1] not in all_locations: all_locations.append(trip[1])
             if trip[2] not in all_locations: all_locations.append(trip[2])
-            
-            if trip[1] not in pick_ups: pick_ups.append(trip[1])                
-            if trip[2] not in drop_offs: drop_offs.append(trip[2])
                 
             if trip[1] not in startloc_passengers:
                 startloc_passengers[trip[1]] = trip[0]
@@ -36,11 +31,9 @@ class Solution:
                 
         all_locations.sort() # for easy start logic
         
-        print("all_locations: ", all_locations)
-        print("pick_ups: ", pick_ups)
-        print("drop_offs: ", drop_offs)
-        print("startloc_passengers: ", startloc_passengers)
-        print("endloc_passengers: ", endloc_passengers)
+        # print("all_locations: ", all_locations)
+        # print("startloc_passengers: ", startloc_passengers)
+        # print("endloc_passengers: ", endloc_passengers)
         
         # start the logic
         # make a variable and start with 0 - it should not exceed capacity
@@ -61,10 +54,6 @@ class Solution:
                 seats -= startloc_passengers[locs]
                 if seats < 0: return False
             
-            
         return True
-        
-        
-        
         
         
