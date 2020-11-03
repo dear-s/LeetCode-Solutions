@@ -1,0 +1,30 @@
+
+class Solution:
+    def maxPower(self, s: str) -> int:
+        
+        
+        # repeating same letters - only one
+        
+        # get length - maximum, where len of set of that word should be 1
+        
+        if len(s) == 0:
+            return 0
+        
+        max_length = 1
+        
+        i = 0
+        while i < len(s):
+            j = i
+            while j < len(s):
+                make_word = s[i:j+1]
+                if len(set(make_word)) == 1:
+                    max_length = max(max_length, len(make_word))
+                    j+=1
+                
+                else:
+                    j = len(s)
+            i+=1
+            
+        return max_length
+        
+       
