@@ -1,0 +1,43 @@
+
+
+count_array = []
+index_array = []
+
+arr_s = list(s)
+
+i = 0
+while i < len(arr_s):
+	if i == 0:
+		count_array.append(1)
+		index_array.append(0)
+		# can't do shit
+		i+=1
+
+	else:
+		# for other index values - we need to compare
+		if arr_s[i-1] == arr_s[i]:
+			count_array.append(count_array[-1] + 1)
+			# index_array.append(i)
+		else:
+			count_array.append(1)
+		index_array.append(i)
+		i+=1
+
+
+		if count_array[-1] == k:
+			# start popping
+			popCount = 0
+			while popCount < k:
+				count_array.pop()
+				ind = index_array.pop()
+				arr_s.pop(ind)
+				popCount += 1
+
+			if len(index_array) > 0:
+				i = index_array[-1] + 1
+			else:
+				i = 0
+
+out = "".join(x for x in arr_s)
+return out
+
