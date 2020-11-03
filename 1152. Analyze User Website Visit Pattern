@@ -1,0 +1,74 @@
+class Solution:
+    def mostVisitedPattern(self, username: List[str], timestamp: List[int], website: List[str]) -> List[str]:
+        
+        
+        # user, time, website
+        
+        array = []
+        
+        i = 0
+        while i < len(username):
+            array.append([username[i], timestamp[i], website[i]])
+            i+=1
+            
+        # sort wrt timestamp
+        array.sort(key = lambda x:x[1])
+        
+        # print("array: ", array)
+        
+        # user -> [websites...]
+        user_websites = {}
+        
+        for a in array:
+            if a[0] in user_websites:
+                user_websites[a[0]].append(a[2])
+            else:
+                user_websites[a[0]] = [a[2]]
+                
+        # print("user_websites: ", user_websites)
+        
+        seq_users = {}
+        
+        # finding out 3-sequence
+        for key,vals in user_websites.items():
+            if len(vals) >= 3:
+                # has 3-sequence (valid)
+                i = 0
+                while i < len(vals):
+                    j = i+1
+                    while j < len(vals):
+                        k = j+1
+                        while k < len(vals):
+                            three_seq_list = [vals[i], vals[j], vals[k]]
+                            tuple_sequence = tuple(three_seq_list)
+                            if tuple_sequence in seq_users:
+                                seq_users[tuple_sequence].append(key)
+                            else:
+                                seq_users[tuple_sequence] = [key]
+                            
+                            k+=1
+                        j+=1
+                    i+=1
+                
+        # print("seq_users: ", seq_users)
+        
+        # maximum freq value
+        max_freq = 0
+        for k,v in seq_users.items():
+            max_freq = max(max_freq, len(set(v)))
+            
+        total_sequences = []
+        
+        for k,v in seq_users.items():
+            if len(set(v)) == max_freq:
+                total_sequences.append(k)
+                
+        # print("original total_sequences: ", total_sequences)
+                        
+        total_sequences.sort()
+        
+        # print("final total_sequences: ", total_sequences)
+        
+        return total_sequences[0]
+    
+    
