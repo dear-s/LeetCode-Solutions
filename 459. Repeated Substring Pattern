@@ -1,0 +1,28 @@
+
+class Solution:
+    def repeatedSubstringPattern(self, s: str) -> bool:
+       
+        
+        # lets brute force
+        
+        form_string = ""
+        
+        i = 0
+        j = i+1
+        while j < len(s):
+            arr = s[i:j]
+            if len(s) % len(arr) == 0:
+                times_add = len(s) // len(arr)
+                new_string = ""
+                
+                t = 0
+                while t < times_add and len(new_string) <= len(s) and new_string != s:
+                    new_string += arr
+                    
+                if new_string == s:
+                    return True
+                
+            j+=1
+            
+        return False
+
