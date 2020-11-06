@@ -1,0 +1,50 @@
+
+class Solution:
+    def findCircleNum(self, M: List[List[int]]) -> int:
+        
+        
+        total_students = [] # 0 to n-1
+        for n in range(len(M)):
+            total_students.append(n)
+
+        dict = {}
+
+        for i in range(len(M)):
+            for j in range(len(M[i])):
+                if M[i][j] == 1:
+                    if i not in dict:
+                        dict[i] = [j]
+                    else:
+                        if j not in dict[i]:
+                            dict[i].append(j)
+
+                    if j not in dict:
+                        dict[j] = [i]
+                    else:
+                        if i not in dict[j]:
+                            dict[j].append(i)
+
+        # count circles
+        friend_circles = []
+        # apply bfs
+        # start popping total_students and add to the queue for bfs
+        
+        visited = []
+        while len(total_students) > 0:
+            a = total_students.pop(0)
+            if a not in visited:
+                queue = [a]
+                visited.append(a)
+                temp = []
+                while len(queue):
+                    b = queue.pop(0)
+                    temp.append(b)
+                    array = dict[b]
+                    for arr in array:
+                        if arr not in visited:
+                            queue.append(arr)
+                            visited.append(arr)
+                friend_circles.append(temp)
+
+        return len(friend_circles)
+    
