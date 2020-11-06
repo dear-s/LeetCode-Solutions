@@ -1,0 +1,46 @@
+
+# dict_for_sectors = {} # sector : freq_visited
+        # all_sectors
+
+        sector_frequencyVisited = {}
+
+        for i in range(1, n+1):
+            sector_frequencyVisited[i] = 0 # will add more
+
+        sector_freqArray = []
+
+        for i in range(1, n+1):
+            sector_freqArray.append([i, 0])
+
+        print("sector_freqArray: ", sector_freqArray)
+
+        # start marathon
+        startsFrom = rounds[0]
+        get_index_of_starting = startsFrom-1
+        k = get_index_of_starting
+
+        j = 1
+        while j < len(rounds):
+            while sector_freqArray[k][0] != rounds[j]:
+                sector_freqArray[k][1] += 1
+                k+=1
+                if k >= n:
+                    k = 0
+            j+=1
+        sector_freqArray[k][1] += 1
+
+        print("sector_freqArray: ", sector_freqArray)
+
+
+        max_freq = 0
+
+        for sec in sector_freqArray:
+            max_freq = max(max_freq, sec[1])
+
+        output_with_max_sectors = []
+        for sec in sector_freqArray:
+            if sec[1] == max_freq:
+                output_with_max_sectors.append(sec[0])
+
+        output_with_max_sectors.sort()
+        return output_with_max_sectors
