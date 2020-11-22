@@ -1,0 +1,47 @@
+
+
+class Solution:
+    def numsSameConsecDiff(self, N: int, K: int) -> List[int]:
+        
+        
+        # can be done through combinations
+        self.combs = []
+
+        # N - total digits [1,2,3(don't include 0 for left most digit set)]
+
+        numbers = "0123456789"
+        string = ""
+        
+        if N == 1:
+            for i in range(0,10):
+                self.make_combs(string + str(i), numbers, N, K)
+                
+        else:
+            for i in range(1, 10):
+                # 1 to 9 - for the starting digit
+                # length of the str should be exactly N and corresponding difference will be K (adjacent elements)
+                self.make_combs(string + str(i), numbers, N, K)
+
+                
+        output = []
+        for cc in self.combs:
+            output.append(int(cc))
+
+        return output
+
+
+    def make_combs(self, string, numbers, length_N, diff_K):
+
+        if len(string) == length_N:
+            if string not in self.combs:
+                self.combs.append(string)
+                return
+
+        for i in range(0, 10):
+            diff = abs(i - int(string[-1]))
+            if diff == diff_K:
+                self.make_combs(string + str(i), numbers, length_N, diff_K)
+
+
+
+  
