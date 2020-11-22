@@ -1,0 +1,34 @@
+
+class Solution:
+    def findMinDifference(self, timePoints: List[str]) -> int:
+        
+
+        # convert every hour:min to minutes formal
+
+        max_minutes = 24 * 60 # 1440
+        total_minutes = []
+
+        for time in range(len(timePoints)):
+            # convert time from hh:mm to minutes integer values
+            hour_format = int(timePoints[time][:2])
+            min_format = int(timePoints[time][-2:])
+
+            how_many_minutes = hour_format * 60 + min_format
+            total_minutes.append(how_many_minutes)
+
+        total_minutes.sort()
+
+        # traverse adjacently and then consider first and last too - with having 0 and max_minutes as dividers
+        every_diff = []
+        for i in range(len(total_minutes)-1):
+            # i and i+1
+            diff = total_minutes[i+1] - total_minutes[i]
+            every_diff.append(diff)
+
+        # consider first and last
+        last_case_last_value = total_minutes[0] - total_minutes[-1] + max_minutes # less - greater than add another greater
+        every_diff.append(last_case_last_value)
+
+        return min(every_diff)
+
+    
