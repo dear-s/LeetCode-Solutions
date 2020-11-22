@@ -1,0 +1,77 @@
+
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution:
+    def distanceK(self, root: TreeNode, target: TreeNode, K: int) -> List[int]:
+        
+        
+        # nodes that are 'K' distance from the 'target' node
+        # lets start the 'level order traversal' or 'bfs' from that node only
+        
+        # store the parent of such nodes
+
+        node_parent = {}
+        head = root
+
+        q = [head]
+        while q:
+            a = q.pop(0)
+            if a.left:
+                node_parent[a.left] = a
+                q.append(a.left)
+            if a.right:
+                node_parent[a.right] = a
+                q.append(a.right)
+                
+        
+        seen = [target] # not to add nodes again again if once visited
+        queue = [target, "d"]
+        
+        current_level = 0
+        
+        while current_level != K and len(queue) > 0:
+            aa = queue.pop(0)
+            
+            if aa != "d":
+                if aa.left:
+                    if aa.left not in seen:
+                        queue.append(aa.left)
+                        seen.append(aa.left)
+                if aa.right:
+                    if aa.right not in seen:
+                        queue.append(aa.right)
+                        seen.append(aa.right)
+
+                # check for parent
+                if aa in node_parent:
+                    parentNode = node_parent[aa]
+                    if parentNode not in seen:
+                        queue.append(parentNode)
+                        seen.append(parentNode)
+                        
+            else:
+                current_level += 1
+                if len(queue) > 0:
+                    queue.append("d")
+            
+            
+        if len(queue) > 0 and queue[-1] == "d":
+            queue.pop()
+            
+        if current_level == K:
+            # int value of queue array
+            output = []
+            for q in queue:
+                output.append(q.val)
+                
+            return output
+        
+        else:
+            return []
+        
+       
