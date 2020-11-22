@@ -1,0 +1,59 @@
+
+class Solution:
+    def isRobotBounded(self, instructions: str) -> bool:
+        
+        
+        # 3 instructions
+        # G -- go straight 1 unit
+        # L -- turn 90 degrees left
+        # R -- turn 90 degrees right
+
+        # lets start with (0,0) and change coords as we go ahead and notice them
+        # check for the circle -- if any coordinate repeats
+
+        coord = [[0,0]] # will append more locations
+
+        direction_facing = "up" # north at the beginning
+        
+        for i in instructions:
+            current_position = coord[-1]
+            if i == "G":
+                if direction_facing == "up":
+                    new_loc = [current_position[0], current_position[1] + 1]
+                elif direction_facing == "left":
+                    new_loc = [current_position[0] - 1, current_position[1]]
+                elif direction_facing == "down":
+                    new_loc = [current_position[0], current_position[1] - 1]
+                elif direction_facing == "right":
+                    new_loc = [current_position[0] + 1, current_position[1]]
+
+                coord.append(new_loc)
+
+
+            elif i == "L":
+                if direction_facing == "up":
+                    direction_facing = "left"
+                elif direction_facing == "left":
+                    direction_facing = "down"
+                elif direction_facing == "down":
+                    direction_facing = "right"
+                elif direction_facing == "right":
+                    direction_facing = "up"
+
+            elif i == "R":
+                if direction_facing == "up":
+                    direction_facing = "right"
+                elif direction_facing == "left":
+                    direction_facing = "up"
+                elif direction_facing == "down":
+                    direction_facing = "left"
+                elif direction_facing == "right":
+                    direction_facing = "down"
+        
+        # used hint 2 == The robot stays in the circle iff (looking at the final vector) it changes direction (ie. doesn't stay pointing north), or it moves 0.
+        if direction_facing != "up" or len(coord) == 1 or (len(coord) > 1 and coord[-1] == [0,0]):
+            return True
+        
+        return False
+    
+    
