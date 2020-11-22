@@ -1,0 +1,17 @@
+
+class Solution:
+    def findAnagrams(self, s: str, p: str) -> List[int]:
+ 
+        output = []
+        p_list = list(p)
+        p_list.sort()
+        s_list = list(s)
+    
+        for i in range(len(s_list)-len(p_list)+1):
+            temp = s_list[i:i+len(p_list)]
+            temp.sort() # tim sort
+            if temp == p_list:
+                output.append(i)
+                
+        return output
+            
