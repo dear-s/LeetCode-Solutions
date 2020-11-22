@@ -1,0 +1,54 @@
+
+class Solution:
+    def smallestDivisor(self, nums: List[int], threshold: int) -> int:
+        
+        
+        # binary seach
+        # these are indexes
+        low = 1
+        high = max(nums)
+
+        range_set_value_track = []
+        min_range = float('inf')
+
+        while low <= high:
+            mid = (high + low) // 2 # index
+            # compute threshold
+            temp = []
+            for n in nums:
+                divided = math.ceil(n/mid)
+                temp.append(divided)
+
+            sum_temp = sum(temp)
+            if sum_temp <= threshold:
+                min_range = min(min_range, mid)
+                range_set_value_track.append(mid)
+                high = mid -1
+            else:
+                low = mid + 1
+                
+        return min_range
+        
+        
+        
+#         max_element = max(nums)
+        
+#         for i in range(1, max_element+1):
+            
+#             # check for number i
+#             # divide the whole array with this number
+            
+#             new_array= []
+#             for t in nums:
+#                 # divide
+#                 new_t = math.ceil(t/i)
+#                 new_array.append(new_t)
+                
+            
+#             # take sum
+#             sum_array = sum(new_array)
+            
+#             if sum_array <= threshold:
+#                 return i
+            
+        
