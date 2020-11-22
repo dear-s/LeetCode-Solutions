@@ -1,0 +1,55 @@
+
+class UndergroundSystem:
+
+    def __init__(self):
+        self.getsIn_id_sname_t = {} # {id:{sname:time, ..}, id:{sname:time, ..}, ...}
+        self.getsOut_id_sname_t = {}
+        self.id_start_end_t1_t2 = {} # {id: [start, end, t1, t2], ...}
+
+
+    def checkIn(self, id: int, stationName: str, t: int) -> None:
+        # getsIn
+        if id not in self.getsIn_id_sname_t:
+            self.getsIn_id_sname_t[id] = {}
+        self.getsIn_id_sname_t[id][stationName] = t
+
+        if id in self.id_start_end_t1_t2:
+            # in checkOut always edit the last added array -- with index -1
+            self.id_start_end_t1_t2[id].append([stationName, "", t, ""])
+        else:
+            self.id_start_end_t1_t2[id] = [[stationName, "", t, ""]]
+
+
+    def checkOut(self, id: int, stationName: str, t: int) -> None:
+        # getsOut
+        if id not in self.getsOut_id_sname_t:
+            self.getsOut_id_sname_t[id] = {}
+        self.getsOut_id_sname_t[id][stationName] = t
+
+        arr = self.id_start_end_t1_t2[id][-1]
+        arr[1] = stationName
+        arr[3] = t
+        self.id_start_end_t1_t2[id].pop()
+        self.id_start_end_t1_t2[id].append(arr)
+
+
+    def getAverageTime(self, startStation: str, endStation: str) -> float:
+        # returns the average time - between startStation and endStation
+
+        duration = []
+        for k,v in self.id_start_end_t1_t2.items():
+            for vv in v:
+                if vv[0] == startStation and vv[1] == endStation:
+                    diff = vv[3] - vv[2]
+                    duration.append(diff)
+
+        get_avg = sum(duration)/len(duration)
+
+        return get_avg
+
+
+# Your UndergroundSystem object will be instantiated and called as such:
+# obj = UndergroundSystem()
+# obj.checkIn(id,stationName,t)
+# obj.checkOut(id,stationName,t)
+# param_3 = obj.getAverageTime(startStation,endStation)-
