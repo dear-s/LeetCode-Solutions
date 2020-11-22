@@ -1,0 +1,75 @@
+
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def reverseKGroup(self, head: ListNode, k: int) -> ListNode:
+        
+        
+        # convert into list
+        # form groups - reverse
+        # form a linked list
+        
+        if head is None: return None
+        if k == 1: return head
+        
+        arr = []
+        cur = head
+        while cur:
+            arr.append(cur.val)
+            cur = cur.next
+                    
+        # reverse into the groups of k
+        rem = len(arr) % k
+        if rem != 0:
+            last_elements = arr[-rem:]
+            arr = arr[:-rem]
+            
+        arr_group = []
+        temp = []
+        while len(arr):
+            a = arr.pop(0)
+            if len(temp) == k:
+                arr_group.append(temp)
+                temp = [a]
+            else:
+                temp.append(a)
+            
+        if len(temp) > 0:
+            arr_group.append(temp)
+            
+        if rem != 0 and len(last_elements) > 0:
+            arr_group.append(last_elements)
+        
+        # reverse those groups - with length == k
+        for ind in range(len(arr_group)):
+            if len(arr_group[ind]) == k:
+                arr_group[ind] = arr_group[ind][::-1]        
+        
+        single_list = []
+        for aaa in arr_group:
+            for aa in aaa:
+                single_list.append(aa)
+                        
+        if len(single_list) == 0: return None
+        
+        # make linked list from this array
+        
+        new_node = ListNode()
+        return_node = new_node
+        new_node.val = single_list[0]
+        
+        if len(single_list) == 1: return new_node
+        
+        for i in range(1, len(single_list)):
+            next_node = ListNode()
+            next_node.val = single_list[i]
+            new_node.next = next_node
+            new_node = next_node
+            
+        return return_node
+        
+        
+        
