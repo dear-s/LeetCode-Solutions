@@ -1,0 +1,42 @@
+
+class Solution:
+    def maxAreaOfIsland(self, grid: List[List[int]]) -> int:
+        
+        
+        # find the max area
+        # can mark differently - or can count one by one
+
+        self.area = 0
+
+        self.grid = grid
+
+        for i in range(len(self.grid)):
+            for j in range(len(self.grid[i])):
+                if self.grid[i][j] == 1: # uncovered
+                    self.area_count = 0
+                    self.traverseArea(i, j)
+                    self.area = max(self.area, self.area_count)
+
+        return self.area
+
+
+    def traverseArea(self, r, c):
+
+        if r < 0 or r >= len(self.grid) or c < 0 or c >= len(self.grid[r]) or self.grid[r][c] != 1:
+            return
+
+        if self.grid[r][c] == 1:
+            self.area_count += 1
+            self.grid[r][c] = ""
+
+        # up
+        self.traverseArea(r-1, c)
+        # down
+        self.traverseArea(r+1, c)
+        # # left
+        self.traverseArea(r, c-1)
+        # # right
+        self.traverseArea(r, c+1)
+
+
+        
