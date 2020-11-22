@@ -1,0 +1,24 @@
+
+class Solution:
+    def countSubstrings(self, s: str) -> int:
+        
+        
+        # how many palindromic substrings
+        self.palins = {} # {(1,2):"string", (4,5):"string", ...}
+
+        for i in range(len(s)):
+            for j in range(i+1, len(s)+1):
+                temp = s[i:j]
+                if temp == temp[::-1]:
+                    self.palins[(i,j)] = temp
+
+        # print("self.palins: ", self.palins)
+
+        count = 0
+        for k,v in self.palins.items():
+            count += 1
+
+        # print("count")
+        return count
+    
+    
