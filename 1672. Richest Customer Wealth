@@ -1,0 +1,15 @@
+
+class Solution:
+    def maximumWealth(self, accounts: List[List[int]]) -> int:
+        
+        
+        # sum rows - return max sum
+        max_sum = 0
+        
+        for row in accounts:
+            max_sum = max(max_sum, sum(row))
+            
+        return max_sum
+        	
+		
+		
