@@ -1,0 +1,17 @@
+
+class Solution:
+    def concatenatedBinary(self, n: int) -> int:
+        
+        
+        all_bin = []
+        
+        for i in range(1, n+1):
+            binary = bin(i).replace("0b", "")
+            all_bin.append(binary)
+            
+        concat = "".join(x for x in all_bin)
+        get_decimal_number = int(concat,2) 
+        
+        return get_decimal_number % (10**9 + 7)
+    
+    
