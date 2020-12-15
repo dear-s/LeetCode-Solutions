@@ -1,0 +1,34 @@
+
+class Solution:
+    def groupThePeople(self, groupSizes: List[int]) -> List[List[int]]:
+        
+        
+        grouplen_grid = {}
+        
+        for g in groupSizes:
+            if g not in grouplen_grid:
+                grouplen_grid[g] = []
+                
+        
+        for i in range(len(groupSizes)):
+            get_length = groupSizes[i]
+            
+            # get last array from this - from dict values
+            if len(grouplen_grid[get_length]) > 0:
+                # check last array
+                if len(grouplen_grid[get_length][-1]) < get_length:
+                    grouplen_grid[get_length][-1].append(i)
+                elif len(grouplen_grid[get_length][-1]) == get_length:
+                    grouplen_grid[get_length].append([i])
+                
+            else:
+                # make an array
+                grouplen_grid[get_length].append([i])
+                
+                
+        output = []
+        for k,vv in grouplen_grid.items():
+            for v in vv:
+                output.append(v)
+            
+        return output
