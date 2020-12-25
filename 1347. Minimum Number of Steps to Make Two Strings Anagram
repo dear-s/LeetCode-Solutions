@@ -1,0 +1,39 @@
+class Solution:
+    def minSteps(self, s: str, t: str) -> int:
+        
+        
+        s_count = {}
+        t_count = {}
+        
+        for ss in s:
+            if ss in s_count:
+                s_count[ss] +=1
+            else:
+                s_count[ss] = 1
+                
+        for tt in t:
+            if tt in t_count:
+                t_count[tt] +=1
+            else:
+                t_count[tt] = 1
+                
+                
+        count = 0
+                
+        for k,v in s_count.items():
+            if k in t_count:
+                # check difference
+                k_in_s = v
+                k_in_t = t_count[k]
+                
+                if k_in_s > k_in_t:
+                    diff = k_in_s - k_in_t
+                    count += diff
+            
+            else:
+                
+                count += v
+                
+        return count
+                
+                
