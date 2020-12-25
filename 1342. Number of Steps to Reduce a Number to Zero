@@ -1,0 +1,23 @@
+class Solution:
+    def numberOfSteps (self, num: int) -> int:
+        
+        
+        # even - divide by 2
+        # odd - subtract 1
+        
+        # reduce it to zero
+        
+        count = 0
+        
+        while num != 0:
+            if num % 2 == 0:
+                num = num //2
+                
+            else:
+                num -= 1
+                
+            count += 1
+            
+        return count
+        
+        
