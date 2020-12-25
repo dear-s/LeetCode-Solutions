@@ -1,0 +1,19 @@
+class Solution:
+    def checkIfExist(self, arr: List[int]) -> bool:
+        
+        
+        check = False
+        
+        i = 0
+        while check == False and i < len(arr):
+            
+            number = arr[i]
+            rest_array = arr[:i] + arr[i+1:]
+            
+            if number*2 in rest_array:
+                check = True
+                
+            i+=1
+            
+        return check
+        
