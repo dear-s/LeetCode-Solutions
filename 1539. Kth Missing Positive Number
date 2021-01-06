@@ -1,0 +1,21 @@
+class Solution:
+    def findKthPositive(self, arr: List[int], k: int) -> int:
+        
+        
+        count = 0
+        
+        make_array = []
+        missing = []
+        
+        start = 1
+        
+        while len(missing) < k:
+            if start not in arr:
+                missing.append(start)
+            
+            start += 1
+            
+        # print("missing: ", missing)
+        return missing[-1]
+        
+        
