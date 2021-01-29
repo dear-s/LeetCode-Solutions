@@ -1,0 +1,39 @@
+class Solution:
+    def getSmallestString(self, n: int, k: int) -> str:
+        
+        
+        # n - length of the string
+        # k - total value (by adding each letter)
+        
+        # find every string with value 'k' and length 'n'
+        # sort them and return the first one
+        
+        alpha = "0abcdefghijklmnopqrstuvwxyz"
+        
+        # start from the very end
+        ans = ""
+        
+        while k != 0:
+            if k - n == 0:
+                # append a only
+                ans += "a"
+                n -=1
+                k -=1
+                
+            elif k-n < 26:
+                # get that letter
+                get_letter = alpha[k-n+1]
+                ans += get_letter
+                n -= 1
+                k -= alpha.index(get_letter)
+                
+            elif k-n >= 26:
+                # append z
+                ans += "z"
+                n-=1
+                k-=26
+    
+        ans = ans[::-1]    
+        return ans
+                
+        
