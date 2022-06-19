@@ -1,0 +1,14 @@
+class Solution:
+    def divisorSubstrings(self, num: int, k: int) -> int:
+        
+        beauty = 0
+        get_str = str(num)
+        
+        for i in range(len(get_str) - k+1):
+            get_string = get_str[i:i+k]
+            get_num = int(get_string)
+
+            if get_num != 0 and num % get_num == 0:
+                beauty += 1
+                
+        return beauty
