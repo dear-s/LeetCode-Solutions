@@ -1,0 +1,32 @@
+class Solution:
+    def greatestLetter(self, s: str) -> str:
+        
+        upper="ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+        lower=upper.lower()
+        index_letter = {}
+        
+        for i in s:
+            if i in upper:
+                if upper.index(i) in index_letter:
+                    index_letter[upper.index(i)].append("upper")
+                else:
+                    index_letter[upper.index(i)] = ["upper"]
+            else:
+                if lower.index(i) in index_letter:
+                    index_letter[lower.index(i)].append("lower")
+                else:
+                    index_letter[lower.index(i)] = ["lower"]
+                    
+        result = []
+        # print(index_letter)
+        
+        for k,v in index_letter.items():
+            if "lower" in v and "upper" in v:
+                result.append(upper[k])
+        
+        # print(result)
+        result.sort()
+        if len(result) == 0: return ""
+        return result[-1]
+                
+        
