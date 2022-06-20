@@ -1,0 +1,44 @@
+class Solution:
+    def findBall(self, grid: List[List[int]]) -> List[int]:
+        
+        ans = []
+        
+        aa = 0
+        while aa < len(grid[0]):
+            i = 0
+            j = aa
+            while i < len(grid) and j < len(grid[i]):
+                if grid[i][j] == 1:
+                    # check horizontal - towards right
+                    if j == len(grid[i]) - 1:
+                        # block situation
+                        ans.append(-1)
+                        break
+                    else:
+                        if grid[i][j+1] == -1:
+                            # block
+                            ans.append(-1)
+                            break
+                        else:
+                            i+=1
+                            j+=1
+                else:
+                    # value is -1
+                    # check horizontal towards left
+                    if j == 0:
+                        # block
+                        ans.append(-1)
+                        break
+                    else:
+                        if grid[i][j-1] == 1:
+                            # block
+                            ans.append(-1)
+                            break
+                        else:
+                            i+=1
+                            j-=1
+                if i == len(grid):
+                    ans.append(j)
+            aa+=1
+        
+        return ans
