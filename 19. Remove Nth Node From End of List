@@ -38,4 +38,74 @@ class Solution:
             return None
         
 	
+	
+	
+	
+# Another submission - 2 approaches
+
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def removeNthFromEnd(self, head: Optional[ListNode], n: int) -> Optional[ListNode]:
+        
+        # 2 approaches
+        # 1. LL -> convert to list and do the operation -> form new LL and return (easy to understand - beginner friendly)
+        # 2. using pointers - deleting the node from LL using pointers
+        
+        one = head
+        total_nodes = 0
+        
+        while one.next != None:
+            total_nodes += 1
+            one = one.next
+        
+        if one.val != None:
+            total_nodes += 1
+            
+        a = ListNode(0, head)
+        ans = a
+        b = head
+        c = head
+        
+        # consider only one
+        if total_nodes == 1:
+            return head.next
+        # consider only two
+        if total_nodes == 2:
+            if n == 1:
+                new = head
+                new.next = None
+                return new
+            elif n == 2:
+                new = head
+                new = new.next
+                return new
+        
+        index_to_pop = total_nodes - n
+        
+        # length is >= 3
+        b = head
+        c = b.next
+        
+        i = 0
+        while i != index_to_pop:
+            if a.next:
+                a = a.next
+            if b.next:
+                b = b.next
+            if c.next:
+                c = c.next
+            else: c = None
+            i+=1
+            
+            
+        if i == index_to_pop:
+            a.next = c
+            b.next = None
+        
+        return ans.next
+    
 	 
