@@ -1,0 +1,13 @@
+class Solution:
+    def minimumLengthEncoding(self, words: List[str]) -> int:
+        
+        new_string = ""
+        
+        words.sort(reverse = True, key = lambda x:len(x))
+        
+        for w in words:
+            if w+"#" not in new_string:
+                new_string+=w+"#"
+                
+        return len(new_string)
+    
