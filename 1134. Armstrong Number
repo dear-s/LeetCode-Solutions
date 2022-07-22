@@ -1,0 +1,16 @@
+class Solution:
+    def isArmstrong(self, n: int) -> bool:
+        
+        
+        k = len(str(n))
+        
+        summ = 0
+        
+        for i in range(len(str(n))):
+            digit = str(n)[i]
+            cubic = int(digit)**k
+            summ += cubic
+            
+        if summ == n:
+            return True
+        return False
