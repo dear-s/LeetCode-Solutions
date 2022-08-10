@@ -1,0 +1,28 @@
+class WordDistance:
+
+    def __init__(self, wordsDict: List[str]):
+        self.word_indexes = {}
+        for index in range(len(wordsDict)):
+            if wordsDict[index] in self.word_indexes:
+                self.word_indexes[wordsDict[index]].append(index)
+            else:
+                self.word_indexes[wordsDict[index]] = [index]
+        # print(self.word_indexes)
+
+    def shortest(self, word1: str, word2: str) -> int:
+        first = self.word_indexes[word1]
+        sec = self.word_indexes[word2]
+        
+        shortest = float('inf')
+        
+        for f in first:
+            for s in sec:
+                shortest = min(shortest, abs(f-s))
+                
+        return shortest
+        
+
+
+# Your WordDistance object will be instantiated and called as such:
+# obj = WordDistance(wordsDict)
+# param_1 = obj.shortest(word1,word2)
