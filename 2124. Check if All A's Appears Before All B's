@@ -1,0 +1,23 @@
+class Solution:
+    def checkString(self, s: str) -> bool:
+        
+        
+        # get rightmost index of a
+        # get leftmost index of b
+        
+        bfound = False
+        a_index = -1
+        b_index = float('inf')
+        
+        for i in range(len(s)):
+            if s[i] == "a":
+                a_index = i
+            else:
+                if bfound == False:
+                    b_index = i
+                    bfound = True
+                
+        if a_index < b_index:
+            return True
+        
+        return False
