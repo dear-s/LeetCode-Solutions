@@ -1,0 +1,80 @@
+class Solution:
+    def printVertically(self, s: str) -> List[str]:
+
+        # Solving this question after months of losing practice - very much brute force solution (for the time being)
+        
+        # matrix - find cols, rows
+        # cols = number of words
+        # rows = max length of words
+
+        # new array with appended number - to denote a trailing space
+        arr = s.split(" ")
+        print("arr: ", arr)
+
+        cols = len(arr)
+        print("cols: ", cols)
+
+        rows = 0
+        for a in arr:
+            rows = max(rows, len(a))
+        print("rows: ", rows)
+
+        new = []
+        for ar in arr:
+            if len(ar) != rows:
+                new_word = ar + "0"*(rows-len(ar))
+                new.append(new_word)
+            else:
+                new.append(ar)
+        
+        print("new: ", new)
+
+        
+
+        ans = [[""] * cols for i in range(rows)]
+        print("ans: ", ans)
+
+        for i in range(0, cols):
+            for j in range(0,rows):
+                print(i,j)
+                ans[j][i] = new[i][j]
+
+        print("ans: ", ans)
+
+        output = []
+        for an in ans:
+            word = ""
+            for a in an:
+                word += a
+            output.append(word)
+        
+        print("output: ", output)
+        
+        answer = []
+        # traverse from backwards
+        for out in output:
+            word = ""
+            i = cols-1
+            while i >=0:
+                if out[i] == "0":
+                    i-=1
+                else:
+                    break
+            word = out[:i+1]
+            answer.append(word)
+        
+        print("answer: ", answer)
+
+        final = []
+        # removing 0 -> space
+        for ans in answer:
+            new = ""
+            for a in ans:
+                if a == "0":
+                    new += " "
+                else:
+                    new += a
+            final.append(new)
+
+        print("final: ", final)
+        return final
