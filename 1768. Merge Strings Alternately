@@ -1,0 +1,34 @@
+# Picked up Leetcode after 4-5 years almost :) Feeling humble!
+# Python was very intuitive to me! Now it feels so distant. I'm mixing Java (because of my work) and Python.
+
+class Solution:
+    def mergeAlternately(self, word1: str, word2: str) -> str:
+
+        listA = []
+        listB = []
+        for i in range(len(word1)):
+            listA.append(word1[i])
+        for j in range(len(word2)):
+            listB.append(word2[j])
+
+        newValue = self.popFirst(listA, listB, "")
+        return newValue     
+
+    def popFirst(self, list_a, list_b, charValue) -> str:
+        if len(list_a) != 0:
+            charValue += list_a.pop(0)
+        if len(list_b) != 0:
+            charValue += list_b.pop(0)
+
+        # if one of the lengths reach 0 > append the other and return
+        if len(list_a) == 0 or len(list_b) == 0:
+            # find which one is left
+            if len(list_a) > 0:
+                charValue += "".join(list_a)
+            else:
+                charValue += "".join(list_b)
+            return charValue
+
+        return self.popFirst(list_a, list_b, charValue)
+
+        
