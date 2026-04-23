@@ -1,0 +1,52 @@
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def maxLevelSum(self, root: Optional[TreeNode]) -> int:
+
+        # depth-first search
+        
+        curLevel = 1
+        self.level_sum = {}
+
+        self.level_sum[curLevel] = root.val
+        if root.left is not None:
+            if curLevel+1 not in self.level_sum:
+                self.level_sum[curLevel+1] = 0
+            self.goDown(curLevel+1, root.left)
+        if root.right is not None:
+            if curLevel+1 not in self.level_sum:
+                self.level_sum[curLevel+1] = 0
+            self.goDown(curLevel+1, root.right)
+
+        # print(self.level_sum)
+        # Now, we have the mapping of level:sum
+        # fetch max value out of them and note down their level - then pick the smallest out of them
+        max_level = 0
+        max_value = float("-inf")
+        for k,v in self.level_sum.items():
+            if v > max_value:
+                max_value = v
+                max_level = k
+                # print("max_value: ", max_value)
+                # print("max_level: ", max_level)
+        
+        return max_level
+
+
+    def goDown(self, level, rootNew):
+        self.level_sum[level] += rootNew.val
+        
+        if rootNew.left is not None:
+            if level+1 not in self.level_sum:
+                self.level_sum[level+1] = 0
+            self.goDown(level+1, rootNew.left)
+        if rootNew.right is not None:
+            if level+1 not in self.level_sum:
+                self.level_sum[level+1] = 0
+            self.goDown(level+1, rootNew.right)
+
+
