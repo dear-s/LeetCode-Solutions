@@ -1,0 +1,97 @@
+class Solution:
+    def minFlips(self, a: int, b: int, c: int) -> int:
+
+        flipCount = 0
+        
+        # 1. write each positive number to its binary representation and get them as string form
+        binA = self.binaryForm(a)
+        binB = self.binaryForm(b)
+        binC = self.binaryForm(c)
+        # print("after 1st: ", binA, binB, binC)
+
+        # 2. make sure their lengths are same
+        # start with the biggest one
+        if len(binA) > len(binB) and len(binA) > len(binC):
+            binAA = self.make_len_equal(binA, binB)["binA"]
+            binBB = self.make_len_equal(binAA, binB)["binB"]
+            binCC = self.make_len_equal(binAA, binC)["binB"]
+        elif len(binB) > len(binA) and len(binB) > len(binC):
+            binBB = self.make_len_equal(binA, binB)["binB"]
+            binAA = self.make_len_equal(binA, binBB)["binA"]
+            binCC = self.make_len_equal(binAA, binC)["binB"]
+        elif len(binC) > len(binA) and len(binC) > len(binB):
+            binCC = self.make_len_equal(binA, binC)["binB"]
+            binAA = self.make_len_equal(binA, binCC)["binA"]
+            binBB = self.make_len_equal(binAA, binB)["binB"]
+        else:
+            binAA = self.make_len_equal(binA, binB)["binA"]
+            binBB = self.make_len_equal(binAA, binB)["binB"]
+            binCC = self.make_len_equal(binAA, binC)["binB"]
+        
+        # print("after 2nd: ", binAA, binBB, binCC)
+
+        # 3. compare a and b - as per C
+        
+        # meaning at each index:
+        # if c value is 0 - both should have 0
+        # if c value is 1 - either should have 1
+
+        # binary scenarios for OR operation
+        # 0,1 = 1
+        # 0,0 = 0
+        # 1,0 = 1
+        # 1,1 = 1
+
+        # both lengths are same now ~ we make sure of it earlier
+        for i in range (0, len(binAA)):
+            if binCC[i] is "0": # if result has 0 - both should have 0 [if both 1, flip twice]
+                if binAA[i] == binBB[i]:
+                    if binAA[i] == "0":
+                        pass
+                    else:
+                        flipCount += 2
+                else:
+                    flipCount += 1
+            else:
+                # result is 1, either should have 1, also both can also have 1
+                # Both shouldn't be having 0s
+                if binAA[i] == binBB[i] and binAA[i] is "0":
+                    flipCount += 1
+                # else all cool
+        
+        return flipCount
+
+
+    def make_len_equal(self, binA, binB):
+        if len(binA) != len(binB):
+            if len(binA) > len(binB):
+                # find different and add those number of 0s from the left
+                toAdd = len(binA) - len(binB)
+                # append from left, to binB
+                for i in range(0,toAdd):
+                    new_binB = "0" + binB
+                    binB = new_binB
+            else:
+                toAdd = len(binB) - len(binA)
+                for i in range(0,toAdd):
+                    new_binA = "0" + binA
+                    binA = new_binA
+
+        return {"binA":binA, "binB": binB}
+
+
+
+    def binaryForm(self, number):
+        # return string
+
+        # convert number to binary representation/form
+        # How - divide the number repetitively and store their remainders
+        binary = []
+        while number is not 0:
+            rem = number % 2
+            binary.insert(0, str(rem))
+            number = number//2
+
+        # make it string and return
+        return "".join(binary)
+
