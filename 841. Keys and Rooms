@@ -1,0 +1,39 @@
+class Solution:
+    def canVisitAllRooms(self, rooms: List[List[int]]) -> bool:
+        
+        self.visitedKeys = {} # roomNumber: visited or not
+
+        enterFirstRoom = rooms[0]
+        self.visitedKeys[0] = "visited"
+        for firstRoomKey in enterFirstRoom:
+            self.visitedKeys[firstRoomKey] = "not visited"
+            self.enterRoom(firstRoomKey, rooms)
+
+        # pick keys/rooms from visitedKeys that are "not visited" and start visiting/recording them
+        # keep fetching keys also from them
+
+        # once we are done visiting ~ check if we did visit in all the rooms or not
+        for i in range(0, len(rooms)):
+            if i not in self.visitedKeys:
+                return False
+            else:
+                if self.visitedKeys[i] == "not visited":
+                    return False
+        
+        return True
+
+    def enterRoom(self, key, rooms):
+
+        if key in self.visitedKeys:
+            if self.visitedKeys[key] == "visited":
+                # if already visited, then don't do anything
+                return
+
+        fetchAllKeys = rooms[key]
+        self.visitedKeys[key] = "visited"
+        for key in fetchAllKeys:
+            if key not in self.visitedKeys:
+                self.visitedKeys[key] = "not visited"
+                self.enterRoom(key, rooms)
+
+# Improvement scope - Consider using a boolean array instead of a dictionary for slightly faster access.
