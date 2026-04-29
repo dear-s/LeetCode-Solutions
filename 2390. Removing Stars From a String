@@ -1,0 +1,21 @@
+class Solution:
+    def removeStars(self, s: str) -> str:
+
+        leftIndex = []
+
+        i = 0
+        while (i != len(s)):
+            # print("which index: i: ", i, " and what's the listS: ", listS, " leftIndex: ", leftIndex)
+            if s[i] is "*":
+                # remove this & remove leftIndex
+                s = s[:i] + s[i+1:]
+                s = s[:leftIndex[-1]] + s[leftIndex[-1]+1:]
+                leftIndex.pop()
+                i -= 1
+            else:
+                # some alphabet
+                leftIndex.append(i)
+                i += 1
+
+        # leftover list - move to string
+        return s
