@@ -1,0 +1,32 @@
+class Solution:
+    def maxVowels(self, s: str, k: int) -> int:
+
+        # 2 pointer substring approach - good old
+
+        vowels = ("a","e","i","o","u") # tuple?
+        vCount = 0 # max this shit out
+        for sub in s[:k]:
+            if sub in vowels:
+                vCount += 1
+
+        maxReturn = vCount
+        i = 1
+        while i != len(s) and i+k <= len(s):
+
+            # check previous letter which we moved from
+            # if vowel ~ drop the count ~ -=1
+            # if not vowel ~ keep the count same
+            if s[i-1] in vowels:
+                vCount -= 1
+
+            # read the last letter from subs
+            # if vowel ~ +=1
+            # if not vowel ~ keep the count same
+            if s[i:i+k][-1] in vowels:
+                vCount += 1
+                
+            maxReturn = max(maxReturn, vCount)
+
+            i+=1
+        
+        return maxReturn
