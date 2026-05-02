@@ -1,0 +1,30 @@
+class Foo:
+    def __init__(self):
+        
+        self.firstDone = False
+        self.secondDone = False
+        self.thirdDone = False
+
+
+    def first(self, printFirst: 'Callable[[], None]') -> None:
+        
+        # printFirst() outputs "first". Do not change or remove this line.
+        printFirst()
+        self.firstDone = True
+
+    def second(self, printSecond: 'Callable[[], None]') -> None:
+
+        # wait till we process first
+        while self.secondDone is False:
+            if self.firstDone:
+                # printSecond() outputs "second". Do not change or remove this line.
+                printSecond()
+                self.secondDone = True
+
+    def third(self, printThird: 'Callable[[], None]') -> None:
+
+        while self.thirdDone is False:
+            if self.secondDone:
+                # printThird() outputs "third". Do not change or remove this line.
+                printThird()
+                self.thirdDone = True
