@@ -31,4 +31,30 @@ class Solution:
                 j-=1
 
         return matrix
+
+
+class Solution:
+    def rotate(self, matrix: List[List[int]]) -> None:
+        """
+        Do not return anything, modify matrix in-place instead.
+        """
+        
+        n = len(matrix)
+
+        i = n-1
+        j = 0
+        arr = []
+        while i >= 0 and j < n:
+            arr.append(matrix[i][j])
+            if len(arr) == n:
+                matrix.append(arr)
+                j+=1
+                arr = []
+                i = n-1
+            else:
+                i-=1
+
+        # chop matrix in half
+        matrix[:] = matrix[n:] # in memory slicing
+        # print("final matrix: ", matrix)'
         
