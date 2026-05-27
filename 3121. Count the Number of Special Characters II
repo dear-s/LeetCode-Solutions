@@ -1,0 +1,36 @@
+class Solution:
+    def numberOfSpecialChars(self, word: str) -> int:
+        # ....lower...UPPER... > special and in this occurence format only
+        # no lower should occur after UPPER
+
+        specialCount = 0 # upgrade at every UPPERCASE whose lowercase we have already tracked
+
+        # not sure if the letter can be repeated or can be counted > 1 times
+
+        lowerIndex = {} # {a: [0,1]}
+        upperIndex = {} # {A: [2,3]}
+
+        for i in range(len(word)):
+            if word[i].isupper(): # A,B,C
+                if word[i] in upperIndex:
+                    upperIndex[word[i]].append(i)
+                else:
+                    upperIndex[word[i]] = [i]
+            else:
+                # found lower letter - just store in the map = lowerIndex
+                if word[i] in lowerIndex:
+                    lowerIndex[word[i]].append(i)
+                else:
+                    lowerIndex[word[i]] = [i]
+        
+        for k,v in upperIndex.items():
+            # match this
+            # find lowest of upper list
+            firstUpperEver = v[0]
+            # find max of lower list
+            if k.lower() in lowerIndex:
+                lastLowestEver = lowerIndex[k.lower()][-1]
+                if lastLowestEver < firstUpperEver:
+                    specialCount += 1
+
+        return specialCount
