@@ -1,0 +1,27 @@
+class Solution:
+    def minimumCost(self, cost: List[int]) -> int:
+
+        # freeCandy cost <= min(candyA, candyB)
+        
+        # min cost - of buying all
+        # traverse from max to min (buy 2, take 1 free, and repeat until we buy them all)
+
+        if len(cost) == 1:
+            return cost[0]
+        elif len(cost) == 2:
+            return cost[0] + cost[1]
+
+        cost.sort()
+        buyBucket = 0
+        totalCost = 0
+
+        for i in range(len(cost)-1, -1, -1):
+            # high to low
+            if buyBucket != 2:
+                buyBucket += 1
+                totalCost += cost[i]
+            else:
+                # puchased 2 candies - now get a free one
+                buyBucket = 0 # reset
+        
+        return totalCost
