@@ -1,0 +1,57 @@
+class Solution:
+    def totalWaviness(self, num1: int, num2: int) -> int:
+
+        # waviness = total_peaks + total_valleys
+        
+        # peak = greater than both neighbors
+        # valley = less than both neighbors
+
+        # The first and last digits of a number cannot be peaks or valleys
+        # any number with less than 3 digits = waviness = 0
+
+        # count starts from 2nd digit and ends at 2nd last digit
+
+        if num2 <= 100:
+            return 0 # 2 digit numbers have waviness = 0
+
+        if num1 <= 100:
+            # we will still start from 101 onwards
+            num1 = 101
+        
+        waves = 0
+
+        n = num1
+        while n <= num2:
+            # calculate waves in a number
+            waves += self.wavesInNumber(n)
+            n += 1
+        
+        return waves
+        
+    def wavesInNumber(self, num):
+        score = 0
+        str_num = str(num)
+        j = 0 # started from 0th index
+
+        while j < len(str_num):
+            k = j+1
+            i = j-1
+            
+            if i >= 0 and k < len(str_num):
+                int_i = int(str_num[i])
+                int_j = int(str_num[j])
+                int_k = int(str_num[k])
+
+                # legit case for peak or valley
+                # check for peak
+                if int_i < int_j and int_k < int_j:
+                    score += 1
+                # check for valley
+                if int_j < int_i and int_j < int_k:
+                    score += 1
+            
+            # move ahead
+            j += 1
+        
+        # print("wavesInNumber: num: ", num, " and score: ", score)
+        return score
