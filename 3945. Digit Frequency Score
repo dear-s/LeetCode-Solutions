@@ -1,0 +1,22 @@
+class Solution:
+    def digitFrequencyScore(self, n: int) -> int:
+
+        s = str(n)
+        set_n = set(s)
+
+        map_count = {}
+
+        for i in range(len(s)):
+            if s[i] in set_n:
+                # repeated
+                if s[i] in map_count:
+                    map_count[s[i]] += 1
+                else:
+                    map_count[s[i]] = 1
+
+        score = 0
+
+        for i,j in map_count.items():
+            score += int(i) * j
+
+        return score
