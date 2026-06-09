@@ -1,0 +1,8 @@
+class Solution:
+    def maxTotalValue(self, nums: List[int], k: int) -> int:
+
+        # why not simply pick the array - over and over again - from max to min?
+
+        value = max(nums) - min(nums)
+        return value * k
+        
