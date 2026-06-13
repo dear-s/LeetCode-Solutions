@@ -1,0 +1,19 @@
+class Solution:
+    def mapWordWeights(self, words: List[str], weights: List[int]) -> str:
+
+        alphabet = "abcdefghijklmnopqrstuvwxyz"
+        
+        res = ""
+        for word in words:
+            # 1. total weight of word
+            ww = 0
+            for w in word:
+                ww += weights[alphabet.index(w)]
+
+            # 2. Find modulus - weight % 26 = ?
+            modulus = ww % 26
+
+            # 3. Map this modulus number - with reverse order of alphabets - letter to res string
+            res += alphabet[-modulus-1]
+
+        return res
