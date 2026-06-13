@@ -1,0 +1,70 @@
+class Solution:
+    def assignEdgeWeights(self, edges: List[List[int]]) -> int:
+
+        # small check - if 1 is a child
+        new_edges = []
+        rev = False
+        for ee in edges:
+            if ee[1] == 1:
+                # oops - reverse the whole testcase array
+                rev = True
+
+        if rev:
+            for ee1 in edges:
+                new_edges.append([ee1[1], ee1[0]])
+        else:
+            new_edges = edges
+
+        lookUp = {}
+        nodes = [1,'b'] # keep a track and remove once parent is done adding kids to tree
+        depth = 0
+
+        for edge in new_edges:
+            p = edge[0]
+            c = edge[1]
+            if p in lookUp:
+                lookUp[p].append(c)
+            else:
+                lookUp[p] = [c]
+        
+        # Approach: Use BFS: find the depth using delimiter in the algorithm
+        # And start the nodes array with always [1,b]
+        # 1 - always gonna be the starting node
+        # b - delimiter variable/anything
+
+        # Note - This is for directed tree option
+        # Since, this question is for undirected - we have handled the edges at the top where 1 can be a child
+
+        while nodes:
+            first = nodes.pop(0)
+            if first in lookUp:
+                # append the kids to nodes
+                for k in lookUp[first]:
+                    nodes.append(k)
+            if first == 'b':
+                depth += 1
+                # don't append again if the size of nodes is already 0 - all nodes traversed
+                if len(nodes):
+                    nodes.append("b") # append b again - to keep a track of each node level from bfs
+        
+        maxDepth = depth-1
+
+        # with these many edges i.e. d > substitute 1/2 > such that sum is ODD
+        ans = self.waysToAssignWeights(maxDepth)
+
+        # since ans can be huge - we are returning modulus - as asked in the question
+        MOD = 10**9 + 7
+        return ans % MOD
+
+    def waysToAssignWeights(self, d):
+        # how can we assign - 1-ones in ODD count - 1st should be ODD basically
+        # THIS IS TRICKY - MATHY AREA
+        # UNDERSTAND - 
+        # 1. exactly half of those combinations will contain an odd number of 1s, and the other half will contain an even number of 1s. 
+        # 2. Total combination - half? - this is easier to calculate
+        # 3. What is total combination - for d digits? - 2(to power d) because 1/2 are the possibilities
+        # 4. Half of this ? - 2^d/2
+
+        # lets calculate
+        total = pow(2,d)
+        return total//2
