@@ -1,0 +1,71 @@
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def createBinaryTree(self, descriptions: List[List[int]]) -> Optional[TreeNode]:
+
+        # 1. Find rootNode
+        # 2. BFS - create Binary Tree
+        # 3. return rootNode that we found at step1
+
+        # We know - that root can't be the child
+        child = set() # easy for the lookup ~ lists are O(N), but set is O(N)
+        parent = set()
+        pcMap = {}
+
+        # parsing - only once
+        for p,c,isLeft in descriptions:
+            parent.add(p)
+            child.add(c)
+            
+            if p in pcMap:
+                # fetch which c it is
+                if isLeft == 1:
+                    pcMap[p][0] = c
+                else:
+                    pcMap[p].append(c)
+            else:
+                if isLeft == 1:
+                    pcMap[p] = [c]
+                else:
+                    pcMap[p] = [0,c]
+
+        # 1. FIND THE ROOT
+        rootParent = None
+        for p in parent:
+            if p not in child:
+                rootParent = p # this has to be true
+                break
+
+        # Now we have parent node ~
+        rootNode = TreeNode(rootParent)
+
+        # 2. CREATE BFS TREE -
+
+        bfs = [rootNode] # we will be appending tree nodes to this
+        while bfs:
+            node = bfs.pop(0) # tree node is fetched everytime
+            if node.val in pcMap:
+                # parent found, now fetch its kids and add them as child nodes
+                children = pcMap[node.val]
+                
+                left = children[0]
+            
+                if left is not 0:
+                    node.left = TreeNode(left)
+                    bfs.append(node.left)
+                
+                if len(children) == 2:
+                    right = children[1]
+                    if right is not 0:
+                        node.right = TreeNode(right)
+                        bfs.append(node.right)
+
+
+        # tree is ready
+
+        # 3. return rootNode - that we found in Step 1
+        return rootNode
