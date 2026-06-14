@@ -1,0 +1,26 @@
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def pairSum(self, head: Optional[ListNode]) -> int:
+
+        # make it a list and solve according to the given parameters
+        array = []
+        pairs = set()
+
+        while head is not None:
+            array.append(head.val)
+            head = head.next
+
+        # find possibilities of "i"(s)
+        n = len(array)
+        possible_I = (n//2) - 1
+
+        for i in range(0, possible_I+1):
+            sec = n-i-1
+            summ = array[i] + array[sec]
+            pairs.add(summ)
+
+        return max(pairs)
