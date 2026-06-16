@@ -1,0 +1,54 @@
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def deleteMiddle(self, head: Optional[ListNode]) -> Optional[ListNode]:
+
+        # simple brute-force ~ convert to list, pop middle item, convert to linked list
+
+        # manipulating Linked list
+        # such that we need to skip the next pointer ~ and let it point to next to next
+
+        # check for length = 1
+        if head.next is None:
+            return None # middle is 0 for n=1
+
+        # 1. Let's find length (n)
+        n = 0
+        i = head
+        while i != None:
+            n += 1
+            i = i.next
+        
+        # print("n: ", n)
+
+        # 2. Find the middle index
+        middle = n//2
+
+        # print("middle: ", middle)
+
+        # 3. lets try to skip it
+        newHead = head
+        secHead = newHead.next
+        index = 1 #start from 2nd
+        while secHead != None:
+            # print("secHead.val, ", secHead.val, " and index: ", index)
+            if index == middle:
+                secHead = secHead.next # move second head again
+                newHead.next = secHead # skip the current index
+                index += 1
+            
+            # for every case ~ incrementally 1 by 1
+            newHead = secHead
+            if secHead is not None and secHead.next is not None:
+                secHead = secHead.next
+            else:
+                break
+            index += 1
+
+        return head
+
+
+        
