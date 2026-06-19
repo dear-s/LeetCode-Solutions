@@ -1,0 +1,11 @@
+class Solution:
+    def largestAltitude(self, gain: List[int]) -> int:
+        
+        # sounds like prefixSum - max of that list
+
+        res = 0 # because the biker started at altitude=0
+        s = 0
+        for i in gain:
+            s += i
+            res = max(res, s)
+        return res
