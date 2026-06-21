@@ -1,0 +1,24 @@
+class Solution:
+    def maxIceCream(self, costs: List[int], coins: int) -> int:
+
+        # Simple ~ Start buying ice creams that are cheaper first and then go ahead from there
+
+        # sort it -> prefix sum -> return index whose value <= coins-value
+
+        costs.sort()
+        # print("sorted costs: ", costs)
+
+        s = 0 # sum
+        for i in range(0, len(costs)):
+            s += costs[i]
+            # print("updates s: ", s)
+
+            # if s value > coins: return previous index if exists
+            if s > coins:
+                if i != 0:
+                    return i # -1 and +1
+                else:
+                    return 0
+
+        return len(costs)
+        
