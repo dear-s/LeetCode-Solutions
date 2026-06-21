@@ -1,0 +1,56 @@
+class Solution:
+    def equalPairs(self, grid: List[List[int]]) -> int:
+
+        # hashmaps of row ~ MAKE LIST AS A STRING AND COMPARE
+        # {(row_set): frequency}
+
+        # hashmaps of column
+        # {(col_set): frequency}
+
+        n = len(grid)
+
+        row_set = {}
+        col_set = {}
+        pairsRC = [] # simply return the list
+
+        # populate rows & frequency
+        for r in range(n):
+            row = ""
+            for c in range(len(grid[r])):
+                # we are in row
+                row += "," + str(grid[r][c])
+            if row in row_set:
+                row_set[row] += 1
+            else:
+                row_set[row] = 1
+        
+        # populate col & frequency
+        c = 0
+        while c < n:
+            i = 0
+            col = ""
+            while i < n:
+                col += "," + str(grid[i][c])
+                i += 1
+            c += 1
+            if col in col_set:
+                col_set[col] += 1
+            else:
+                col_set[col] = 1
+
+        res = 0
+        # Now, compare the ordering and find pairs between their keys
+        for k,v in row_set.items():
+            if k in col_set:
+                # jackpot
+                # total frequency - should be multiplication of both the numbers? - PAIRS we have to count
+                maxFrequency = v * col_set[k]
+                res += maxFrequency
+        
+        return res
+
+
+
+
+        
+                
