@@ -1,0 +1,58 @@
+class Solution:
+    def findDifference(self, nums1: List[int], nums2: List[int]) -> List[List[int]]:
+
+        # Using hashmap approach instead of lists - more optimal
+        dic1 = {}
+        dic2 = {}
+
+        for i in nums1:
+            dic1[i] = True
+        cDic1 = dic1.copy()
+        
+        for j in nums2:
+            dic2[j] = True
+        cDic2 = dic2.copy()
+
+        for k,v in dic1.items():
+            if k in dic2:
+                # remove from both dictionaries
+                cDic1.pop(k)
+                cDic2.pop(k)
+        
+        # all ready
+        a = []
+        b = []
+        for k,v in cDic1.items():
+            a.append(k)
+        for k,v in cDic2.items():
+            b.append(k)
+        
+        return [a,b]
+
+
+    #     i = 0
+    #     while i < len(nums1):
+    #         if nums1[i] in nums2:
+    #             # delete from nums2 - ALL occurrences
+    #             nums2 = self.deleteAllOccurrences(nums2, nums1[i])
+    #             # delete from num1 also
+    #             nums1 = self.deleteAllOccurrences(nums1, nums1[i])
+    #             # dont incremnt i
+    #         else:
+    #             i+=1
+        
+    #     # both lists are cleaned up - make it set and good to return
+    #     return [list(set(nums1)), list(set(nums2))]
+
+
+    # def deleteAllOccurrences(self, array, num):
+    #     i = 0
+    #     while i < len(array):
+    #         if array[i] == num:
+    #             array.pop(i)
+    #         else:
+    #             i+=1
+
+    #     return array
+
+        
