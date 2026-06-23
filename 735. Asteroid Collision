@@ -1,0 +1,47 @@
+class Solution:
+    def asteroidCollision(self, asteroids: List[int]) -> List[int]:
+
+        # collision - smaller remove
+        # both same size - both will explode/remove
+        
+        # THINK THROUGH STACKS IN MIND - leetcode-75 gave it away kind of
+        # Also stack pattern - left and right ~ merging and destroying - then lookup is going to next/bottom one in the stack/list
+        array = [] # return the reverse of this - because we are traversing with stacks here
+
+        # Idea - start popping from the right side of the list
+        
+        while len(asteroids):
+            a = asteroids.pop(0)
+            # if -ve, then keep a track of array[]
+            if a > 0:
+                array.append(a)
+            else:
+                negative = True
+                # go to array, and pop from right
+                while len(array) and negative is True:
+                    b = array.pop()
+                    aVal = int(str(a)[1:])
+                    # print("a: ", a, " and b: ", b)
+                    if b > 0:
+                        # collision and now compare
+                        if aVal == b:
+                            negative = False
+                        elif aVal > b:
+                            negative = True
+                        else:
+                            negative = False
+                            array.append(b)
+                    else:
+                        # b is negative and a is negative
+                        array.append(b)
+                        array.append(a)
+                        negative = False
+                    
+                if negative is True and len(array) == 0:
+                    array.append(a)
+                # print("array in while: ", array)
+            # print("final array: ", array)
+        
+        # print(array)
+        return array
+                    
