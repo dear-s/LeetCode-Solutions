@@ -1,3 +1,54 @@
+class Solution:
+    def decodeString(self, s: str) -> str:
+
+        nums = ["1","2","3","4","5","6","7","8","9","0"]
+
+        res = []
+
+        # we will be fetching from left of the string only and popping
+        # once we see "]" - we need to parse back
+
+        for i in range(len(s)):
+            val = s[i]
+            # we will act on ] only
+            if val == "]":
+                print("Found ] with res: ", res)
+                # close brakcet found - now start parsing back and find the pattern -> "k[string]"
+                encoded_s_track = []
+                while res[-1] != "[":
+                    aa = res.pop()
+                    encoded_s_track.append(aa)
+                
+                # we are at [ now
+                if res[-1] == "[":
+                    res.pop()
+                
+                # we have encoded_string now
+                encoded_string = "".join(encoded_s_track[::-1])
+                print("encoded_string: ", encoded_string, " and res: ", res)
+
+                # look back and fetch till we get no nums
+                track_k = ""
+                while len(res) > 0 and res[-1] in nums:
+                    bb = res.pop()
+                    track_k += bb
+
+                # now we have k
+                encoded_k = track_k[::-1]
+                print("encoded_k: ", encoded_k, " and track_k: ", track_k)
+
+                # now decode them and append to res
+                decode_string = ""
+                for n in range(0, int(encoded_k)):
+                    decode_string += encoded_string
+                res.append(decode_string)
+            else:
+                res.append(val)
+
+        result = "".join(res)
+        return result
+
+
 
 class Solution:
     def decodeString(self, s: str) -> str:
