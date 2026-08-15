@@ -1,0 +1,98 @@
+class Solution:
+    def longestSubsequence(self, nums: List[int]) -> int:
+        
+        # bitwise XOR ~ non-zero - when?
+        # 1 if bits are different
+        # 0 if bits are same
+
+        # start with max array
+        # then dec down 1 element at a time
+
+        # First, check if all are 0:
+        if len(set(nums)) == 1 and nums[0] == 0:
+            return 0
+
+        if len(nums) == 1:
+            # find bin, if any 1 exists - return 1
+            bin_value = bin(nums[0])
+            if "1" in bin_value:
+                return 1 # XOR is non-zero it means
+            else:
+                return 0 # XOR is zero it means
+
+        if len(nums) == 2:
+            bin_value = self.findXOR(bin(nums[0])[2:], bin(nums[1])[2:])
+            if "1" in bin_value:
+                return 2 # XOR is non-zero it means
+            elif 0 not in nums:
+                return 1
+
+        # check with full array
+        if self.isArrayNonZeroXOR(nums) is True:
+            # print("full array came out")
+            return len(nums)
+
+        # if not, simply drop 1 and return len -1 - THIS IS HACKY
+        # WE ARE LOOKING FOR SUBSEQUENCE, AND NOT SUBSTRING - WE CAN DROP ANY ELEMENTS IN BETWEEN
+        return len(nums)-1
+
+
+
+    def isArrayNonZeroXOR(self, array):
+        # given an array - find XOR of them
+        # send 2 items one by one to findXOR?
+
+        xor_storage = "" # ---> here, we will be storing intermediate xor values from 2 numbers from array
+
+        # we have 2 and more items
+        # start with - first 2
+        xor_storage = self.findXOR(bin(array[0])[2:], bin(array[1])[2:])
+        # print("XOR for first 2 elements: ", xor_storage)
+
+        # from 3rd index onwards
+        for a in range(2, len(array)):
+            new_index_bin = bin(array[a])[2:]
+            # find xor with this new index value
+            new_xor_storage = self.findXOR(xor_storage, new_index_bin)
+            # print("new found: ", new_xor_storage)
+            xor_storage = new_xor_storage
+        
+        # at the end we will have final ans
+        # print("final xor_storage: ", xor_storage)
+        if "1" in xor_storage:
+            return True
+        else:
+            return False
+
+
+
+
+    # Provide binary values only
+    # return/get binary result only
+    def findXOR(self, binA, binB):
+        # print("TO FIND XOR: A = ", binA, " and B = ", binB)
+
+        # cal bigger len
+        if len(binA) > len(binB):
+            # cal diff
+            diff = len(binA) - len(binB)
+            # append those many 0s from the left to binB
+            for i in range(diff):
+                binB = "0" + binB
+        else:
+            diff = len(binB) - len(binA)
+            for i in range(diff):
+                binA = "0" + binA
+        
+        # both have equal strings now - lets compare their index values
+        xor_result = ""
+
+        for j in range(0, len(binA)):
+            if binA[j] != binB[j]:
+                xor_result += "1"
+            else:
+                xor_result += "0"
+        
+        # now we have xor value in binary
+        return xor_result # no need to convert
+
